@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leon Keijzers | Certificaten</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f4f7fb;
+        --muted: #b9c7d8;
+        --panel: #111d31;
+        --line: #293d59;
+        --accent: #1e88e5; /* Helder blauw */
+        --accent-bright: #00a8ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        color: var(--ink);
+        background: #07111f;
+      }
+      .hero {
+        min-height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 24px;
+        position: relative;
+        isolation: isolate;
+        background:
+          linear-gradient(120deg, rgba(5, 14, 29, 0.88), rgba(9, 37, 61, 0.72)),
+          url("https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000001-a2fb4a2fb6/images-pexels-com-photos-2292837-pexels-photo-2292837-auto-compress-cs-tinysrgb-dpr-2-h-650-w-940.jpeg?ph=3ab40ebb9b")
+            center/cover;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1565c0, #1e88e5, #00a8ff);
+        z-index: -1;
+      }
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 24px;
+        max-width: 900px;
+        width: 100%;
+      }
+      .profile-img {
+        width: 180px;
+        height: auto;
+        max-height: 240px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 10px 25px rgba(0, 168, 255, 0.25);
+        flex-shrink: 0;
+        background: rgba(0, 0, 0, 0.3);
+      }
+      .hero-content {
+        text-align: center;
+        width: 100%;
+      }
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent-bright);
+        font-weight: 700;
+      }
+
+      /* Rij: vuurwerk links - naam - vuurwerk rechts */
+      .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 8px 0;
+      }
+      .fireworks {
+        width: clamp(44px, 15vw, 260px);
+        height: 200px;
+        flex-shrink: 0;
+        pointer-events: none;
+        display: block;
+      }
+
+      /* Naam: verschijnt letter voor letter, knippert blauw, zweeft */
+      h1 {
+        font-size: clamp(1.7rem, 7vw, 5rem);
+        line-height: 1.05;
+        margin: 16px 0;
+        min-height: 1.05em;
+        white-space: nowrap;
+        display: inline-block;
+        color: var(--accent-bright);
+        animation:
+          floatName 3.5s ease-in-out infinite,
+          blinkBlue 1.4s ease-in-out infinite;
+      }
+      .name-cursor {
+        display: inline-block;
+        width: 0.06em;
+        height: 0.85em;
+        margin-left: 0.06em;
+        vertical-align: -0.05em;
+        background: var(--accent-bright);
+        animation: blink 0.7s infinite;
+      }
+      .name-cursor.done {
+        display: none;
+      }
+
+      @keyframes floatName {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes blinkBlue {
+        0%,
+        100% {
+          color: #00a8ff;
+          text-shadow:
+            0 0 14px rgba(0, 168, 255, 0.9),
+            0 0 36px rgba(0, 168, 255, 0.55);
+        }
+        50% {
+          color: #1a62d6;
+          text-shadow:
+            0 0 6px rgba(26, 98, 214, 0.5),
+            0 0 14px rgba(26, 98, 214, 0.25);
+        }
+      }
+
+      .hero p {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: #e0eaf6;
+        margin: 0;
+        min-height: 1.5em;
+      }
+
+      /* Knipperende blauwe cursor voor de getypte tekst */
+      .typing-cursor {
+        display: inline-block;
+        background-color: var(--accent-bright);
+        width: 2px;
+        height: 1.1em;
+        vertical-align: middle;
+        margin-left: 2px;
+        animation: blink 0.7s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        h1 {
+          animation: none;
+        }
+        .fireworks {
+          display: none;
+        }
+      }
+
+      main {
+        max-width: 1400px;
+        margin: auto;
+        padding: 58px 24px 84px;
+      }
+      .section-heading {
+        text-align: center;
+        margin-bottom: 34px;
+      }
+      .section-heading h2 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        margin: 0 0 12px;
+      }
+      .section-heading p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      /* Sectiekop in Aston Martin F1-kleuren: racing green + lime */
+      .section-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+      .fireworks.small {
+        width: clamp(36px, 10vw, 200px);
+        height: 140px;
+      }
+      .section-text {
+        min-width: 0;
+        text-align: center;
+      }
+      .section-heading h2.am-title {
+        position: relative;
+        font-size: clamp(1.3rem, 5vw, 2.6rem);
+        margin: 0 0 12px;
+        color: #cedc00;
+        animation: blinkGreen 1.4s ease-in-out infinite;
+      }
+      .section-heading p.am-sub {
+        position: relative;
+        color: #cedc00;
+      }
+      .am-title .ghost,
+      .am-sub .ghost {
+        display: block;
+        visibility: hidden;
+      }
+      .am-title .overlay,
+      .am-sub .overlay {
+        position: absolute;
+        inset: 0;
+        text-align: center;
+      }
+      .am-cursor {
+        display: inline-block;
+        width: 0.06em;
+        height: 0.85em;
+        margin-left: 0.06em;
+        vertical-align: -0.05em;
+        background: #cedc00;
+        animation: blink 0.7s infinite;
+      }
+      .am-sub .am-cursor {
+        width: 2px;
+        height: 1.1em;
+        vertical-align: middle;
+      }
+      .am-cursor.done {
+        display: none;
+      }
+      /* Code-vensters links en rechts van de sectiekop */
+      .code-panel {
+        width: clamp(220px, 26vw, 340px);
+        flex: 0 1 auto;
+        background: rgba(5, 14, 29, 0.92);
+        border: 1px solid #0b4d46;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: left;
+        box-shadow:
+          0 0 18px rgba(206, 220, 0, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35);
+        font-family:
+          ui-monospace, "SF Mono", Consolas, "Courier New", monospace;
+      }
+      .code-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        background: #0b1f2a;
+        border-bottom: 1px solid #0b4d46;
+      }
+      .code-bar i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #00a58e;
+      }
+      .code-bar i:nth-child(2) {
+        background: #cedc00;
+      }
+      .code-bar i:nth-child(3) {
+        background: #e5e9ee;
+      }
+      .code-title {
+        margin-left: 8px;
+        font-size: 11px;
+        color: #8fb5ae;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .code-body {
+        margin: 0;
+        padding: 10px 12px;
+        height: 158px;
+        overflow: hidden;
+        font-size: 11.5px;
+        line-height: 1.45;
+        color: #cfe9e4;
+        white-space: pre;
+      }
+      .code-body .k {
+        color: #cedc00;
+      }
+      .code-body .s {
+        color: #7ee0c3;
+      }
+      .code-body .c {
+        color: #5f8a84;
+        font-style: italic;
+      }
+      .code-body .c2 {
+        color: #8fb5ae;
+      }
+      .code-body .n {
+        color: #ffd479;
+      }
+      .code-body .w {
+        color: #ffffff;
+      }
+      .code-caret {
+        display: inline-block;
+        width: 6px;
+        height: 1em;
+        margin-left: 1px;
+        vertical-align: -2px;
+        background: #cedc00;
+        animation: blink 0.7s infinite;
+      }
+      @media (max-width: 900px) {
+        .section-title-row {
+          flex-wrap: wrap;
+        }
+        .section-text {
+          order: -1;
+          flex: 1 1 100%;
+        }
+        .code-panel {
+          flex: 1 1 150px;
+          width: auto;
+          max-width: 340px;
+        }
+        .code-body {
+          font-size: 10px;
+        }
+      }
+      @keyframes blinkGreen {
+        0%,
+        100% {
+          color: #cedc00;
+          text-shadow:
+            0 0 14px rgba(206, 220, 0, 0.85),
+            0 0 34px rgba(206, 220, 0, 0.5);
+        }
+        50% {
+          color: #00a58e;
+          text-shadow:
+            0 0 8px rgba(0, 165, 142, 0.7),
+            0 0 20px rgba(0, 111, 98, 0.5);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .section-heading h2.am-title {
+          animation: none;
+        }
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr));
+        gap: 24px;
+      }
+      .certificate {
+        background: linear-gradient(
+          145deg,
+          rgba(20, 36, 58, 0.98),
+          rgba(11, 23, 39, 0.98)
+        );
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 15px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .certificate:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-bright);
+      }
+      .certificate a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 260px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 8px;
+      }
+      .certificate img {
+        display: block;
+        width: 100%;
+        height: 330px;
+        object-fit: contain;
+      }
+      .certificate h2 {
+        font-size: 1rem;
+        text-align: center;
+        margin: 15px 5px 5px;
+      }
+      footer {
+        text-align: center;
+        padding: 26px;
+        color: #8ea2bb;
+        border-top: 1px solid #1e3048;
+        font-size: 0.9rem;
+      }
+      @media (max-width: 600px) {
+        .hero {
+          padding: 40px 16px;
+        }
+        main {
+          padding: 40px 16px 56px;
+        }
+        .grid {
+          gap: 16px;
+        }
+        .profile-img {
+          width: 140px;
+        }
+        .certificate img {
+          height: 300px;
+        }
+        .title-row {
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <img src="foto.jpg" alt="Leon Keijzers" class="profile-img" />
+        <div class="hero-content">
+          <div class="eyebrow">Portfolio · ICT & Cybersecurity</div>
+          <div class="title-row">
+            <canvas class="fireworks" id="fw-left" aria-hidden="true"></canvas>
+            <h1 aria-label="Leon Keijzers">
+              <span id="typed-name"></span
+              ><span class="name-cursor" id="name-cursor"></span>
+            </h1>
+            <canvas class="fireworks" id="fw-right" aria-hidden="true"></canvas>
+          </div>
+          <p>
+            <span id="typed-text"></span><span class="typing-cursor"></span>
+          </p>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="section-heading">
+        <div class="section-title-row">
+          <div class="code-panel" id="code-left" aria-hidden="true">
+            <div class="code-bar">
+              <i></i><i></i><i></i><span class="code-title"></span>
+            </div>
+            <pre class="code-body"></pre>
+          </div>
+          <div class="section-text">
+            <h2 class="am-title" aria-label="Certificaten & opleidingen">
+              <span class="ghost" aria-hidden="true"
+                >Certificaten & opleidingen</span
+              >
+              <span class="overlay" aria-hidden="true"
+                ><span id="sec-title"></span
+                ><span class="am-cursor" id="sec-title-cursor"></span
+              ></span>
+            </h2>
+            <p
+              class="am-sub"
+              aria-label="Een overzicht van mijn behaalde certificaten en trainingen."
+            >
+              <span class="ghost" aria-hidden="true"
+                >Een overzicht van mijn behaalde certificaten en
+                trainingen.</span
+              >
+              <span class="overlay" aria-hidden="true"
+                ><span id="sec-sub"></span
+                ><span class="am-cursor" id="sec-sub-cursor"></span
+              ></span>
+            </p>
+          </div>
+          <div class="code-panel" id="code-right" aria-hidden="true">
+            <div class="code-bar">
+              <i></i><i></i><i></i><span class="code-title"></span>
+            </div>
+            <pre class="code-body"></pre>
+          </div>
+        </div>
+      </div>
+      <section class="grid" aria-label="Certificaten">
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000106-8ea348ea37/javascript.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000106-8ea348ea37/javascript.png?ph=3ab40ebb9b"
+              alt="JavaScript"
+              loading="lazy"
+            />
+          </a>
+          <h2>JavaScript Developer</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000100-4a7ef4a7f1/python%20cert.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000100-4a7ef4a7f1/python%20cert.jpeg?ph=3ab40ebb9b"
+              alt="Python Developer"
+              loading="lazy"
+            />
+          </a>
+          <h2>Python Developer ITMG</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000102-9fb709fb71/scholingstraject.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000102-9fb709fb71/scholingstraject.jpeg?ph=3ab40ebb9b"
+              alt="Scholingstraject"
+              loading="lazy"
+            />
+          </a>
+          <h2>Scholingstraject Python Developer</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000098-8aae78aae9/cert%20websites%20maken.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000098-8aae78aae9/cert%20websites%20maken.jpeg?ph=3ab40ebb9b"
+              alt="Websites maken"
+              loading="lazy"
+            />
+          </a>
+          <h2>Websites maken Development Essentials</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000031-0dca90dcac/l1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000031-0dca90dcac/l1.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Scholingstraject Ethical Hacker</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000045-a608fa6091/hacking%20practitioner.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000045-a608fa6091/hacking%20practitioner.png?ph=3ab40ebb9b"
+              alt="Hacking Practitioner"
+              loading="lazy"
+            />
+          </a>
+          <h2>Ethical Hacker Practitioner</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000035-0da640da66/certificaat%20ethical%20hacker1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000035-0da640da66/certificaat%20ethical%20hacker1.jpeg?ph=3ab40ebb9b"
+              alt="Ethical Hacker"
+              loading="lazy"
+            />
+          </a>
+          <h2>Ethical Hacker Foundation</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000047-1bc2b1bc2e/iso%2027001%20certificaat.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000047-1bc2b1bc2e/iso%2027001%20certificaat.png?ph=3ab40ebb9b"
+              alt="ISO 27001"
+              loading="lazy"
+            />
+          </a>
+          <h2>ISO 27001</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000094-909f5909f7/AI%20en%20Chatgpt.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000094-909f5909f7/AI%20en%20Chatgpt.jpeg?ph=3ab40ebb9b"
+              alt="AI en ChatGPT"
+              loading="lazy"
+            />
+          </a>
+          <h2>AI en ChatGPT</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000091-2f1a12f1a3/big%20data%20certificaat.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000091-2f1a12f1a3/big%20data%20certificaat.png?ph=3ab40ebb9b"
+              alt="Big Data"
+              loading="lazy"
+            />
+          </a>
+          <h2>Big Data</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000037-96f6996f6b/sql%20cert.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000037-96f6996f6b/sql%20cert.jpeg?ph=3ab40ebb9b"
+              alt="SQL"
+              loading="lazy"
+            />
+          </a>
+          <h2>SQL</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000033-7b41a7b41c/l8.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000033-7b41a7b41c/l8.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Basiskennis IT</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000007-d819ad819c/cert1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000007-d819ad819c/cert1.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Security Awareness 1</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000009-77c3577c37/cert2.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000009-77c3577c37/cert2.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Security Awareness 2</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000096-9006590066/bewijs%20deelname%20project.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000096-9006590066/bewijs%20deelname%20project.jpeg?ph=3ab40ebb9b"
+              alt="Projectmatig werken"
+              loading="lazy"
+            />
+          </a>
+          <h2>Projectmatig werken</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000029-ddc3dddc41/mile2%20cpeh-1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000029-ddc3dddc41/mile2%20cpeh-1.jpeg?ph=3ab40ebb9b"
+              alt="Mile2 CPEH"
+              loading="lazy"
+            />
+          </a>
+          <h2>Mile2 CPEH</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000011-ce75ece75f/hack%20novi.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000011-ce75ece75f/hack%20novi.jpeg?ph=3ab40ebb9b"
+              alt="Hack NOVI"
+              loading="lazy"
+            />
+          </a>
+          <h2>Introductie Hacking</h2>
+          <h2>Behaald bij: Hoge school Novi</h2>
+        </article>
+      </section>
+    </main>
+    <footer>Leon Keijzers · Portfolio</footer>
+
+    <script>
+      /* ---------- Typende teksten: eerst de naam, dan de ondertitel ---------- */
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const nameEl = document.getElementById("typed-name");
+      const nameCursor = document.getElementById("name-cursor");
+      const subEl = document.getElementById("typed-text");
+      const NAME = "Leon Keijzers";
+      const SUBTITLE = "Mijn certificaten en opleidingen";
+
+      function typeInto(el, text, delay, done) {
+        if (reduceMotion) {
+          el.textContent = text;
+          if (done) done();
+          return;
+        }
+        let i = 0;
+        (function step() {
+          if (i < text.length) {
+            el.textContent += text.charAt(i++);
+            setTimeout(step, delay);
+          } else if (done) {
+            done();
+          }
+        })();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          typeInto(nameEl, NAME, 120, () => {
+            nameCursor.classList.add("done");
+            setTimeout(() => typeInto(subEl, SUBTITLE, 55), 300);
+          });
+        }, 400);
+      });
+
+      /* ---------- Siervuurwerk (links en rechts van de naam) ---------- */
+      const DEFAULT_THEME = {
+        palette: [
+          [200, 100, 62], // helder blauw
+          [215, 95, 58], // diep blauw
+          [185, 100, 70], // cyaan
+          [45, 100, 62], // goud
+          [0, 0, 100], // wit
+        ],
+        accent: [45, 100, 65],
+        sparkHue: [35, 50],
+        sparkL: 68,
+      };
+
+      class Fireworks {
+        constructor(canvas, offset, theme) {
+          this.canvas = canvas;
+          this.ctx = canvas.getContext("2d");
+          this.rockets = [];
+          this.theme = theme || DEFAULT_THEME;
+          this.sparks = [];
+          this.nextLaunch = performance.now() + offset;
+          this.resize();
+          window.addEventListener("resize", () => this.resize());
+          this.loop = this.loop.bind(this);
+          requestAnimationFrame(this.loop);
+        }
+
+        resize() {
+          const dpr = window.devicePixelRatio || 1;
+          this.w = this.canvas.clientWidth;
+          this.h = this.canvas.clientHeight;
+          this.canvas.width = this.w * dpr;
+          this.canvas.height = this.h * dpr;
+          this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          this.scale = Math.max(0.45, Math.min(1.3, this.w / 200));
+        }
+
+        rand(a, b) {
+          return a + Math.random() * (b - a);
+        }
+
+        launch() {
+          const g = 0.12;
+          const targetY = this.rand(this.h * 0.12, this.h * 0.5);
+          this.rockets.push({
+            x: this.rand(this.w * 0.25, this.w * 0.75),
+            y: this.h,
+            vx: this.rand(-0.35, 0.35),
+            vy: -Math.sqrt(2 * g * (this.h - targetY)),
+            g,
+          });
+        }
+
+        explode(x, y) {
+          const palette = this.theme.palette;
+          const main = palette[Math.floor(Math.random() * palette.length)];
+          const type = ["sphere", "ring", "willow"][
+            Math.floor(Math.random() * 3)
+          ];
+          const count = Math.round(46 * Math.min(1, this.scale + 0.2));
+          for (let i = 0; i < count; i++) {
+            const angle =
+              type === "ring"
+                ? (i / count) * Math.PI * 2
+                : Math.random() * Math.PI * 2;
+            const speed =
+              (type === "ring" ? 2.4 : this.rand(0.6, 3.2)) * this.scale;
+            const col = Math.random() < 0.25 ? this.theme.accent : main;
+            this.sparks.push({
+              x,
+              y,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              life: 1,
+              decay: type === "willow" ? this.rand(0.008, 0.014) : this.rand(0.014, 0.026),
+              g: type === "willow" ? 0.05 : 0.035,
+              size: this.rand(1, 2.2),
+              h: col[0],
+              s: col[1],
+              l: col[2],
+              twinkle: Math.random() < 0.3,
+            });
+          }
+        }
+
+        sparkler() {
+          // Continu sprankelend vuurwerkje onderaan
+          const cx = this.w / 2;
+          for (let i = 0; i < 2; i++) {
+            const a = -Math.PI / 2 + this.rand(-0.9, 0.9);
+            const s = this.rand(1, 2.6) * this.scale;
+            this.sparks.push({
+              x: cx,
+              y: this.h - 2,
+              vx: Math.cos(a) * s,
+              vy: Math.sin(a) * s,
+              life: 1,
+              decay: this.rand(0.04, 0.07),
+              g: 0.08,
+              size: this.rand(0.8, 1.6),
+              h: this.rand(this.theme.sparkHue[0], this.theme.sparkHue[1]),
+              s: 100,
+              l: this.theme.sparkL,
+              twinkle: true,
+            });
+          }
+        }
+
+        loop(now) {
+          const { ctx, w, h } = this;
+
+          // Laat het vorige beeld langzaam vervagen voor lichtsporen
+          ctx.globalCompositeOperation = "destination-out";
+          ctx.fillStyle = "rgba(0,0,0,0.2)";
+          ctx.fillRect(0, 0, w, h);
+          ctx.globalCompositeOperation = "lighter";
+
+          if (now >= this.nextLaunch) {
+            this.launch();
+            this.nextLaunch = now + this.rand(650, 1500);
+          }
+          this.sparkler();
+
+          // Raketten
+          for (let i = this.rockets.length - 1; i >= 0; i--) {
+            const r = this.rockets[i];
+            r.x += r.vx;
+            r.y += r.vy;
+            r.vy += r.g;
+            ctx.fillStyle = "rgba(255,230,160,0.95)";
+            ctx.beginPath();
+            ctx.arc(r.x, r.y, 1.6, 0, Math.PI * 2);
+            ctx.fill();
+            if (r.vy >= -0.3) {
+              this.explode(r.x, r.y);
+              this.rockets.splice(i, 1);
+            }
+          }
+
+          // Vonken
+          for (let i = this.sparks.length - 1; i >= 0; i--) {
+            const p = this.sparks[i];
+            p.vx *= 0.975;
+            p.vy = p.vy * 0.975 + p.g;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= p.decay;
+            if (p.life <= 0) {
+              this.sparks.splice(i, 1);
+              continue;
+            }
+            const flicker = p.twinkle ? 0.5 + Math.random() * 0.5 : 1;
+            ctx.fillStyle = `hsla(${p.h}, ${p.s}%, ${p.l}%, ${p.life * flicker})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          requestAnimationFrame(this.loop);
+        }
+      }
+
+      if (!reduceMotion) {
+        new Fireworks(document.getElementById("fw-left"), 600);
+        new Fireworks(document.getElementById("fw-right"), 1200);
+      }
+
+      /* ---------- Sectiekop: Aston Martin F1-kleuren (racing green + lime) ---------- */
+      const AM_THEME = {
+        palette: [
+          [168, 100, 42], // racing green
+          [72, 100, 50], // lime
+          [160, 100, 60], // mint
+          [65, 100, 45], // Aston Martin lime
+          [0, 0, 100], // wit
+        ],
+        accent: [65, 100, 52],
+        sparkHue: [60, 75],
+        sparkL: 58,
+      };
+
+      /* ---------- Code-animatie: Python, JavaScript en ethical hacking ---------- */
+      class CodeTerminal {
+        constructor(el, snippets, startDelay) {
+          this.titleEl = el.querySelector(".code-title");
+          this.body = el.querySelector(".code-body");
+          this.snippets = snippets;
+          this.si = 0;
+          if (reduceMotion) {
+            const s = snippets[0];
+            this.titleEl.textContent = s.title;
+            this.render(s.code, s.lang, false);
+          } else {
+            setTimeout(() => this.play(), startDelay);
+          }
+        }
+
+        esc(s) {
+          return s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        }
+
+        highlight(text, lang) {
+          const safe = this.esc(text);
+          if (lang === "sh") {
+            return safe
+              .split("\n")
+              .map((l) => {
+                if (l.startsWith("$ "))
+                  return (
+                    '<span class="k">$</span> <span class="w">' +
+                    l.slice(2) +
+                    "</span>"
+                  );
+                if (l.startsWith("[+]")) return '<span class="s">' + l + "</span>";
+                return '<span class="c2">' + l + "</span>";
+              })
+              .join("\n");
+          }
+          const re =
+            /(#.*|\/\/.*)|("[^"\n]*"|'[^'\n]*'|`[^`\n]*`)|\b(import|def|return|print|const|function|from|if|else|for|console)\b|\b(\d+)\b/g;
+          return safe.replace(re, (m, c, s, k, n) => {
+            if (c) return '<span class="c">' + m + "</span>";
+            if (s) return '<span class="s">' + m + "</span>";
+            if (k) return '<span class="k">' + m + "</span>";
+            return '<span class="n">' + m + "</span>";
+          });
+        }
+
+        render(text, lang, caret) {
+          const visible = text.split("\n").slice(-8).join("\n");
+          this.body.innerHTML =
+            this.highlight(visible, lang) +
+            (caret ? '<span class="code-caret"></span>' : "");
+        }
+
+        play() {
+          const s = this.snippets[this.si];
+          this.titleEl.textContent = s.title;
+          let i = 0;
+          const step = () => {
+            i++;
+            this.render(s.code.slice(0, i), s.lang, true);
+            if (i < s.code.length) {
+              const delay =
+                s.code[i - 1] === "\n" ? 260 : 28 + Math.random() * 30;
+              setTimeout(step, delay);
+            } else {
+              setTimeout(() => {
+                this.si = (this.si + 1) % this.snippets.length;
+                this.play();
+              }, 2400);
+            }
+          };
+          this.render("", s.lang, true);
+          step();
+        }
+      }
+
+      const LEFT_SNIPPETS = [
+        {
+          title: "poortcheck.py",
+          lang: "py",
+          code: [
+            "import socket",
+            "",
+            "def check(host, port):",
+            "    s = socket.socket()",
+            "    s.settimeout(1)",
+            "    r = s.connect_ex((host, port))",
+            "    return r == 0",
+            "",
+            'print(check("127.0.0.1", 80))',
+          ].join("\n"),
+        },
+        {
+          title: "certificaten.js",
+          lang: "js",
+          code: [
+            'const certs = ["Python", "SQL"];',
+            "",
+            "certs.forEach((c) => {",
+            "  console.log(`${c} behaald`);",
+            "});",
+            "",
+            "// Leon Keijzers - ITMG",
+          ].join("\n"),
+        },
+        {
+          title: "hash_demo.py",
+          lang: "py",
+          code: [
+            "import hashlib",
+            "",
+            'pw = "geheim123"',
+            "h = hashlib.sha256(pw.encode())",
+            "print(h.hexdigest()[:16])",
+          ].join("\n"),
+        },
+      ];
+
+      const RIGHT_SNIPPETS = [
+        {
+          title: "kali@lab:~",
+          lang: "sh",
+          code: [
+            "$ nmap -sV 127.0.0.1",
+            "PORT   STATE SERVICE",
+            "22/tcp open  ssh",
+            "80/tcp open  http",
+            "[+] 2 open poorten (eigen lab)",
+            "$ whoami",
+            "ethical-hacker",
+          ].join("\n"),
+        },
+        {
+          title: "filter.js",
+          lang: "js",
+          code: [
+            "function veilig(input) {",
+            "  return input",
+            '    .replace(/</g, "&lt;")',
+            '    .replace(/>/g, "&gt;");',
+            "}",
+            "",
+            "// veilig tegen XSS",
+          ].join("\n"),
+        },
+      ];
+
+      const SEC_TITLE = "Certificaten & opleidingen";
+      const SEC_SUB = "Een overzicht van mijn behaalde certificaten en trainingen.";
+      const secTitleEl = document.getElementById("sec-title");
+      const secTitleCursor = document.getElementById("sec-title-cursor");
+      const secSubEl = document.getElementById("sec-sub");
+      const secSubCursor = document.getElementById("sec-sub-cursor");
+      let sectionStarted = false;
+
+      function startSection() {
+        if (sectionStarted) return;
+        sectionStarted = true;
+        new CodeTerminal(document.getElementById("code-left"), LEFT_SNIPPETS, 400);
+        new CodeTerminal(document.getElementById("code-right"), RIGHT_SNIPPETS, 1100);
+        typeInto(secTitleEl, SEC_TITLE, 90, () => {
+          secTitleCursor.classList.add("done");
+          setTimeout(() => {
+            typeInto(secSubEl, SEC_SUB, 30, () =>
+              secSubCursor.classList.add("done"),
+            );
+          }, 250);
+        });
+      }
+
+      const sectionHeading = document.querySelector(".section-heading");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io.disconnect();
+              startSection();
+            }
+          },
+          { threshold: 0.6 },
+        );
+        io.observe(sectionHeading);
+      } else {
+        startSection();
+      }
+    </script>
+  </body>
+</html>

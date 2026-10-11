@@ -1,0 +1,2335 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leon Keijzers | Certificaten</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f4f7fb;
+        --muted: #b9c7d8;
+        --panel: #111d31;
+        --line: #293d59;
+        --accent: #1e88e5; /* Helder blauw */
+        --accent-bright: #00a8ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        color: var(--ink);
+        background: #07111f;
+      }
+      .hero {
+        min-height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 24px;
+        position: relative;
+        isolation: isolate;
+        background:
+          linear-gradient(120deg, rgba(5, 14, 29, 0.88), rgba(9, 37, 61, 0.72)),
+          url("https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000001-a2fb4a2fb6/images-pexels-com-photos-2292837-pexels-photo-2292837-auto-compress-cs-tinysrgb-dpr-2-h-650-w-940.jpeg?ph=3ab40ebb9b")
+            center/cover;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1565c0, #1e88e5, #00a8ff);
+        z-index: -1;
+      }
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 24px;
+        max-width: 900px;
+        width: 100%;
+      }
+      .profile-img {
+        width: 180px;
+        height: auto;
+        max-height: 240px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 10px 25px rgba(0, 168, 255, 0.25);
+        flex-shrink: 0;
+        background: rgba(0, 0, 0, 0.3);
+      }
+      .hero-content {
+        text-align: center;
+        width: 100%;
+      }
+      /* ---------- Hacker-achtergrond ---------- */
+      #bg-matrix,
+      #bg-net {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      #bg-matrix {
+        opacity: 0.42;
+      }
+      .bg-vignette {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(3, 8, 16, 0.78) 100%
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.13) 0 1px,
+            transparent 1px 3px
+          );
+      }
+      .bg-scan {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: -160px;
+        height: 160px;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 255, 156, 0.08),
+          transparent
+        );
+        animation: bgScan 8s linear infinite;
+      }
+      @keyframes bgScan {
+        to {
+          transform: translateY(calc(100vh + 320px));
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bg-scan {
+          display: none;
+        }
+      }
+      /* Inhoud boven de achtergrond; hero laat de achtergrond doorschemeren */
+      main,
+      footer {
+        position: relative;
+        z-index: 2;
+      }
+      .hero {
+        z-index: 2;
+        background: linear-gradient(
+          120deg,
+          rgba(5, 14, 29, 0.5),
+          rgba(9, 37, 61, 0.3)
+        );
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        opacity: 0.2;
+        background: url("https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000001-a2fb4a2fb6/images-pexels-com-photos-2292837-pexels-photo-2292837-auto-compress-cs-tinysrgb-dpr-2-h-650-w-940.jpeg?ph=3ab40ebb9b")
+          center/cover;
+      }
+
+      /* ---------- Lightbox: certificaat vergroot op dezelfde pagina ---------- */
+      .certificate a {
+        cursor: zoom-in;
+      }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 56px 16px 16px;
+        background: rgba(3, 8, 16, 0.94);
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .lightbox[hidden] {
+        display: none;
+      }
+      .lightbox.open {
+        opacity: 1;
+      }
+      .lb-stage {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        display: flex;
+        overflow: auto;
+        overscroll-behavior: contain;
+      }
+      .lb-stage img {
+        margin: auto;
+        max-width: min(96vw, 1400px);
+        max-height: calc(100vh - 170px);
+        object-fit: contain;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow:
+          0 0 0 1px rgba(206, 220, 0, 0.35),
+          0 20px 60px rgba(0, 0, 0, 0.6);
+        cursor: zoom-in;
+      }
+      .lb-stage img.zoomed {
+        width: 220%;
+        max-width: none;
+        max-height: none;
+        cursor: zoom-out;
+      }
+      .lb-caption {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        text-align: center;
+        color: var(--ink);
+      }
+      .lb-caption strong {
+        font-size: 1.05rem;
+        color: #cedc00;
+      }
+      .lb-caption span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .lb-caption .lb-hint {
+        font-size: 0.78rem;
+        color: #8ea2bb;
+      }
+      .lb-btn {
+        position: absolute;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        font-size: 1.9rem;
+        line-height: 1;
+        color: #fff;
+        background: rgba(0, 165, 142, 0.25);
+        border: 1px solid rgba(206, 220, 0, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          transform 0.15s;
+      }
+      .lb-btn:hover {
+        background: rgba(206, 220, 0, 0.35);
+      }
+      .lb-btn:focus-visible {
+        outline: 2px solid #cedc00;
+        outline-offset: 2px;
+      }
+      .lb-close {
+        top: 10px;
+        right: 12px;
+      }
+      .lb-prev,
+      .lb-next {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .lb-prev {
+        left: 10px;
+      }
+      .lb-next {
+        right: 10px;
+      }
+      @media (max-width: 600px) {
+        .lb-prev,
+        .lb-next {
+          top: auto;
+          bottom: 14px;
+          transform: none;
+        }
+        .lb-stage img {
+          max-height: calc(100vh - 190px);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lightbox {
+          transition: none;
+        }
+      }
+
+      /* ---------- Opstartscherm (boot) ---------- */
+      .boot {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 24px clamp(20px, 8vw, 120px);
+        background: #02060c;
+        color: #7ee0c3;
+        font-family:
+          ui-monospace, "SF Mono", Consolas, "Courier New", monospace;
+        cursor: pointer;
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s;
+      }
+      .boot.hide {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .boot pre {
+        margin: 0;
+        font-size: clamp(12px, 1.6vw, 16px);
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+      .boot .ok {
+        color: #cedc00;
+      }
+      .boot .granted {
+        display: inline-block;
+        margin-top: 14px;
+        font-size: clamp(1.4rem, 4vw, 2.4rem);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #cedc00;
+        text-shadow: 0 0 18px rgba(206, 220, 0, 0.7);
+      }
+      .boot-skip {
+        position: absolute;
+        bottom: 18px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #5f8a84;
+      }
+
+      /* ---------- Naam met decrypt-effect ---------- */
+      .title-row h1 {
+        position: relative;
+      }
+      .ghost-name {
+        visibility: hidden;
+      }
+      .name-overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+      }
+      .name-overlay .scr {
+        opacity: 0.55;
+      }
+
+      /* ---------- Filter en zoekbalk ---------- */
+      .filters {
+        max-width: 1400px;
+        margin: -10px auto 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      #cert-search {
+        width: min(100%, 420px);
+        padding: 11px 18px;
+        border-radius: 999px;
+        border: 1px solid #0b4d46;
+        background: rgba(5, 14, 29, 0.85);
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.95rem;
+        outline: none;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+      #cert-search:focus {
+        border-color: #cedc00;
+        box-shadow: 0 0 0 3px rgba(206, 220, 0, 0.18);
+      }
+      #cert-search::placeholder {
+        color: #7f95ad;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      .chip {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid #0b4d46;
+        background: rgba(0, 165, 142, 0.12);
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+      }
+      .chip:hover {
+        border-color: #cedc00;
+      }
+      .chip[aria-pressed="true"] {
+        background: #cedc00;
+        color: #07111f;
+        border-color: #cedc00;
+        font-weight: 600;
+      }
+      .chip:focus-visible {
+        outline: 2px solid #cedc00;
+        outline-offset: 2px;
+      }
+      .chip small {
+        margin-left: 5px;
+        opacity: 0.7;
+      }
+      .filter-status {
+        min-height: 1.3em;
+        margin: 0 0 20px;
+        text-align: center;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+      .certificate.pop {
+        animation: certPop 0.3s ease;
+      }
+      @keyframes certPop {
+        from {
+          opacity: 0;
+          transform: scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ---------- Contactblok ---------- */
+      .contact {
+        max-width: 760px;
+        margin: 72px auto 0;
+      }
+      .contact-card {
+        overflow: hidden;
+        background: linear-gradient(
+          145deg,
+          rgba(20, 36, 58, 0.96),
+          rgba(11, 23, 39, 0.96)
+        );
+        border: 1px solid #0b4d46;
+        border-radius: 14px;
+        box-shadow:
+          0 0 24px rgba(206, 220, 0, 0.1),
+          0 12px 30px rgba(0, 0, 0, 0.3);
+      }
+      .contact-body {
+        padding: 28px clamp(18px, 4vw, 36px) 30px;
+        text-align: center;
+      }
+      .contact-body h2 {
+        margin: 0 0 10px;
+        font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+        color: #cedc00;
+      }
+      .contact-body p {
+        max-width: 52ch;
+        margin: 0 auto 22px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .contact-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border: 1px solid rgba(206, 220, 0, 0.5);
+        border-radius: 10px;
+        background: rgba(0, 165, 142, 0.15);
+        color: #fff;
+        font: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          transform 0.15s;
+      }
+      .btn:hover {
+        background: rgba(206, 220, 0, 0.22);
+        transform: translateY(-2px);
+      }
+      .btn:focus-visible {
+        outline: 2px solid #cedc00;
+        outline-offset: 2px;
+      }
+      .btn-primary {
+        background: #cedc00;
+        border-color: #cedc00;
+        color: #07111f;
+      }
+      .btn-primary:hover {
+        background: #dbe84a;
+      }
+      .contact-body .contact-line {
+        max-width: none;
+        margin: 22px 0 0;
+        font-family:
+          ui-monospace, "SF Mono", Consolas, "Courier New", monospace;
+        font-size: 0.9rem;
+        color: #7ee0c3;
+      }
+      .contact-line .k {
+        color: #cedc00;
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent-bright);
+        font-weight: 700;
+      }
+
+      /* Rij: vuurwerk links - naam - vuurwerk rechts */
+      .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 8px 0;
+      }
+      .fireworks {
+        width: clamp(44px, 15vw, 260px);
+        height: 200px;
+        flex-shrink: 0;
+        pointer-events: none;
+        display: block;
+      }
+
+      /* Naam: verschijnt letter voor letter, knippert blauw, zweeft */
+      h1 {
+        font-size: clamp(1.7rem, 7vw, 5rem);
+        line-height: 1.05;
+        margin: 16px 0;
+        min-height: 1.05em;
+        white-space: nowrap;
+        display: inline-block;
+        color: var(--accent-bright);
+        animation:
+          floatName 3.5s ease-in-out infinite,
+          blinkBlue 1.4s ease-in-out infinite;
+      }
+      .name-cursor {
+        display: inline-block;
+        width: 0.06em;
+        height: 0.85em;
+        margin-left: 0.06em;
+        vertical-align: -0.05em;
+        background: var(--accent-bright);
+        animation: blink 0.7s infinite;
+      }
+      .name-cursor.done {
+        display: none;
+      }
+
+      @keyframes floatName {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes blinkBlue {
+        0%,
+        100% {
+          color: #00a8ff;
+          text-shadow:
+            0 0 14px rgba(0, 168, 255, 0.9),
+            0 0 36px rgba(0, 168, 255, 0.55);
+        }
+        50% {
+          color: #1a62d6;
+          text-shadow:
+            0 0 6px rgba(26, 98, 214, 0.5),
+            0 0 14px rgba(26, 98, 214, 0.25);
+        }
+      }
+
+      .hero p {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: #e0eaf6;
+        margin: 0;
+        min-height: 1.5em;
+      }
+
+      /* Knipperende blauwe cursor voor de getypte tekst */
+      .typing-cursor {
+        display: inline-block;
+        background-color: var(--accent-bright);
+        width: 2px;
+        height: 1.1em;
+        vertical-align: middle;
+        margin-left: 2px;
+        animation: blink 0.7s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        h1 {
+          animation: none;
+        }
+        .fireworks {
+          display: none;
+        }
+      }
+
+      main {
+        max-width: 1400px;
+        margin: auto;
+        padding: 58px 24px 84px;
+      }
+      .section-heading {
+        text-align: center;
+        margin-bottom: 34px;
+      }
+      .section-heading h2 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        margin: 0 0 12px;
+      }
+      .section-heading p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      /* Sectiekop in Aston Martin F1-kleuren: racing green + lime */
+      .section-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+      .fireworks.small {
+        width: clamp(36px, 10vw, 200px);
+        height: 140px;
+      }
+      .section-text {
+        min-width: 0;
+        text-align: center;
+      }
+      .section-heading h2.am-title {
+        position: relative;
+        font-size: clamp(1.3rem, 5vw, 2.6rem);
+        margin: 0 0 12px;
+        color: #cedc00;
+        animation: blinkGreen 1.4s ease-in-out infinite;
+      }
+      .section-heading p.am-sub {
+        position: relative;
+        color: #cedc00;
+      }
+      .am-title .ghost,
+      .am-sub .ghost {
+        display: block;
+        visibility: hidden;
+      }
+      .am-title .overlay,
+      .am-sub .overlay {
+        position: absolute;
+        inset: 0;
+        text-align: center;
+      }
+      .am-cursor {
+        display: inline-block;
+        width: 0.06em;
+        height: 0.85em;
+        margin-left: 0.06em;
+        vertical-align: -0.05em;
+        background: #cedc00;
+        animation: blink 0.7s infinite;
+      }
+      .am-sub .am-cursor {
+        width: 2px;
+        height: 1.1em;
+        vertical-align: middle;
+      }
+      .am-cursor.done {
+        display: none;
+      }
+      /* Code-vensters links en rechts van de sectiekop */
+      .code-panel {
+        width: clamp(220px, 26vw, 340px);
+        flex: 0 1 auto;
+        background: rgba(5, 14, 29, 0.92);
+        border: 1px solid #0b4d46;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: left;
+        box-shadow:
+          0 0 18px rgba(206, 220, 0, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35);
+        font-family:
+          ui-monospace, "SF Mono", Consolas, "Courier New", monospace;
+      }
+      .code-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        background: #0b1f2a;
+        border-bottom: 1px solid #0b4d46;
+      }
+      .code-bar i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #00a58e;
+      }
+      .code-bar i:nth-child(2) {
+        background: #cedc00;
+      }
+      .code-bar i:nth-child(3) {
+        background: #e5e9ee;
+      }
+      .code-title {
+        margin-left: 8px;
+        font-size: 11px;
+        color: #8fb5ae;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .code-body {
+        margin: 0;
+        padding: 10px 12px;
+        height: 158px;
+        overflow: hidden;
+        font-size: 11.5px;
+        line-height: 1.45;
+        color: #cfe9e4;
+        white-space: pre;
+      }
+      .code-body .k {
+        color: #cedc00;
+      }
+      .code-body .s {
+        color: #7ee0c3;
+      }
+      .code-body .c {
+        color: #5f8a84;
+        font-style: italic;
+      }
+      .code-body .c2 {
+        color: #8fb5ae;
+      }
+      .code-body .n {
+        color: #ffd479;
+      }
+      .code-body .w {
+        color: #ffffff;
+      }
+      .code-caret {
+        display: inline-block;
+        width: 6px;
+        height: 1em;
+        margin-left: 1px;
+        vertical-align: -2px;
+        background: #cedc00;
+        animation: blink 0.7s infinite;
+      }
+      @media (max-width: 900px) {
+        .section-title-row {
+          flex-wrap: wrap;
+        }
+        .section-text {
+          order: -1;
+          flex: 1 1 100%;
+        }
+        .code-panel {
+          flex: 1 1 150px;
+          width: auto;
+          max-width: 340px;
+        }
+        .code-body {
+          font-size: 10px;
+        }
+      }
+      @keyframes blinkGreen {
+        0%,
+        100% {
+          color: #cedc00;
+          text-shadow:
+            0 0 14px rgba(206, 220, 0, 0.85),
+            0 0 34px rgba(206, 220, 0, 0.5);
+        }
+        50% {
+          color: #00a58e;
+          text-shadow:
+            0 0 8px rgba(0, 165, 142, 0.7),
+            0 0 20px rgba(0, 111, 98, 0.5);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .section-heading h2.am-title {
+          animation: none;
+        }
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr));
+        gap: 24px;
+      }
+      .certificate {
+        background: linear-gradient(
+          145deg,
+          rgba(20, 36, 58, 0.98),
+          rgba(11, 23, 39, 0.98)
+        );
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 15px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .certificate:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-bright);
+      }
+      .certificate a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 260px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 8px;
+      }
+      .certificate img {
+        display: block;
+        width: 100%;
+        height: 330px;
+        object-fit: contain;
+      }
+      .certificate h2 {
+        font-size: 1rem;
+        text-align: center;
+        margin: 15px 5px 5px;
+      }
+      footer {
+        text-align: center;
+        padding: 26px;
+        color: #8ea2bb;
+        border-top: 1px solid #1e3048;
+        font-size: 0.9rem;
+      }
+      @media (max-width: 600px) {
+        .hero {
+          padding: 40px 16px;
+        }
+        main {
+          padding: 40px 16px 56px;
+        }
+        .grid {
+          gap: 16px;
+        }
+        .profile-img {
+          width: 140px;
+        }
+        .certificate img {
+          height: 300px;
+        }
+        .title-row {
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="boot" id="boot" role="presentation">
+      <pre id="boot-log" aria-hidden="true"></pre>
+      <div class="boot-skip">Klik of druk op een toets om over te slaan</div>
+    </div>
+    <canvas id="bg-matrix" aria-hidden="true"></canvas>
+    <canvas id="bg-net" aria-hidden="true"></canvas>
+    <div class="bg-vignette" aria-hidden="true"></div>
+    <div class="bg-scan" aria-hidden="true"></div>
+    <header class="hero">
+      <div class="hero-inner">
+        <img src="foto.jpg" alt="Leon Keijzers" class="profile-img" />
+        <div class="hero-content">
+          <div class="eyebrow">Portfolio · ICT & Cybersecurity</div>
+          <div class="title-row">
+            <canvas class="fireworks" id="fw-left" aria-hidden="true"></canvas>
+            <h1 aria-label="Leon Keijzers">
+              <span class="ghost-name" aria-hidden="true">Leon Keijzers</span>
+              <span class="name-overlay" aria-hidden="true"
+                ><span id="typed-name"></span
+                ><span class="name-cursor" id="name-cursor"></span
+              ></span>
+            </h1>
+            <canvas class="fireworks" id="fw-right" aria-hidden="true"></canvas>
+          </div>
+          <p>
+            <span id="typed-text"></span><span class="typing-cursor"></span>
+          </p>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="section-heading">
+        <div class="section-title-row">
+          <div class="code-panel" id="code-left" aria-hidden="true">
+            <div class="code-bar">
+              <i></i><i></i><i></i><span class="code-title"></span>
+            </div>
+            <pre class="code-body"></pre>
+          </div>
+          <div class="section-text">
+            <h2 class="am-title" aria-label="Certificaten & opleidingen">
+              <span class="ghost" aria-hidden="true"
+                >Certificaten & opleidingen</span
+              >
+              <span class="overlay" aria-hidden="true"
+                ><span id="sec-title"></span
+                ><span class="am-cursor" id="sec-title-cursor"></span
+              ></span>
+            </h2>
+            <p
+              class="am-sub"
+              aria-label="Een overzicht van mijn behaalde certificaten en trainingen."
+            >
+              <span class="ghost" aria-hidden="true"
+                >Een overzicht van mijn behaalde certificaten en
+                trainingen.</span
+              >
+              <span class="overlay" aria-hidden="true"
+                ><span id="sec-sub"></span
+                ><span class="am-cursor" id="sec-sub-cursor"></span
+              ></span>
+            </p>
+          </div>
+          <div class="code-panel" id="code-right" aria-hidden="true">
+            <div class="code-bar">
+              <i></i><i></i><i></i><span class="code-title"></span>
+            </div>
+            <pre class="code-body"></pre>
+          </div>
+        </div>
+      </div>
+      <div class="filters" id="filters">
+        <input
+          type="search"
+          id="cert-search"
+          placeholder="Zoek een certificaat..."
+          aria-label="Zoek een certificaat"
+          autocomplete="off"
+        />
+        <div class="chips" id="chips" role="group" aria-label="Filter op categorie"></div>
+      </div>
+      <p class="filter-status" id="filter-status" aria-live="polite"></p>
+      <section class="grid" aria-label="Certificaten">
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000106-8ea348ea37/javascript.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000106-8ea348ea37/javascript.png?ph=3ab40ebb9b"
+              alt="JavaScript"
+              loading="lazy"
+            />
+          </a>
+          <h2>JavaScript Developer</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000100-4a7ef4a7f1/python%20cert.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000100-4a7ef4a7f1/python%20cert.jpeg?ph=3ab40ebb9b"
+              alt="Python Developer"
+              loading="lazy"
+            />
+          </a>
+          <h2>Python Developer ITMG</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000102-9fb709fb71/scholingstraject.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000102-9fb709fb71/scholingstraject.jpeg?ph=3ab40ebb9b"
+              alt="Scholingstraject"
+              loading="lazy"
+            />
+          </a>
+          <h2>Scholingstraject Python Developer</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000098-8aae78aae9/cert%20websites%20maken.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000098-8aae78aae9/cert%20websites%20maken.jpeg?ph=3ab40ebb9b"
+              alt="Websites maken"
+              loading="lazy"
+            />
+          </a>
+          <h2>Websites maken Development Essentials</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000031-0dca90dcac/l1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000031-0dca90dcac/l1.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Scholingstraject Ethical Hacker</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000045-a608fa6091/hacking%20practitioner.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000045-a608fa6091/hacking%20practitioner.png?ph=3ab40ebb9b"
+              alt="Hacking Practitioner"
+              loading="lazy"
+            />
+          </a>
+          <h2>Ethical Hacker Practitioner</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000035-0da640da66/certificaat%20ethical%20hacker1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000035-0da640da66/certificaat%20ethical%20hacker1.jpeg?ph=3ab40ebb9b"
+              alt="Ethical Hacker"
+              loading="lazy"
+            />
+          </a>
+          <h2>Ethical Hacker Foundation</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000047-1bc2b1bc2e/iso%2027001%20certificaat.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000047-1bc2b1bc2e/iso%2027001%20certificaat.png?ph=3ab40ebb9b"
+              alt="ISO 27001"
+              loading="lazy"
+            />
+          </a>
+          <h2>ISO 27001</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000094-909f5909f7/AI%20en%20Chatgpt.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000094-909f5909f7/AI%20en%20Chatgpt.jpeg?ph=3ab40ebb9b"
+              alt="AI en ChatGPT"
+              loading="lazy"
+            />
+          </a>
+          <h2>AI en ChatGPT</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000091-2f1a12f1a3/big%20data%20certificaat.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000091-2f1a12f1a3/big%20data%20certificaat.png?ph=3ab40ebb9b"
+              alt="Big Data"
+              loading="lazy"
+            />
+          </a>
+          <h2>Big Data</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000037-96f6996f6b/sql%20cert.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000037-96f6996f6b/sql%20cert.jpeg?ph=3ab40ebb9b"
+              alt="SQL"
+              loading="lazy"
+            />
+          </a>
+          <h2>SQL</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000033-7b41a7b41c/l8.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000033-7b41a7b41c/l8.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Basiskennis IT</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000007-d819ad819c/cert1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000007-d819ad819c/cert1.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Security Awareness 1</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000009-77c3577c37/cert2.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000009-77c3577c37/cert2.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Security Awareness 2</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000096-9006590066/bewijs%20deelname%20project.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000096-9006590066/bewijs%20deelname%20project.jpeg?ph=3ab40ebb9b"
+              alt="Projectmatig werken"
+              loading="lazy"
+            />
+          </a>
+          <h2>Projectmatig werken</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000029-ddc3dddc41/mile2%20cpeh-1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000029-ddc3dddc41/mile2%20cpeh-1.jpeg?ph=3ab40ebb9b"
+              alt="Mile2 CPEH"
+              loading="lazy"
+            />
+          </a>
+          <h2>Mile2 CPEH</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000011-ce75ece75f/hack%20novi.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000011-ce75ece75f/hack%20novi.jpeg?ph=3ab40ebb9b"
+              alt="Hack NOVI"
+              loading="lazy"
+            />
+          </a>
+          <h2>Introductie Hacking</h2>
+          <h2>Behaald bij: Hoge school Novi</h2>
+        </article>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-card">
+          <div class="code-bar">
+            <i></i><i></i><i></i><span class="code-title">contact.sh</span>
+          </div>
+          <div class="contact-body">
+            <h2 id="contact-title">Laten we contact opnemen</h2>
+            <p>
+              Heb je een vraag, een project of een kans? Stuur me gerust een
+              bericht, dan reageer ik zo snel mogelijk.
+            </p>
+            <div class="contact-actions">
+              <a class="btn btn-primary" id="c-mail" href="#">E-mail sturen</a>
+              <a
+                class="btn"
+                id="c-linkedin"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                >LinkedIn</a
+              >
+              <a class="btn" id="c-cv" href="#" download>CV downloaden</a>
+              <button class="btn" id="c-copy" type="button">
+                Kopieer e-mailadres
+              </button>
+            </div>
+            <p class="contact-line">
+              <span class="k">$</span> <span id="c-mail-text"></span>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Certificaat vergroot"
+      hidden
+    >
+      <button class="lb-btn lb-close" id="lb-close" aria-label="Sluiten">
+        &times;
+      </button>
+      <button class="lb-btn lb-prev" id="lb-prev" aria-label="Vorig certificaat">
+        &#8249;
+      </button>
+      <button class="lb-btn lb-next" id="lb-next" aria-label="Volgend certificaat">
+        &#8250;
+      </button>
+      <div class="lb-stage" id="lb-stage">
+        <img id="lb-img" src="" alt="" />
+      </div>
+      <div class="lb-caption">
+        <strong id="lb-title"></strong>
+        <span id="lb-sub"></span>
+        <span class="lb-hint">Klik op het certificaat om in of uit te zoomen</span>
+      </div>
+    </div>
+
+    <footer>Leon Keijzers · Portfolio</footer>
+
+    <script>
+      /* ---------- Typende teksten: eerst de naam, dan de ondertitel ---------- */
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const nameEl = document.getElementById("typed-name");
+      const nameCursor = document.getElementById("name-cursor");
+      const subEl = document.getElementById("typed-text");
+      const NAME = "Leon Keijzers";
+      const SUBTITLE = "Mijn certificaten en opleidingen";
+
+      function typeInto(el, text, delay, done) {
+        if (reduceMotion) {
+          el.textContent = text;
+          if (done) done();
+          return;
+        }
+        let i = 0;
+        (function step() {
+          if (i < text.length) {
+            el.textContent += text.charAt(i++);
+            setTimeout(step, delay);
+          } else if (done) {
+            done();
+          }
+        })();
+      }
+
+      // Decrypt-effect: willekeurige tekens ontcijferen één voor één tot de naam
+      function decryptInto(el, text, done) {
+        if (reduceMotion) {
+          el.textContent = text;
+          if (done) done();
+          return;
+        }
+        const SCRAMBLE = "!#$%*+-=?@01{}[]/^~";
+        let revealed = 0;
+        const render = () => {
+          let tail = "";
+          for (let i = revealed; i < text.length; i++) {
+            tail +=
+              text[i] === " "
+                ? " "
+                : SCRAMBLE[(Math.random() * SCRAMBLE.length) | 0];
+          }
+          el.innerHTML =
+            text.slice(0, revealed) + '<span class="scr">' + tail + "</span>";
+        };
+        const scrambler = setInterval(render, 45);
+        const revealer = setInterval(() => {
+          revealed++;
+          if (revealed >= text.length) {
+            clearInterval(scrambler);
+            clearInterval(revealer);
+            el.textContent = text;
+            if (done) done();
+          }
+        }, 130);
+        render();
+      }
+
+      // Wordt gestart zodra het opstartscherm klaar is
+      function startIntro() {
+        setTimeout(() => {
+          decryptInto(nameEl, NAME, () => {
+            nameCursor.classList.add("done");
+            setTimeout(() => typeInto(subEl, SUBTITLE, 55), 300);
+          });
+        }, 300);
+      }
+
+      /* ---------- Siervuurwerk (links en rechts van de naam) ---------- */
+      const DEFAULT_THEME = {
+        palette: [
+          [200, 100, 62], // helder blauw
+          [215, 95, 58], // diep blauw
+          [185, 100, 70], // cyaan
+          [45, 100, 62], // goud
+          [0, 0, 100], // wit
+        ],
+        accent: [45, 100, 65],
+        sparkHue: [35, 50],
+        sparkL: 68,
+      };
+
+      class Fireworks {
+        constructor(canvas, offset, theme) {
+          this.canvas = canvas;
+          this.ctx = canvas.getContext("2d");
+          this.rockets = [];
+          this.theme = theme || DEFAULT_THEME;
+          this.sparks = [];
+          this.nextLaunch = performance.now() + offset;
+          this.resize();
+          window.addEventListener("resize", () => this.resize());
+          this.loop = this.loop.bind(this);
+          requestAnimationFrame(this.loop);
+        }
+
+        resize() {
+          const dpr = window.devicePixelRatio || 1;
+          this.w = this.canvas.clientWidth;
+          this.h = this.canvas.clientHeight;
+          this.canvas.width = this.w * dpr;
+          this.canvas.height = this.h * dpr;
+          this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          this.scale = Math.max(0.45, Math.min(1.3, this.w / 200));
+        }
+
+        rand(a, b) {
+          return a + Math.random() * (b - a);
+        }
+
+        launch() {
+          const g = 0.12;
+          const targetY = this.rand(this.h * 0.12, this.h * 0.5);
+          this.rockets.push({
+            x: this.rand(this.w * 0.25, this.w * 0.75),
+            y: this.h,
+            vx: this.rand(-0.35, 0.35),
+            vy: -Math.sqrt(2 * g * (this.h - targetY)),
+            g,
+          });
+        }
+
+        explode(x, y) {
+          const palette = this.theme.palette;
+          const main = palette[Math.floor(Math.random() * palette.length)];
+          const type = ["sphere", "ring", "willow"][
+            Math.floor(Math.random() * 3)
+          ];
+          const count = Math.round(46 * Math.min(1, this.scale + 0.2));
+          for (let i = 0; i < count; i++) {
+            const angle =
+              type === "ring"
+                ? (i / count) * Math.PI * 2
+                : Math.random() * Math.PI * 2;
+            const speed =
+              (type === "ring" ? 2.4 : this.rand(0.6, 3.2)) * this.scale;
+            const col = Math.random() < 0.25 ? this.theme.accent : main;
+            this.sparks.push({
+              x,
+              y,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              life: 1,
+              decay: type === "willow" ? this.rand(0.008, 0.014) : this.rand(0.014, 0.026),
+              g: type === "willow" ? 0.05 : 0.035,
+              size: this.rand(1, 2.2),
+              h: col[0],
+              s: col[1],
+              l: col[2],
+              twinkle: Math.random() < 0.3,
+            });
+          }
+        }
+
+        sparkler() {
+          // Continu sprankelend vuurwerkje onderaan
+          const cx = this.w / 2;
+          for (let i = 0; i < 2; i++) {
+            const a = -Math.PI / 2 + this.rand(-0.9, 0.9);
+            const s = this.rand(1, 2.6) * this.scale;
+            this.sparks.push({
+              x: cx,
+              y: this.h - 2,
+              vx: Math.cos(a) * s,
+              vy: Math.sin(a) * s,
+              life: 1,
+              decay: this.rand(0.04, 0.07),
+              g: 0.08,
+              size: this.rand(0.8, 1.6),
+              h: this.rand(this.theme.sparkHue[0], this.theme.sparkHue[1]),
+              s: 100,
+              l: this.theme.sparkL,
+              twinkle: true,
+            });
+          }
+        }
+
+        loop(now) {
+          const { ctx, w, h } = this;
+
+          // Laat het vorige beeld langzaam vervagen voor lichtsporen
+          ctx.globalCompositeOperation = "destination-out";
+          ctx.fillStyle = "rgba(0,0,0,0.2)";
+          ctx.fillRect(0, 0, w, h);
+          ctx.globalCompositeOperation = "lighter";
+
+          if (now >= this.nextLaunch) {
+            this.launch();
+            this.nextLaunch = now + this.rand(650, 1500);
+          }
+          this.sparkler();
+
+          // Raketten
+          for (let i = this.rockets.length - 1; i >= 0; i--) {
+            const r = this.rockets[i];
+            r.x += r.vx;
+            r.y += r.vy;
+            r.vy += r.g;
+            ctx.fillStyle = "rgba(255,230,160,0.95)";
+            ctx.beginPath();
+            ctx.arc(r.x, r.y, 1.6, 0, Math.PI * 2);
+            ctx.fill();
+            if (r.vy >= -0.3) {
+              this.explode(r.x, r.y);
+              this.rockets.splice(i, 1);
+            }
+          }
+
+          // Vonken
+          for (let i = this.sparks.length - 1; i >= 0; i--) {
+            const p = this.sparks[i];
+            p.vx *= 0.975;
+            p.vy = p.vy * 0.975 + p.g;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= p.decay;
+            if (p.life <= 0) {
+              this.sparks.splice(i, 1);
+              continue;
+            }
+            const flicker = p.twinkle ? 0.5 + Math.random() * 0.5 : 1;
+            ctx.fillStyle = `hsla(${p.h}, ${p.s}%, ${p.l}%, ${p.life * flicker})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          requestAnimationFrame(this.loop);
+        }
+      }
+
+      if (!reduceMotion) {
+        new Fireworks(document.getElementById("fw-left"), 600);
+        new Fireworks(document.getElementById("fw-right"), 1200);
+      }
+
+      /* ---------- Sectiekop: Aston Martin F1-kleuren (racing green + lime) ---------- */
+      const AM_THEME = {
+        palette: [
+          [168, 100, 42], // racing green
+          [72, 100, 50], // lime
+          [160, 100, 60], // mint
+          [65, 100, 45], // Aston Martin lime
+          [0, 0, 100], // wit
+        ],
+        accent: [65, 100, 52],
+        sparkHue: [60, 75],
+        sparkL: 58,
+      };
+
+      /* ---------- Code-animatie: Python, JavaScript en ethical hacking ---------- */
+      class CodeTerminal {
+        constructor(el, snippets, startDelay) {
+          this.titleEl = el.querySelector(".code-title");
+          this.body = el.querySelector(".code-body");
+          this.snippets = snippets;
+          this.si = 0;
+          if (reduceMotion) {
+            const s = snippets[0];
+            this.titleEl.textContent = s.title;
+            this.render(s.code, s.lang, false);
+          } else {
+            setTimeout(() => this.play(), startDelay);
+          }
+        }
+
+        esc(s) {
+          return s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        }
+
+        highlight(text, lang) {
+          const safe = this.esc(text);
+          if (lang === "sh") {
+            return safe
+              .split("\n")
+              .map((l) => {
+                if (l.startsWith("$ "))
+                  return (
+                    '<span class="k">$</span> <span class="w">' +
+                    l.slice(2) +
+                    "</span>"
+                  );
+                if (l.startsWith("[+]")) return '<span class="s">' + l + "</span>";
+                return '<span class="c2">' + l + "</span>";
+              })
+              .join("\n");
+          }
+          const re =
+            /(#.*|\/\/.*)|("[^"\n]*"|'[^'\n]*'|`[^`\n]*`)|\b(import|def|return|print|const|function|from|if|else|for|console)\b|\b(\d+)\b/g;
+          return safe.replace(re, (m, c, s, k, n) => {
+            if (c) return '<span class="c">' + m + "</span>";
+            if (s) return '<span class="s">' + m + "</span>";
+            if (k) return '<span class="k">' + m + "</span>";
+            return '<span class="n">' + m + "</span>";
+          });
+        }
+
+        render(text, lang, caret) {
+          const visible = text.split("\n").slice(-8).join("\n");
+          this.body.innerHTML =
+            this.highlight(visible, lang) +
+            (caret ? '<span class="code-caret"></span>' : "");
+        }
+
+        play() {
+          const s = this.snippets[this.si];
+          this.titleEl.textContent = s.title;
+          let i = 0;
+          const step = () => {
+            i++;
+            this.render(s.code.slice(0, i), s.lang, true);
+            if (i < s.code.length) {
+              const delay =
+                s.code[i - 1] === "\n" ? 260 : 28 + Math.random() * 30;
+              setTimeout(step, delay);
+            } else {
+              setTimeout(() => {
+                this.si = (this.si + 1) % this.snippets.length;
+                this.play();
+              }, 2400);
+            }
+          };
+          this.render("", s.lang, true);
+          step();
+        }
+      }
+
+      const LEFT_SNIPPETS = [
+        {
+          title: "poortcheck.py",
+          lang: "py",
+          code: [
+            "import socket",
+            "",
+            "def check(host, port):",
+            "    s = socket.socket()",
+            "    s.settimeout(1)",
+            "    r = s.connect_ex((host, port))",
+            "    return r == 0",
+            "",
+            'print(check("127.0.0.1", 80))',
+          ].join("\n"),
+        },
+        {
+          title: "certificaten.js",
+          lang: "js",
+          code: [
+            'const certs = ["Python", "SQL"];',
+            "",
+            "certs.forEach((c) => {",
+            "  console.log(`${c} behaald`);",
+            "});",
+            "",
+            "// Leon Keijzers - ITMG",
+          ].join("\n"),
+        },
+        {
+          title: "hash_demo.py",
+          lang: "py",
+          code: [
+            "import hashlib",
+            "",
+            'pw = "geheim123"',
+            "h = hashlib.sha256(pw.encode())",
+            "print(h.hexdigest()[:16])",
+          ].join("\n"),
+        },
+      ];
+
+      const RIGHT_SNIPPETS = [
+        {
+          title: "kali@lab:~",
+          lang: "sh",
+          code: [
+            "$ nmap -sV 127.0.0.1",
+            "PORT   STATE SERVICE",
+            "22/tcp open  ssh",
+            "80/tcp open  http",
+            "[+] 2 open poorten (eigen lab)",
+            "$ whoami",
+            "ethical-hacker",
+          ].join("\n"),
+        },
+        {
+          title: "filter.js",
+          lang: "js",
+          code: [
+            "function veilig(input) {",
+            "  return input",
+            '    .replace(/</g, "&lt;")',
+            '    .replace(/>/g, "&gt;");',
+            "}",
+            "",
+            "// veilig tegen XSS",
+          ].join("\n"),
+        },
+      ];
+
+      const SEC_TITLE = "Certificaten & opleidingen";
+      const SEC_SUB = "Een overzicht van mijn behaalde certificaten en trainingen.";
+      const secTitleEl = document.getElementById("sec-title");
+      const secTitleCursor = document.getElementById("sec-title-cursor");
+      const secSubEl = document.getElementById("sec-sub");
+      const secSubCursor = document.getElementById("sec-sub-cursor");
+      let sectionStarted = false;
+
+      function startSection() {
+        if (sectionStarted) return;
+        sectionStarted = true;
+        new CodeTerminal(document.getElementById("code-left"), LEFT_SNIPPETS, 400);
+        new CodeTerminal(document.getElementById("code-right"), RIGHT_SNIPPETS, 1100);
+        typeInto(secTitleEl, SEC_TITLE, 90, () => {
+          secTitleCursor.classList.add("done");
+          setTimeout(() => {
+            typeInto(secSubEl, SEC_SUB, 30, () =>
+              secSubCursor.classList.add("done"),
+            );
+          }, 250);
+        });
+      }
+
+      const sectionHeading = document.querySelector(".section-heading");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io.disconnect();
+              startSection();
+            }
+          },
+          { threshold: 0.6 },
+        );
+        io.observe(sectionHeading);
+      } else {
+        startSection();
+      }
+
+      /* ---------- Hacker-achtergrond: matrix-regen + netwerk met pakketjes ---------- */
+      (function () {
+        const mCanvas = document.getElementById("bg-matrix");
+        const nCanvas = document.getElementById("bg-net");
+        const mctx = mCanvas.getContext("2d");
+        const nctx = nCanvas.getContext("2d");
+
+        const FONT = 15;
+        const MONO = 'ui-monospace, Consolas, "Courier New", monospace';
+        const CHARS =
+          "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン0123456789ABCDEF<>/{}[]$#%&=+*".split(
+            "",
+          );
+
+        let W = 0;
+        let H = 0;
+        let DPR = 1;
+        let ready = false;
+
+        // matrix-kolommen
+        let rows = [];
+        let acc = [];
+        let spd = [];
+
+        // netwerk
+        let nodes = [];
+        let packets = [];
+        const mouse = { x: -999, y: -999 };
+
+        const rnd = (a, b) => a + Math.random() * (b - a);
+        const pick = () => CHARS[(Math.random() * CHARS.length) | 0];
+
+        function resize() {
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          // Mobiele browsers sturen resize bij scrollen (adresbalk): negeer kleine hoogteverschillen
+          if (ready && w === W && Math.abs(h - H) < 120) return;
+          W = w;
+          H = h;
+          DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+          for (const c of [mCanvas, nCanvas]) {
+            c.width = Math.round(W * DPR);
+            c.height = Math.round(H * DPR);
+          }
+          mctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+          nctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+          const cols = Math.ceil(W / FONT);
+          const oldRows = rows;
+          rows = Array.from({ length: cols }, (_, i) =>
+            oldRows[i] !== undefined ? oldRows[i] : Math.floor(rnd(-40, 0)),
+          );
+          acc = Array.from({ length: cols }, () => Math.random());
+          spd = Array.from({ length: cols }, () => rnd(0.3, 0.95));
+
+          const n = Math.max(24, Math.min(80, Math.floor((W * H) / 22000)));
+          nodes = Array.from({ length: n }, (_, i) => ({
+            x: rnd(0, W),
+            y: rnd(0, H),
+            vx: rnd(-0.3, 0.3),
+            vy: rnd(-0.3, 0.3),
+            r: rnd(1, 2.4),
+            hot: i % 9 === 0,
+            label:
+              "10.0." +
+              Math.floor(rnd(0, 255)) +
+              "." +
+              Math.floor(rnd(1, 254)),
+          }));
+          packets = [];
+          ready = true;
+        }
+
+        /* --- Matrix-regen --- */
+        function eraseCell(x, y) {
+          mctx.clearRect(x, y - FONT + 3, FONT, FONT);
+        }
+
+        function matrixStep() {
+          // Laat het vorige beeld langzaam vervagen (lichtspoor)
+          mctx.globalCompositeOperation = "destination-out";
+          mctx.fillStyle = "rgba(0,0,0,0.09)";
+          mctx.fillRect(0, 0, W, H);
+          mctx.globalCompositeOperation = "source-over";
+          mctx.font = FONT + "px " + MONO;
+
+          for (let i = 0; i < rows.length; i++) {
+            acc[i] += spd[i];
+            if (acc[i] < 1) continue;
+            acc[i] -= 1;
+            rows[i]++;
+            const x = i * FONT;
+            const y = rows[i] * FONT;
+            if (y > 0) {
+              // vorige cel wordt groen (of af en toe limoen)
+              if (y - FONT > 0) {
+                eraseCell(x, y - FONT);
+                mctx.fillStyle =
+                  i % 11 === 0 ? "rgba(206,220,0,0.85)" : "rgba(0,214,140,0.8)";
+                mctx.fillText(pick(), x, y - FONT);
+              }
+              // kop van de druppel is bijna wit
+              eraseCell(x, y);
+              mctx.fillStyle = "rgba(220,255,236,0.95)";
+              mctx.fillText(pick(), x, y);
+            }
+            if (y > H && Math.random() > 0.975) {
+              rows[i] = Math.floor(rnd(-25, 0));
+              spd[i] = rnd(0.3, 0.95);
+            }
+          }
+        }
+
+        /* --- Netwerk met pakketjes --- */
+        const LINK = 140;
+
+        function neighbors(a) {
+          const out = [];
+          for (const b of nodes) {
+            if (b === a) continue;
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            if (dx * dx + dy * dy < LINK * LINK) out.push(b);
+          }
+          return out;
+        }
+
+        function spawnPacket(from) {
+          const a = from || nodes[(Math.random() * nodes.length) | 0];
+          const nb = neighbors(a);
+          if (!nb.length) return;
+          packets.push({
+            a,
+            b: nb[(Math.random() * nb.length) | 0],
+            t: 0,
+            s: rnd(0.012, 0.03),
+          });
+        }
+
+        let lastSpawn = 0;
+
+        function netStep(now) {
+          nctx.clearRect(0, 0, W, H);
+
+          for (const n of nodes) {
+            n.x += n.vx;
+            n.y += n.vy;
+            if (n.x < 0 || n.x > W) n.vx *= -1;
+            if (n.y < 0 || n.y > H) n.vy *= -1;
+          }
+
+          // verbindingen tussen nodes
+          nctx.lineWidth = 1;
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const dx = nodes[i].x - nodes[j].x;
+              const dy = nodes[i].y - nodes[j].y;
+              const d = Math.sqrt(dx * dx + dy * dy);
+              if (d < LINK) {
+                nctx.strokeStyle =
+                  "rgba(0,255,156," + ((1 - d / LINK) * 0.35).toFixed(3) + ")";
+                nctx.beginPath();
+                nctx.moveTo(nodes[i].x, nodes[i].y);
+                nctx.lineTo(nodes[j].x, nodes[j].y);
+                nctx.stroke();
+              }
+            }
+          }
+
+          // lijnen naar de muis (je "scant" het netwerk)
+          if (mouse.x > -500) {
+            for (const n of nodes) {
+              const dx = n.x - mouse.x;
+              const dy = n.y - mouse.y;
+              const d = Math.sqrt(dx * dx + dy * dy);
+              if (d < 190) {
+                nctx.strokeStyle =
+                  "rgba(206,220,0," + ((1 - d / 190) * 0.7).toFixed(3) + ")";
+                nctx.beginPath();
+                nctx.moveTo(n.x, n.y);
+                nctx.lineTo(mouse.x, mouse.y);
+                nctx.stroke();
+              }
+            }
+            nctx.fillStyle = "rgba(206,220,0,0.9)";
+            nctx.beginPath();
+            nctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
+            nctx.fill();
+          }
+
+          // nodes, met pulserende ring en IP-label bij "doelwitten"
+          nctx.font = "10px " + MONO;
+          for (const n of nodes) {
+            nctx.fillStyle = "rgba(0,255,170,0.85)";
+            nctx.beginPath();
+            nctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            nctx.fill();
+            if (n.hot) {
+              const pulse = 5 + Math.sin(now / 300 + n.x) * 3;
+              nctx.strokeStyle = "rgba(206,220,0,0.55)";
+              nctx.beginPath();
+              nctx.arc(n.x, n.y, pulse, 0, Math.PI * 2);
+              nctx.stroke();
+              nctx.fillStyle = "rgba(0,255,156,0.5)";
+              nctx.fillText(n.label, n.x + 9, n.y - 7);
+            }
+          }
+
+          // pakketjes die over de verbindingen reizen
+          if (now - lastSpawn > 450 && packets.length < 14) {
+            lastSpawn = now;
+            spawnPacket();
+          }
+          for (let i = packets.length - 1; i >= 0; i--) {
+            const p = packets[i];
+            p.t += p.s;
+            if (p.t >= 1) {
+              packets.splice(i, 1);
+              if (Math.random() < 0.45) spawnPacket(p.b); // pakket gaat verder
+              continue;
+            }
+            const x = p.a.x + (p.b.x - p.a.x) * p.t;
+            const y = p.a.y + (p.b.y - p.a.y) * p.t;
+            nctx.fillStyle = "rgba(0,255,156,0.25)";
+            nctx.beginPath();
+            nctx.arc(x, y, 5, 0, Math.PI * 2);
+            nctx.fill();
+            nctx.fillStyle = "rgba(235,255,245,0.95)";
+            nctx.beginPath();
+            nctx.arc(x, y, 1.8, 0, Math.PI * 2);
+            nctx.fill();
+          }
+        }
+
+        /* --- Start --- */
+        resize();
+        window.addEventListener("resize", resize);
+        window.addEventListener("pointermove", (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+        document.addEventListener("pointerleave", () => {
+          mouse.x = -999;
+          mouse.y = -999;
+        });
+
+        if (reduceMotion) {
+          // Eén stilstaand beeld, geen animatie
+          for (let i = 0; i < 140; i++) matrixStep();
+          netStep(0);
+          return;
+        }
+
+        let last = 0;
+        function frame(t) {
+          if (t - last >= 33) {
+            last = t;
+            matrixStep();
+            netStep(t);
+          }
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+
+      /* ---------- Lightbox: klik op een certificaat = vergroot op dezelfde pagina ---------- */
+      (function () {
+        const lb = document.getElementById("lightbox");
+        const stage = document.getElementById("lb-stage");
+        const img = document.getElementById("lb-img");
+        const titleEl = document.getElementById("lb-title");
+        const subEl = document.getElementById("lb-sub");
+        const btnClose = document.getElementById("lb-close");
+        const btnPrev = document.getElementById("lb-prev");
+        const btnNext = document.getElementById("lb-next");
+
+        const cards = Array.from(document.querySelectorAll(".certificate"));
+        const items = cards.map((card) => {
+          const h2s = card.querySelectorAll("h2");
+          return {
+            src: card.querySelector("a").href,
+            alt: card.querySelector("img").alt,
+            title: h2s[0] ? h2s[0].textContent.trim() : "",
+            sub: h2s[1] ? h2s[1].textContent.trim() : "",
+          };
+        });
+
+        let current = 0;
+        let lastFocus = null;
+        let hideTimer = null;
+
+        function show(i) {
+          const dir = i < current ? -1 : 1;
+          current = (i + items.length) % items.length;
+          let guard = 0;
+          while (cards[current].hidden && guard++ < items.length) {
+            current = (current + dir + items.length) % items.length;
+          }
+          const it = items[current];
+          img.classList.remove("zoomed");
+          stage.scrollTop = 0;
+          stage.scrollLeft = 0;
+          img.src = it.src;
+          img.alt = it.alt + " - " + it.title;
+          titleEl.textContent = it.title;
+          subEl.textContent = it.sub;
+        }
+
+        function open(i) {
+          clearTimeout(hideTimer);
+          lastFocus = document.activeElement;
+          show(i);
+          lb.hidden = false;
+          document.body.style.overflow = "hidden";
+          requestAnimationFrame(() => lb.classList.add("open"));
+          btnClose.focus();
+        }
+
+        function close() {
+          lb.classList.remove("open");
+          document.body.style.overflow = "";
+          hideTimer = setTimeout(
+            () => {
+              lb.hidden = true;
+              img.src = "";
+            },
+            reduceMotion ? 0 : 200,
+          );
+          if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }
+
+        // Klik op een certificaat opent de lightbox (Ctrl/Cmd-klik opent nog steeds een nieuw tabblad)
+        cards.forEach((card, i) => {
+          card.querySelector("a").addEventListener("click", (e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+            e.preventDefault();
+            open(i);
+          });
+        });
+
+        btnClose.addEventListener("click", close);
+        btnPrev.addEventListener("click", () => show(current - 1));
+        btnNext.addEventListener("click", () => show(current + 1));
+
+        // Klik op de afbeelding = in/uit zoomen; klik ernaast = sluiten
+        img.addEventListener("click", () => img.classList.toggle("zoomed"));
+        lb.addEventListener("click", (e) => {
+          if (e.target === lb || e.target === stage) close();
+        });
+
+        // Toetsenbord: Esc sluit, pijltjes bladeren, Tab blijft binnen de lightbox
+        document.addEventListener("keydown", (e) => {
+          if (lb.hidden) return;
+          if (e.key === "Escape") close();
+          else if (e.key === "ArrowLeft") show(current - 1);
+          else if (e.key === "ArrowRight") show(current + 1);
+          else if (e.key === "Tab") {
+            const f = [btnClose, btnPrev, btnNext];
+            const idx = f.indexOf(document.activeElement);
+            e.preventDefault();
+            const next = e.shiftKey
+              ? (idx - 1 + f.length) % f.length
+              : (idx + 1) % f.length;
+            f[next].focus();
+          }
+        });
+
+        // Swipe op een telefoon om te bladeren (alleen als er niet is ingezoomd)
+        let touchX = null;
+        lb.addEventListener(
+          "touchstart",
+          (e) => {
+            touchX = e.touches[0].clientX;
+          },
+          { passive: true },
+        );
+        lb.addEventListener(
+          "touchend",
+          (e) => {
+            if (touchX === null || img.classList.contains("zoomed")) return;
+            const dx = e.changedTouches[0].clientX - touchX;
+            if (Math.abs(dx) > 60) show(current + (dx < 0 ? 1 : -1));
+            touchX = null;
+          },
+          { passive: true },
+        );
+      })();
+
+      /* ---------- Filter en zoekbalk voor de certificaten ---------- */
+      (function () {
+        const cards = Array.from(document.querySelectorAll(".certificate"));
+        const chipsEl = document.getElementById("chips");
+        const searchEl = document.getElementById("cert-search");
+        const statusEl = document.getElementById("filter-status");
+
+        // Categorie per certificaat (op titel)
+        const MAP = {
+          "JavaScript Developer": "programmeren",
+          "Python Developer ITMG": "programmeren",
+          "Scholingstraject Python Developer": "programmeren",
+          "Websites maken Development Essentials": "programmeren",
+          "Scholingstraject Ethical Hacker": "hacking",
+          "Ethical Hacker Practitioner": "hacking",
+          "Ethical Hacker Foundation": "hacking",
+          "Mile2 CPEH": "hacking",
+          "Introductie Hacking": "hacking",
+          "ISO 27001": "security",
+          "Security Awareness 1": "security",
+          "Security Awareness 2": "security",
+          "AI en ChatGPT": "data",
+          "Big Data": "data",
+          SQL: "data",
+          "Basiskennis IT": "basis",
+          "Projectmatig werken": "basis",
+        };
+        const CATS = [
+          ["all", "Alles"],
+          ["hacking", "Ethical hacking"],
+          ["security", "Security"],
+          ["programmeren", "Programmeren"],
+          ["data", "Data & AI"],
+          ["basis", "ICT-basis"],
+        ];
+
+        cards.forEach((c) => {
+          const title = c.querySelector("h2").textContent.trim();
+          c.dataset.cat = MAP[title] || "basis";
+          c.dataset.search = (
+            c.textContent +
+            " " +
+            c.querySelector("img").alt
+          ).toLowerCase();
+          c.addEventListener("animationend", () => c.classList.remove("pop"));
+        });
+
+        const state = { cat: "all", q: "" };
+
+        CATS.forEach(([key, label]) => {
+          const count =
+            key === "all"
+              ? cards.length
+              : cards.filter((c) => c.dataset.cat === key).length;
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "chip";
+          b.dataset.cat = key;
+          b.setAttribute("aria-pressed", key === "all" ? "true" : "false");
+          b.innerHTML = label + "<small>" + count + "</small>";
+          b.addEventListener("click", () => {
+            state.cat = key;
+            chipsEl
+              .querySelectorAll(".chip")
+              .forEach((x) =>
+                x.setAttribute("aria-pressed", x === b ? "true" : "false"),
+              );
+            apply();
+          });
+          chipsEl.appendChild(b);
+        });
+
+        function apply() {
+          let visible = 0;
+          cards.forEach((c) => {
+            const ok =
+              (state.cat === "all" || c.dataset.cat === state.cat) &&
+              (!state.q || c.dataset.search.includes(state.q));
+            const wasVisible = !c.hidden;
+            c.hidden = !ok;
+            if (ok) {
+              visible++;
+              if (!wasVisible && !reduceMotion) {
+                c.classList.remove("pop");
+                void c.offsetWidth;
+                c.classList.add("pop");
+              }
+            }
+          });
+          statusEl.textContent = visible
+            ? visible + " van " + cards.length + " certificaten"
+            : "Geen certificaten gevonden. Probeer een andere zoekterm of categorie.";
+        }
+
+        searchEl.addEventListener("input", () => {
+          state.q = searchEl.value.trim().toLowerCase();
+          apply();
+        });
+
+        apply();
+      })();
+
+      /* ---------- Contactblok ---------- */
+      (function () {
+        // >>> VUL HIER JE EIGEN GEGEVENS IN <<<
+        const CONTACT = {
+          email: "jouw-email@voorbeeld.nl",
+          linkedin: "https://www.linkedin.com/in/jouw-profiel/",
+          cv: "cv.pdf", // zet je CV in dezelfde map als deze pagina
+        };
+
+        const mail = document.getElementById("c-mail");
+        const linkedin = document.getElementById("c-linkedin");
+        const cv = document.getElementById("c-cv");
+        const copyBtn = document.getElementById("c-copy");
+        const mailText = document.getElementById("c-mail-text");
+
+        mail.href = "mailto:" + CONTACT.email;
+        linkedin.href = CONTACT.linkedin;
+        cv.href = CONTACT.cv;
+        mailText.textContent = CONTACT.email;
+
+        copyBtn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(CONTACT.email);
+          } catch (e) {
+            const ta = document.createElement("textarea");
+            ta.value = CONTACT.email;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+            } catch (_) {}
+            ta.remove();
+          }
+          copyBtn.textContent = "Gekopieerd!";
+          setTimeout(() => {
+            copyBtn.textContent = "Kopieer e-mailadres";
+          }, 1800);
+        });
+      })();
+
+      /* ---------- Opstartscherm (nep-bootsequentie) ---------- */
+      (function () {
+        const boot = document.getElementById("boot");
+        const log = document.getElementById("boot-log");
+        let finished = false;
+        let timer = null;
+
+        function finish() {
+          if (finished) return;
+          finished = true;
+          clearTimeout(timer);
+          document.body.style.overflow = "";
+          boot.classList.add("hide");
+          setTimeout(() => boot.remove(), 600);
+          startIntro();
+        }
+
+        if (reduceMotion) {
+          boot.remove();
+          startIntro();
+          return;
+        }
+
+        document.body.style.overflow = "hidden";
+        boot.addEventListener("click", finish);
+        window.addEventListener("keydown", finish, { once: true });
+
+        const n = document.querySelectorAll(".certificate").length;
+        const OK = '[ <span class="ok">OK</span> ] ';
+        const steps = [
+          ['<span class="ok">$</span> ./portfolio --start', 350],
+          [OK + "Modules laden ........ klaar", 280],
+          [OK + n + " certificaten gevonden", 280],
+          [OK + "Localhost scannen ..... klaar", 320],
+          [OK + "Verbinding beveiligd", 280],
+          ['[ .. ] Inloggen als <span class="ok">leon.keijzers</span>', 520],
+        ];
+
+        const lines = [];
+        let i = 0;
+        function next() {
+          if (finished) return;
+          if (i < steps.length) {
+            lines.push(steps[i][0]);
+            log.innerHTML = lines.join("\n");
+            timer = setTimeout(next, steps[i][1]);
+            i++;
+          } else {
+            log.innerHTML =
+              lines.join("\n") +
+              '\n<span class="granted">ACCESS GRANTED</span>';
+            timer = setTimeout(finish, 900);
+          }
+        }
+        next();
+      })();
+    </script>
+  </body>
+</html>

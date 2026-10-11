@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leon Keijzers | Certificaten</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f4f7fb;
+        --muted: #b9c7d8;
+        --panel: #111d31;
+        --line: #293d59;
+        --accent: #1e88e5; /* Helder blauw */
+        --accent-bright: #00a8ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        color: var(--ink);
+        background: #07111f;
+      }
+      .hero {
+        min-height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 24px;
+        position: relative;
+        isolation: isolate;
+        background:
+          linear-gradient(120deg, rgba(5, 14, 29, 0.88), rgba(9, 37, 61, 0.72)),
+          url("https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000001-a2fb4a2fb6/images-pexels-com-photos-2292837-pexels-photo-2292837-auto-compress-cs-tinysrgb-dpr-2-h-650-w-940.jpeg?ph=3ab40ebb9b")
+            center/cover;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1565c0, #1e88e5, #00a8ff);
+        z-index: -1;
+      }
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 24px;
+        max-width: 900px;
+        width: 100%;
+      }
+      .profile-img {
+        width: 180px;
+        height: auto;
+        max-height: 240px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 10px 25px rgba(0, 168, 255, 0.25);
+        flex-shrink: 0;
+        background: rgba(0, 0, 0, 0.3);
+      }
+      .hero-content {
+        text-align: center;
+      }
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent-bright);
+        font-weight: 700;
+      }
+
+      /* Animatie voor de naam Leon Keijzers */
+      h1 {
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        line-height: 1.05;
+        margin: 16px 0;
+        color: #ffffff;
+        display: inline-block;
+        animation: floatName 3.5s ease-in-out infinite;
+        text-shadow: 0 0 20px rgba(0, 168, 255, 0.4);
+      }
+
+      @keyframes floatName {
+        0%,
+        100% {
+          transform: translateY(0);
+          text-shadow: 0 0 15px rgba(0, 168, 255, 0.3);
+        }
+        50% {
+          transform: translateY(-8px);
+          text-shadow: 0 0 30px rgba(0, 168, 255, 0.7);
+        }
+      }
+
+      .hero p {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: #e0eaf6;
+        margin: 0;
+        min-height: 1.5em;
+      }
+
+      /* Knipperende blauwe cursor voor de getypte tekst */
+      .typing-cursor {
+        display: inline-block;
+        background-color: var(--accent-bright);
+        width: 2px;
+        height: 1.1em;
+        vertical-align: middle;
+        margin-left: 2px;
+        animation: blink 0.7s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      main {
+        max-width: 1400px;
+        margin: auto;
+        padding: 58px 24px 84px;
+      }
+      .section-heading {
+        text-align: center;
+        margin-bottom: 34px;
+      }
+      .section-heading h2 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        margin: 0 0 12px;
+      }
+      .section-heading p {
+        color: var(--muted);
+        margin: 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr));
+        gap: 24px;
+      }
+      .certificate {
+        background: linear-gradient(
+          145deg,
+          rgba(20, 36, 58, 0.98),
+          rgba(11, 23, 39, 0.98)
+        );
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 15px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .certificate:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-bright);
+      }
+      .certificate a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 260px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 8px;
+      }
+      .certificate img {
+        display: block;
+        width: 100%;
+        height: 330px;
+        object-fit: contain;
+      }
+      .certificate h2 {
+        font-size: 1rem;
+        text-align: center;
+        margin: 15px 5px 5px;
+      }
+      footer {
+        text-align: center;
+        padding: 26px;
+        color: #8ea2bb;
+        border-top: 1px solid #1e3048;
+        font-size: 0.9rem;
+      }
+      @media (max-width: 600px) {
+        .hero {
+          padding: 40px 16px;
+        }
+        main {
+          padding: 40px 16px 56px;
+        }
+        .grid {
+          gap: 16px;
+        }
+        .profile-img {
+          width: 140px;
+        }
+        .certificate img {
+          height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <img src="foto.jpg" alt="Leon Keijzers" class="profile-img" />
+        <div class="hero-content">
+          <div class="eyebrow">Portfolio · ICT & Cybersecurity</div>
+          <h1>Leon Keijzers</h1>
+          <p>
+            <span id="typed-text"></span><span class="typing-cursor"></span>
+          </p>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="section-heading">
+        <h2>Certificaten & opleidingen</h2>
+        <p>Een overzicht van mijn behaalde certificaten en trainingen.</p>
+      </div>
+      <section class="grid" aria-label="Certificaten">
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000106-8ea348ea37/javascript.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000106-8ea348ea37/javascript.png?ph=3ab40ebb9b"
+              alt="JavaScript"
+              loading="lazy"
+            />
+          </a>
+          <h2>JavaScript Developer</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000100-4a7ef4a7f1/python%20cert.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000100-4a7ef4a7f1/python%20cert.jpeg?ph=3ab40ebb9b"
+              alt="Python Developer"
+              loading="lazy"
+            />
+          </a>
+          <h2>Python Developer ITMG</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000102-9fb709fb71/scholingstraject.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000102-9fb709fb71/scholingstraject.jpeg?ph=3ab40ebb9b"
+              alt="Scholingstraject"
+              loading="lazy"
+            />
+          </a>
+          <h2>Scholingstraject Python Developer</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000098-8aae78aae9/cert%20websites%20maken.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000098-8aae78aae9/cert%20websites%20maken.jpeg?ph=3ab40ebb9b"
+              alt="Websites maken"
+              loading="lazy"
+            />
+          </a>
+          <h2>Websites maken Development Essentials</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000031-0dca90dcac/l1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000031-0dca90dcac/l1.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Scholingstraject Ethical Hacker</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000045-a608fa6091/hacking%20practitioner.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000045-a608fa6091/hacking%20practitioner.png?ph=3ab40ebb9b"
+              alt="Hacking Practitioner"
+              loading="lazy"
+            />
+          </a>
+          <h2>Ethical Hacker Practitioner</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000035-0da640da66/certificaat%20ethical%20hacker1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000035-0da640da66/certificaat%20ethical%20hacker1.jpeg?ph=3ab40ebb9b"
+              alt="Ethical Hacker"
+              loading="lazy"
+            />
+          </a>
+          <h2>Ethical Hacker Foundation</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000047-1bc2b1bc2e/iso%2027001%20certificaat.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000047-1bc2b1bc2e/iso%2027001%20certificaat.png?ph=3ab40ebb9b"
+              alt="ISO 27001"
+              loading="lazy"
+            />
+          </a>
+          <h2>ISO 27001</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000094-909f5909f7/AI%20en%20Chatgpt.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000094-909f5909f7/AI%20en%20Chatgpt.jpeg?ph=3ab40ebb9b"
+              alt="AI en ChatGPT"
+              loading="lazy"
+            />
+          </a>
+          <h2>AI en ChatGPT</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000091-2f1a12f1a3/big%20data%20certificaat.png?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000091-2f1a12f1a3/big%20data%20certificaat.png?ph=3ab40ebb9b"
+              alt="Big Data"
+              loading="lazy"
+            />
+          </a>
+          <h2>Big Data</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000037-96f6996f6b/sql%20cert.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000037-96f6996f6b/sql%20cert.jpeg?ph=3ab40ebb9b"
+              alt="SQL"
+              loading="lazy"
+            />
+          </a>
+          <h2>SQL</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000033-7b41a7b41c/l8.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000033-7b41a7b41c/l8.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Basiskennis IT</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000007-d819ad819c/cert1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000007-d819ad819c/cert1.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Security Awareness 1</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000009-77c3577c37/cert2.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000009-77c3577c37/cert2.jpeg?ph=3ab40ebb9b"
+              alt="Certificaat"
+              loading="lazy"
+            />
+          </a>
+          <h2>Security Awareness 2</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000096-9006590066/bewijs%20deelname%20project.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000096-9006590066/bewijs%20deelname%20project.jpeg?ph=3ab40ebb9b"
+              alt="Projectmatig werken"
+              loading="lazy"
+            />
+          </a>
+          <h2>Projectmatig werken</h2>
+          <h2>Behaald bij: ITMG</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000029-ddc3dddc41/mile2%20cpeh-1.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000029-ddc3dddc41/mile2%20cpeh-1.jpeg?ph=3ab40ebb9b"
+              alt="Mile2 CPEH"
+              loading="lazy"
+            />
+          </a>
+          <h2>Mile2 CPEH</h2>
+          <h2>Behaald bij: Mile2</h2>
+        </article>
+        <article class="certificate">
+          <a
+            href="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000011-ce75ece75f/hack%20novi.jpeg?ph=3ab40ebb9b"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://3ab40ebb9b.cbaul-cdnwnd.com/aadc246265a5795ff914ba9fb8951f55/200000011-ce75ece75f/hack%20novi.jpeg?ph=3ab40ebb9b"
+              alt="Hack NOVI"
+              loading="lazy"
+            />
+          </a>
+          <h2>Introductie Hacking</h2>
+          <h2>Behaald bij: Hoge school Novi</h2>
+        </article>
+      </section>
+    </main>
+    <footer>Leon Keijzers · Portfolio</footer>
+
+    <!-- JavaScript voor het typende effect -->
+    <script>
+      const textElement = document.getElementById("typed-text");
+      const textToType = "Mijn certificaten en opleidingen";
+      let charIndex = 0;
+
+      function typeText() {
+        if (charIndex < textToType.length) {
+          textElement.textContent += textToType.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeText, 60);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(typeText, 400);
+      });
+    </script>
+  </body>
+</html>
