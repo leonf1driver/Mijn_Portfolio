@@ -1030,7 +1030,12 @@
           aria-label="Zoek een certificaat"
           autocomplete="off"
         />
-        <div class="chips" id="chips" role="group" aria-label="Filter op categorie"></div>
+        <div
+          class="chips"
+          id="chips"
+          role="group"
+          aria-label="Filter op categorie"
+        ></div>
       </div>
       <p class="filter-status" id="filter-status" aria-live="polite"></p>
       <section class="grid" aria-label="Certificaten">
@@ -1338,10 +1343,18 @@
       <button class="lb-btn lb-close" id="lb-close" aria-label="Sluiten">
         &times;
       </button>
-      <button class="lb-btn lb-prev" id="lb-prev" aria-label="Vorig certificaat">
+      <button
+        class="lb-btn lb-prev"
+        id="lb-prev"
+        aria-label="Vorig certificaat"
+      >
         &#8249;
       </button>
-      <button class="lb-btn lb-next" id="lb-next" aria-label="Volgend certificaat">
+      <button
+        class="lb-btn lb-next"
+        id="lb-next"
+        aria-label="Volgend certificaat"
+      >
         &#8250;
       </button>
       <div class="lb-stage" id="lb-stage">
@@ -1350,7 +1363,9 @@
       <div class="lb-caption">
         <strong id="lb-title"></strong>
         <span id="lb-sub"></span>
-        <span class="lb-hint">Klik op het certificaat om in of uit te zoomen</span>
+        <span class="lb-hint"
+          >Klik op het certificaat om in of uit te zoomen</span
+        >
       </div>
     </div>
 
@@ -1503,7 +1518,10 @@
               vx: Math.cos(angle) * speed,
               vy: Math.sin(angle) * speed,
               life: 1,
-              decay: type === "willow" ? this.rand(0.008, 0.014) : this.rand(0.014, 0.026),
+              decay:
+                type === "willow"
+                  ? this.rand(0.008, 0.014)
+                  : this.rand(0.014, 0.026),
               g: type === "willow" ? 0.05 : 0.035,
               size: this.rand(1, 2.2),
               h: col[0],
@@ -1643,7 +1661,8 @@
                     l.slice(2) +
                     "</span>"
                   );
-                if (l.startsWith("[+]")) return '<span class="s">' + l + "</span>";
+                if (l.startsWith("[+]"))
+                  return '<span class="s">' + l + "</span>";
                 return '<span class="c2">' + l + "</span>";
               })
               .join("\n");
@@ -1784,7 +1803,8 @@
       ];
 
       const SEC_TITLE = "Certificaten & opleidingen";
-      const SEC_SUB = "Een overzicht van mijn behaalde certificaten en trainingen.";
+      const SEC_SUB =
+        "Een overzicht van mijn behaalde certificaten en trainingen.";
       const secTitleEl = document.getElementById("sec-title");
       const secTitleCursor = document.getElementById("sec-title-cursor");
       const secSubEl = document.getElementById("sec-sub");
@@ -1794,8 +1814,16 @@
       function startSection() {
         if (sectionStarted) return;
         sectionStarted = true;
-        new CodeTerminal(document.getElementById("code-left"), LEFT_SNIPPETS, 400);
-        new CodeTerminal(document.getElementById("code-right"), RIGHT_SNIPPETS, 1100);
+        new CodeTerminal(
+          document.getElementById("code-left"),
+          LEFT_SNIPPETS,
+          400,
+        );
+        new CodeTerminal(
+          document.getElementById("code-right"),
+          RIGHT_SNIPPETS,
+          1100,
+        );
         typeInto(secTitleEl, SEC_TITLE, 90, () => {
           secTitleCursor.classList.add("done");
           setTimeout(() => {
@@ -1886,10 +1914,7 @@
             r: rnd(1, 2.4),
             hot: i % 9 === 0,
             label:
-              "10.0." +
-              Math.floor(rnd(0, 255)) +
-              "." +
-              Math.floor(rnd(1, 254)),
+              "10.0." + Math.floor(rnd(0, 255)) + "." + Math.floor(rnd(1, 254)),
           }));
           packets = [];
           ready = true;
