@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            font-family: Arial;
+            text-align: center;
+        }
+        img
+        {
+            height: 100px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        .closed
+        {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+    </style>
+
+    <script>
+        var aantallen = {
+            'Londen': 0,
+            'Parijs': 0,
+            'Berlijn': 0,
+            'Rome': 0,
+            'Reykjavik': 0
+        }
+
+        var totaal = 0;
+        var max = 0;
+        var winnaar = '';
+
+        function stemmen(stad) {
+            // valideer het maximaal aantal stemmen
+            if (totaal == 10)
+                return;
+
+            totaal++;
+
+            // maak alle plaatjes not-allowed
+            if (totaal == 10) {
+                var plaatjes = document.getElementsByTagName('img');
+
+                for (var plaatje of plaatjes) {
+                    plaatje.className = 'closed';
+                }            
+            }
+
+            aantallen[stad]++;
+
+            // check of er na deze stem een nieuwe winnaar is
+            if (aantallen[stad] > max) {
+                max = aantallen[stad];
+                winnaar = stad;
+            }
+
+            document.getElementById('totaal').innerHTML = `Er is in totaal ${totaal} keer gestemd`;
+            document.getElementById('aantal' + stad).innerHTML = `Er is ${aantallen[stad]} keer op ${stad} gestemd.`;
+            document.getElementById('winnaar').innerHTML = `De winnaar is: ${winnaar}`;
+        }
+
+        // Todo
+
+        // 4) *** percentages (denk aan afronden!)
+
+        function resetStemmen()
+        {
+            totaal = 0;
+            max = 0;
+            winnaar = '';
+
+            for (var stad in aantallen) {
+                aantallen[stad] = 0;
+                document.getElementById('aantal' + stad).innerHTML = `Er is ${aantallen[stad]} keer op ${stad} gestemd.`;
+            }
+
+            document.getElementById('totaal').innerHTML = `Er is in totaal ${totaal} keer gestemd`;
+            document.getElementById('winnaar').innerHTML = `De winnaar is: ${winnaar}`;
+
+            var plaatjes = document.getElementsByTagName('img');
+
+            for (var plaatje of plaatjes) {
+                plaatje.className = '';
+            }            
+
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Waarheen gaan we op vakantie?</h1>
+
+    <img onclick="stemmen('Londen')" src="https://xanderwemmers.nl/london.jpg" />
+    <img onclick="stemmen('Parijs')" src="https://xanderwemmers.nl/parijs.jpg" />
+    <img onclick="stemmen('Berlijn')" src="https://xanderwemmers.nl/berlijn.jpg" />
+    <img onclick="stemmen('Rome')" src="https://xanderwemmers.nl/rome.jpg" />
+    <img onclick="stemmen('Reykjavik')" src="https://xanderwemmers.nl/reykjavik.jpg" />
+
+    <h3 id="totaal">Er is in totaal 0 keer gestemd</h3>
+
+    <p id="aantalLonden">Er is 0 keer op Londen gestemd.</p>
+    <p id="aantalParijs">Er is 0 keer op Parijs gestemd.</p>
+    <p id="aantalBerlijn">Er is 0 keer op Berlijn gestemd.</p>
+    <p id="aantalRome">Er is 0 keer op Rome gestemd.</p>
+    <p id="aantalReykjavik">Er is 0 keer op Reykjavik gestemd.</p>    
+
+    <h3 id="winnaar">De winnaar is: </h3>
+
+    <button onclick="resetStemmen()">reset stemmen</button>
+
+</body>
+</html>

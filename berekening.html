@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body
+        {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        button
+        {
+            margin: 20px;
+            background-color: green;
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            width: 200px;
+            border-color: black;
+        }
+
+        #output
+        {
+            background-color: lightgreen;
+            border: 3px solid green;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        #output.warning
+        {
+            border-color: red;
+            background-color: pink;
+            color: red;
+        }
+
+        label
+        {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 3px;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <script>
+        function bereken()
+        {
+            var element = document.getElementById('output');
+
+            var kapitaal = document.getElementById('invoer').value;
+            var rente = document.getElementById('rente').value;
+            
+            if (isNaN(kapitaal) || isNaN(rente)) {
+                element.innerHTML = 'Voer getallen in!';
+                // geef de output de class warning (zie CSS hierboven) zodat hij rood wordt
+                element.className = 'warning';
+                return;
+            }
+
+            if (kapitaal <= 0 || kapitaal > 1_000_000) {
+                element.innerHTML = 'Voer een normaal getal!';
+                element.className = 'warning';
+                return;
+            }
+
+            var factor = 1 + rente / 100;
+
+            element.innerHTML = '';
+            element.className = '';
+
+            console.log(new Date());
+
+            var vandaag = new Date();
+            var startjaar = vandaag.getFullYear();
+            var looptijd = document.getElementById('looptijd').value;
+            
+            // looptijd is in eerste instantie en string
+            // parseInt maakt er een getal van
+            looptijd = parseInt(looptijd);
+
+            var eindjaar = startjaar + looptijd;
+
+            console.log(startjaar);
+            console.log(eindjaar);
+
+            for (var teller = startjaar; teller < eindjaar; teller++) {
+                kapitaal *= factor;
+                element.innerHTML += `<p>In het jaar ${teller} heb je ${kapitaal.toFixed(2)} euro</p>`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Kapitaal en Rente</h1>
+
+    <label>Kapitaal</label>
+    <input id="invoer" value="1000" placeholder="euro" />
+
+    <label>Rentepercentage</label>
+    <input id="rente" value="5" />
+
+    <label>Looptijd</label>
+    <select id="looptijd" size="4">
+        <option value="5">vijf jaar</option>
+        <option selected value="10">tien jaar</option>
+        <option>20</option>
+        <option>30</option>
+    </select>
+
+    <br />
+    
+    <button class="knop" onclick="bereken()">Bereken!</button>
+
+    <div id="output">Hier komt straks het antwoord</div>
+
+
+</body>
+</html>

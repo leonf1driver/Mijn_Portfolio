@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirk Checkout</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Montserrat:wght@400;800;900&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #E3000F; /* Dirk Red */
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 3em;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+
+        #knoppen {
+            margin-bottom: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            background-color: #fff;
+            color: #E3000F;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 0 #b3000c; /* 3D effect */
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: #ffcc00; /* Dirk yellow */
+            color: #E3000F;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b3000c;
+        }
+
+        button:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* The Receipt Container */
+        .receipt-wrapper {
+            background-color: #fff;
+            color: #000;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px 20px 50px 20px;
+            border-radius: 0; /* Dirk receipt is straight */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            font-family: 'Space Mono', monospace;
+            position: relative;
+            text-align: left;
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+        }
+
+        .receipt-header h2 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 40px;
+            color: #E3000F;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .receipt-header p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        th {
+            border-bottom: 1px dashed #000;
+            padding: 8px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        td {
+            padding: 6px 0;
+        }
+
+        table tr:not(:first-child) {
+            border-bottom: none;
+        }
+
+        th:nth-child(3), th:nth-child(5) {
+            color: transparent;
+        }
+
+        td:nth-child(1) { text-align: left; width: 12%; font-weight: bold; } /* aantal */
+        td:nth-child(2) { text-align: left; width: 43%; } /* product */
+        td:nth-child(3) { text-align: right; width: 5%; } /* euro sign */
+        td:nth-child(4) { text-align: right; width: 15%; } /* prijs */
+        td:nth-child(5) { text-align: right; width: 5%; } /* euro sign */
+        td:nth-child(6) { text-align: right; width: 20%; font-weight: bold; } /* totaal */
+
+        /* Highlight the non-zero rows */
+        .row-active {
+            color: #000;
+        }
+        .row-inactive {
+            display: none; /* Hide inactive rows for cleaner receipt */
+        }
+
+        #totaalprijs {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            text-align: right;
+            border-top: 3px solid #000;
+            padding-top: 15px;
+            margin: 0;
+            color: #E3000F;
+        }
+
+        .barcode {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .barcode-lines {
+            height: 40px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000,
+                #000 2px,
+                transparent 2px,
+                transparent 4px,
+                #000 4px,
+                #000 7px,
+                transparent 7px,
+                transparent 10px,
+                #000 10px,
+                #000 11px,
+                transparent 11px,
+                transparent 16px
+            );
+            margin-bottom: 5px;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .barcode p {
+            font-size: 11px;
+            margin: 0;
+            letter-spacing: 5px;
+            color: #000;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .btn-reset {
+            margin-top: 40px;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            box-shadow: none;
+            font-weight: normal;
+        }
+        .btn-reset:hover {
+            background-color: #fff;
+            color: #E3000F;
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+
+    <script>
+        var prijslijst = {
+            'Brood': 0.98,
+            'Melk': 1.05,
+            'Appels': 2.50,
+            'Sinas': 1.79,
+            'Spinazie': 2.50,
+            'Wijn': 7.98,
+            'Shampoo': 4.69
+        };
+
+        var karretje = {};
+
+        function init() {
+            var dateElem = document.getElementById('receipt-date');
+            if (dateElem) {
+                var today = new Date();
+                dateElem.innerHTML = today.toLocaleDateString('nl-NL');
+            }
+
+            for (let product in prijslijst) {
+                var btn = document.createElement('button');
+                btn.innerHTML = "+ " + product;
+                btn.onclick = () => koop(product);
+                document.getElementById('knoppen').append(btn);
+            }
+            reset();
+        }
+
+        function reset() {
+            for (let product in prijslijst) {
+                karretje[product] = 0;
+            }
+            toonKassabon();
+        }
+
+        function koop(product) {
+            karretje[product]++;
+            toonKassabon();
+        }
+
+        function toonKassabon() {
+            var totaal = 0;
+            var tbl = document.createElement('table');
+
+            addHeaders(tbl, ['Aantal', 'Product', '', 'Prijs', '', 'Totaal']);
+
+            for (let product in prijslijst) {
+                var row = document.createElement('tr');
+                if (karretje[product] > 0) {
+                    row.className = 'row-active';
+                } else {
+                    row.className = 'row-inactive';
+                }
+
+                var colAantal = document.createElement('td');
+                colAantal.innerHTML = karretje[product] + 'x';
+                row.append(colAantal);
+
+                var colProduct = document.createElement('td');
+                colProduct.innerHTML = product;
+                row.append(colProduct);
+
+                var colEuro1 = document.createElement('td');
+                colEuro1.innerHTML = '&euro;';
+                row.append(colEuro1);
+
+                var colPrijs = document.createElement('td');
+                colPrijs.innerHTML = prijslijst[product].toFixed(2);
+                row.append(colPrijs);
+
+                var colEuro2 = document.createElement('td');
+                colEuro2.innerHTML = '&euro;';
+                row.append(colEuro2);
+
+                var colSubtotaal = document.createElement('td');
+                var subtotaal = prijslijst[product] * karretje[product];
+                totaal += subtotaal;
+                colSubtotaal.innerHTML = subtotaal.toFixed(2);
+                row.append(colSubtotaal);
+
+                tbl.append(row);
+            }
+
+            document.getElementById('producten').innerHTML = '';
+            document.getElementById('producten').append(tbl);
+            document.getElementById('totaalprijs').innerHTML = `TOTAAL: &euro; ${totaal.toFixed(2)}`;
+        }
+
+        function addHeaders(tbl, titles) {
+            var row = document.createElement('tr');
+            for (var t of titles) {
+                var th = document.createElement('th');
+                th.innerHTML = t;
+                row.append(th);
+            }
+            tbl.append(row);
+        }
+    </script>
+</head>
+
+<body onload="init();">
+
+    <h1>Boodschappen Scanner</h1>
+
+    <div id="knoppen"></div>
+
+    <div class="receipt-wrapper">
+        <div class="receipt-header">
+            <h2>DIRK</h2>
+            <p>De Goedkoopste!<br>Datum: <span id="receipt-date"></span></p>
+        </div>
+
+        <div id="producten"></div>
+
+        <div id="totaalprijs">TOTAAL: &euro; 0.00</div>
+
+        <div class="barcode">
+            <div class="barcode-lines"></div>
+            <p>8710400311234</p>
+        </div>
+    </div>
+
+    <button class="btn-reset" onclick="reset()">Nieuwe Klant (Reset)</button>
+
+</body>
+
+</html>

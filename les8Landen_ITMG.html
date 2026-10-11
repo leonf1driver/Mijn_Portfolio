@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alle landen van de wereld</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <script>
+      function init() {
+        $.getJSON("https://xanderwemmers.nl/data/countries.json", toonLanden);
+      }
+
+      function toonLanden(data) {
+        console.log(data);
+
+        document.getElementById("aantal").innerHTML =
+          `Aantal landen: ${data.length}`;
+
+        var tbl = document.createElement("table");
+
+        for (var land of data) {
+          var row = document.createElement("tr");
+
+          var td1 = document.createElement("td");
+          td1.innerHTML = land.name.common;
+          row.append(td1);
+
+          tbl.append(row);
+
+        }
+        document.getElementById("output").append(tbl);
+      }
+    </script>
+  </head>
+
+  <body onload="init()">
+    <h1>Alle landen van de wereld</h1>
+
+    <p id="aantal">Aantal landen: 0</p>
+
+    <div id="output"></div>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarkt Kassabon</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #003da5;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #003da5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #ffcc00;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .buttons {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #ffcc00;
+            color: #003da5;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e6b800;
+            transform: scale(1.02);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .receipt {
+            padding: 20px;
+            border-top: 2px dashed #003da5;
+        }
+
+        #boodschappen {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        #boodschappen li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #boodschappen li:last-child {
+            border-bottom: none;
+        }
+
+        #totaal {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #003da5;
+            text-align: center;
+            border: 2px solid #ffcc00;
+        }
+    </style>
+
+    <script>
+        var prijzen = {
+            'Melk': 1.78,
+            'Brood': 0.95,
+            'Appel': 0.65
+        }
+
+        var totaal = 0;
+
+        function koop(product)
+        {
+            totaal += prijzen[product];
+            document.getElementById('totaal').innerHTML = `De totaalprijs is ${totaal.toFixed(2)} euro`;
+            var item = document.createElement('li');
+            item.innerHTML = product;
+            document.getElementById('boodschappen').append(item);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LIDL</h1>
+        </div>
+
+        <div class="buttons">
+            <button onclick="koop('Melk')">Koop melk</button>
+            <button onclick="koop('Brood')">Koop brood</button>
+            <button onclick="koop('Appel')">Koop appel</button>
+        </div>
+
+        <div class="receipt">
+            <ul id="boodschappen"></ul>
+            <p id="totaal">
+                De totaalprijs is 0.00 euro.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

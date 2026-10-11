@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    
+    <style>
+        body {
+            font-family: arial;
+            text-align: center;
+        }
+
+        #map {
+            height: 700px;
+        }
+
+        button {
+            margin: 20px;
+        }
+
+        .weather {
+            text-align: center;
+        }
+    </style>
+
+
+    <script>
+
+        // globale variabele
+        // overal zichtbaar (in deze pagina)
+        // de scope is hier ALLE functies
+
+        var map;
+        var lastMarker;
+
+        function initMap() {
+            // lokale variabele
+            // scope = de zichtbaarheid van een variabele
+            // de scope is hier de functie initMap
+
+            map = L.map('map').setView([52, 5], 7);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; XW 2026'
+            }).addTo(map);
+
+            L.marker([52, 5]).addTo(map).bindPopup('Het midden van Nederland');
+
+            // De nieuwe cirkel krijgt opties mee zoals radius etc in de vorm van een object
+            L.circle([51.5, 0], { radius: 10000, color: 'red', fillColor: 'yellow', weight: 3 }).addTo(map);
+
+            // Web API: data die online toegankelijk is
+
+            // toonStations is een callback functie
+            $.getJSON('https://xanderwemmers.nl/api/ns', toonStations);
+
+            // De library kent ook een soort van onclick, maar net iets anders dan bij de button
+            map.on('click', mapClick);
+        }
+
+        function mapClick(args)
+        {
+            // toon de informatie over de click, dus waar heeft de gebruiker precies geklikt?
+            console.log(args);
+
+            var positie = [args.latlng.lat, args.latlng.lng];
+
+            // centreer de kaart ook op die coordinaten
+            map.flyTo(positie);
+
+            // verwijder de laatste marker, als die bestaat
+            if (lastMarker)
+                map.removeLayer(lastMarker);
+        
+            // en voeg daar een marker toe
+            lastMarker = L.marker(positie);
+            lastMarker.addTo(map);
+
+            // toonWeather is hier een callback functie
+            $.getJSON('https://xanderwemmers.nl/api/weather?query=' + positie, toonWeather);
+        }
+
+        function toonWeather(data)
+        {
+            console.log(data);
+
+            // Bouw een tekst op aan de hand van de gegevens die je zelf zou willen zien
+            // var text = `${data.location.name}<br />${data.location.region}<br />${data.location.country}<img src="${data.current.condition.icon}" />${data.current.temp_c}<br />${data.current.condition.text}`;
+
+            var text = `<div class="weather">${data.location.name}<br/>${data.location.region}<br/>${data.location.country}<img src="${data.current.condition.icon}"/><br /> ${data.current.temp_c} graden<br/>${data.current.condition.text}</div>`;
+
+            lastMarker.bindPopup(text).openPopup();
+        }
+
+        function toonStations(stations)
+        {
+            console.log(stations.length);
+
+            for (var st of stations) {
+                var r = 500;
+
+                if (st.Type == 'MEGA_STATION') 
+                    r = 1000;
+
+                L.circle([st.Lat, st.Long], { radius: r, fillColor: 'yellow'}).addTo(map);
+            }
+        }
+
+        function flyToRhodos()
+        {
+            map.flyTo([36.450368, 28.221201], 15);
+        }
+
+        function flyToLondon()
+        {
+            map.flyTo([51.5, 0], 10);
+        }
+
+        // Web API
+        // Een databron die op het internet gepubliceerd is
+        // Puur data, geen styling
+        // Meestal JSON formaat
+
+        function flyHome()
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+
+        function showPosition(data)
+        {
+            console.log(data);
+
+            var home = [data.coords.latitude, data.coords.longitude];
+
+            map.flyTo(home, 15);
+            L.marker(home).addTo(map);
+            L.circle(home, { radius: data.coords.accuracy, color: 'green' }).addTo(map);
+        }
+
+    </script>
+
+</head>
+
+<body onload="initMap()">
+
+    <h1>Landkaart</h1>
+
+    <div id="map"></div>
+
+    <button onclick="flyToRhodos()">Vlieg naar Rhodos</button>
+
+    <button onclick="flyToLondon()">Vlieg naar Londen</button>
+
+    <button onclick="flyHome()">Vlieg naar huis</button>
+
+</body>
+
+</html>

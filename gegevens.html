@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://code.jquery.com/ui/1.14.2/themes/pepper-grinder/jquery-ui.css" rel="stylesheet" />
+    
+    
+    <!-- <link href="css/stijl.css" rel="stylesheet" /> -->
+
+    <style>
+        body
+        {
+            font-family: arial;
+        }
+
+        label
+        {
+            display: block;
+            margin: 20px 0 5px 0;
+        }
+
+        /* Drie kleurenthema's voor deze pagina. Door de user zelf te kiezen */
+        .light
+        {
+            background-color: lightblue;
+        }
+
+        .dark
+        {
+            background-color: black;
+            color: white;
+            font-family: impact;
+        }
+
+        .green
+        {
+            background-color: green;
+            color: lightgreen;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.min.js"></script>    
+
+    <script>
+
+        $(function() {
+            // De opties van de datepicker geef je mee als een object
+            $("#geboortedatum").datepicker({ 
+                maxDate: 0, 
+                minDate: '-100Y', 
+                dateFormat: 'dd-mm-yy',
+                changeYear: true,
+                changeMonth: true,
+                yearRange: '-100:+0'
+            });
+
+            $("#mijnDialoog").dialog({ autoOpen: false, modal: true });
+        });
+
+        function clearData() {
+            // Dit zou de domme manier zijn: een voor een leegmaken
+            // document.getElementById('voornaam').value = '';
+            // document.getElementById('achternaam').value = '';
+
+            // Met jQuery werkt het zo:
+            $("input,select").val('');
+
+            // jQuery selecteert ALLE input en select velden en maakt die leeg
+            // de jQuery functie 'val()' is het javascript equivalent van .value
+        }
+
+        function saveData()
+        {
+            var persoon = {
+                voornaam: document.getElementById('voornaam').value,
+                achternaam: document.getElementById('achternaam').value,
+                geboortedatum: document.getElementById('geboortedatum').value,
+                kleur: document.getElementById('kleur').value,
+                land: document.getElementById('land').value
+            };
+
+            // JavaScript Object Notation: een notatie om gegevens op te slaan in tekst formaat
+            localStorage.mijnData = JSON.stringify(persoon);
+
+            $("#mijnDialoog").dialog('open');
+        }
+
+        function loadData() 
+        {
+            var persoon = JSON.parse(localStorage.mijnData);
+
+            document.getElementById('voornaam').value = persoon.voornaam;
+            document.getElementById('achternaam').value = persoon.achternaam;
+            document.getElementById('geboortedatum').value = persoon.geboortedatum;
+            document.getElementById('kleur').value = persoon.kleur;
+            document.getElementById('land').value = persoon.land;
+
+            document.body.className = localStorage.userTheme;
+            // todo: het thema wordt nog niet teruggezet in de juiste radiobutton
+            document.getElementById('radio' + localStorage.userTheme).checked = true;
+        }
+
+        function setTheme(theme)
+        {
+            document.body.className = theme;
+            localStorage.userTheme = theme;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Mijn gegevens</h1>
+
+    <label>Voornaam</label>
+    <input id="voornaam" />
+
+    <label>Achternaam</label>
+    <input id="achternaam" />
+
+    <label>Geboortedatum</label>
+    <input id="geboortedatum" />
+
+    <label>Kleur</label>
+    <input id="kleur" type="color" />
+
+    <label>Land</label>
+    <select id="land" size="5">
+        <option>Frankrijk</option>
+        <option>Duitsland</option>
+        <option>Zwitserland</option>
+        <option>Oostenrijk</option>
+        <option>Spanje</option>
+    </select>
+
+    <label>Theme</label>
+    <input type="radio" name="theme" id="radiolight" onclick="setTheme('light')" />Light
+    <input type="radio" name="theme" id="radiogreen" onclick="setTheme('green')" />Green
+    <input type="radio" name="theme" id="radiodark" onclick="setTheme('dark')" />Dark
+
+    <br />
+    <br />
+
+    <button onclick="saveData()">Save Data</button>
+    <button onclick="loadData()">Load Data</button>
+    <button onclick="clearData()">Clear Data</button>
+
+
+    <!-- <br />
+    <br />
+
+    <input type="radio" name="gender" />Man
+    <input type="radio" name="gender" />Vrouw
+    <input type="radio" name="gender" />Iets anders -->
+
+    <div id="mijnDialoog" title="Gegevens">
+        <p>De data is opgeslagen</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // Datastructuren
+        // objecten: verzameling eigenschappen die bij elkaar horen
+
+        var persoon1 = {
+            voornaam: 'Xander',
+            achternaam: 'Wemmers',
+            leeftijd: 52,
+            woonplaats: 'Utrecht'
+        }
+
+        var persoon2 = {
+            voornaam: 'Tristan',
+            achternaam: 'Bijl',
+            leeftijd: 28,
+            woonplaats: 'Pijnacker'
+        }
+
+        var persoon3 = {
+            voornaam: 'Diana',
+            achternaam: 'van Kampen',
+            leeftijd: 29,
+            woonplaats: 'Boskoop'
+        }
+
+        var lijst = [persoon1, persoon2, persoon3];
+
+        var cursus = {
+            naam: 'Javascript Developer',
+            startdatum: '8-24-2026',
+            deelnemers: lijst
+        }
+
+        var leeftijd = 52;
+
+        console.log(persoon1);
+        console.log(persoon1.voornaam);
+
+        console.log(cursus.deelnemers[1].achternaam);
+
+        console.log(`De cursus ${cursus.naam} heeft ${cursus.deelnemers.length} deelnemers`);
+
+        for (var student of cursus.deelnemers) {
+            console.log(`Welkom ${student.voornaam} ${student.achternaam}`);
+        }
+
+        // Het formaat JSON = JavaScript Object Notation
+
+        localStorage.cursus = JSON.stringify(cursus);
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

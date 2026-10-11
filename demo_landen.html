@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+
+    <script>
+        $.getJSON('https://xanderwemmers.nl/data/countries.json', toonLanden);
+
+        function toonLanden(data)
+        {
+            console.log(data.length);
+
+            console.log(data[0].name.common);
+
+            console.log(data[0].population)
+
+            for (var country of data) {
+                if (country.subregion == 'Western Europe')
+                    console.log(country.name.common, country.population);                
+            }
+        }
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

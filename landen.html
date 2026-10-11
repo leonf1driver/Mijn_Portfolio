@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body
+        {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        table
+        {
+            text-align: left;
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+        }
+
+        td,th
+        {
+            border: 1px solid lightgrey;
+            padding: 10px;
+        }
+
+        tr:nth-child(odd)
+        {
+            background-color: navajowhite;
+        }
+
+        tr:nth-child(even)
+        {
+            background-color: antiquewhite;
+        }
+
+        tr:first-child
+        {
+            background-color: maroon;
+            color: white;
+        }
+
+        .clickable
+        {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <script>
+
+        // globale variabele
+        // deze variabele zou altijd de volledige lijst moeten zijn
+        var alleLanden = null;
+
+        var sortAsc = true;
+
+        function init()
+        {
+            $.getJSON('https://xanderwemmers.nl/data/countries.json', toonLanden);
+        }
+
+        function toonLanden(data)
+        {
+            // data is een lokale variabele: lokaal binnen de huidige functie
+            if (alleLanden == null)
+                alleLanden = data;
+
+            document.getElementById('aantal').innerHTML = `Aantal landen: ${data.length} van ${alleLanden.length}`;
+
+            // Schoon de output op want mogelijk staat daar nog een oude tabel
+            document.getElementById('output').innerHTML = '';
+
+            var tbl = document.createElement('table');
+
+            var header = document.createElement('tr');
+
+            var titels = ['Naam', 'Inwoners', 'Regio', 'Subregio', 'Hoofdstad', 'Vlag'];
+
+            for (var titel of titels) {
+                var th = document.createElement('th');
+                th.innerHTML = titel;
+
+                if (titel == 'Naam') {
+                    th.onclick = sorteerOpNaam;
+                    th.className = 'clickable';
+                }
+
+                if (titel == 'Inwoners') {
+                    th.onclick = sorteerOpInwoners;
+                    th.className = 'clickable';
+                }
+
+                header.append(th);
+            }
+
+            tbl.append(header);
+
+            for (var land of data) {
+                var row = document.createElement('tr');
+
+                // Refactoring
+                // Het herschrijven van code zodat het er beter uitziet
+
+                var td1 = document.createElement('td');
+                td1.innerHTML = land.name.common;
+                row.append(td1);
+
+                var td2 = document.createElement('td');
+                td2.innerHTML = land.population;
+                row.append(td2);
+
+                var td3 = document.createElement('td');
+                td3.innerHTML = land.region;
+                row.append(td3);
+
+                var td4 = document.createElement('td');
+                td4.innerHTML = land.subregion;
+                row.append(td4);
+
+                var td5 = document.createElement('td');
+                td5.innerHTML = land.capital;
+                row.append(td5);
+
+                var td6 = document.createElement('td');
+                var plaatje = document.createElement('img');
+                plaatje.src = land.flags.svg;
+                plaatje.width = 100;
+                plaatje.title = land.flags.alt;
+                td6.append(plaatje);
+
+                row.append(td6);
+
+                tbl.append(row);
+            }
+
+            document.getElementById('output').append(tbl);
+        }
+
+        // kolommen: name.common, population, region, subregion, capital, flags.svg
+
+        function europeseLanden()
+        {
+            var result = alleLanden.filter(land => land.region == 'Europe');
+            toonLanden(result);
+        }
+
+        // Maak een functie die alle landen laat zien met meer dan 100 miljoen inwoners
+        function grootsteLanden()
+        {
+            var result = alleLanden.filter(land => land.population > 100_000_000);
+            toonLanden(result);
+        }
+
+        function kleinsteLanden()
+        {
+            var result = alleLanden.filter(land => land.population < 1000);
+            toonLanden(result);
+        }
+
+        function zoekLanden()
+        {
+            var zoekTekst = document.getElementById('zoekveld').value.toLowerCase();
+            var result = alleLanden.filter(land => land.name.common.toLowerCase().includes(zoekTekst));
+            toonLanden(result);
+        }
+
+        function sorteerOpNaam()
+        {
+            // alfabetisch sorteren: gebruik de bestaande functie localeCompare
+            if (sortAsc)
+                alleLanden.sort((a,b) => a.name.common.localeCompare(b.name.common));
+            else
+                alleLanden.sort((a,b) => b.name.common.localeCompare(a.name.common));
+
+            // het ! maakt van true de waarde false en andersom
+            sortAsc = !sortAsc;
+
+            toonLanden(alleLanden);
+        }
+
+        function sorteerOpInwoners()
+        {
+            // sorteren op getal: trek de twee getallen van elkaar af
+            if (sortAsc)
+                alleLanden.sort((a,b) => b.population - a.population);
+            else
+                alleLanden.sort((a,b) => a.population - b.population);
+
+            // Het uitroepteken wordt ook wel de 'not' -operator genoemd
+            sortAsc = !sortAsc;
+
+            toonLanden(alleLanden);
+        }
+
+    </script>
+</head>
+<body onload="init()">
+
+    <h1>Alle landen van de wereld</h1>
+
+    <button onclick="europeseLanden()">Europese landen</button>
+    <button onclick="grootsteLanden()">Grootste landen</button>
+    <button onclick="kleinsteLanden()">Kleinste landen</button>
+    <button onclick="toonLanden(alleLanden)">Alle landen</button>
+    <input id="zoekveld" onkeyup="zoekLanden()" />
+
+    <button onclick="sorteerOpNaam()">Sorteer op naam</button>
+
+    <p id="aantal">Aantal landen: 0</p>
+
+    <div id="output"></div>
+    
+</body>
+</html>

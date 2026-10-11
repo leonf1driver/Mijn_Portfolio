@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: beige;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+        }
+    </style>
+
+    <script>
+
+
+        // Array: lijst van dieren
+        var dieren = ['Lion', 'Elephant', 'Turtle', 'Panda', 'Hippo', 'Sheep', 'Tiger', 'Bear', 'Monkey', 'Eagle', 'Shark', 'Wolf', 'Rhino'];
+
+        var index = 0;
+
+        function volgende() {
+            index++;
+
+            if (index > dieren.length - 1)
+                index = 0;
+
+            toonFoto();
+        }
+
+        function vorige() {
+            index--;
+
+            if (index < 0)
+                index = dieren.length - 1;
+
+            toonFoto();
+        }
+
+        function toonFoto() {
+            document.getElementById('plaatje').src = `https://xanderwemmers.nl/${dieren[index]}.jpg`;
+            document.getElementById('dierennaam').innerHTML = dieren[index];
+            document.getElementById('aantal').innerHTML = `Foto ${index + 1} van ${dieren.length}`;
+        }
+
+        function randomFoto() {
+            // Math.random geeft een getal tussen 0 en 1
+            index = Math.random() * dieren.length;
+            index = Math.floor(index);
+            console.log(index);
+            toonFoto();
+
+        }
+
+    </script>
+</head>
+
+<body onload="toonFoto()">
+    <h1>Dierentuin Fotoalbum</h1>
+
+    <img id="plaatje" height="200" />
+
+    <h3 id="dierennaam"></h3>
+
+    <p id="aantal"></p>
+
+    <button onclick="vorige()">&lt;</button>
+
+    <button onclick="randomFoto()">random</button>
+
+    <button onclick="volgende()">&gt;</button>
+</body>
+
+</html>
