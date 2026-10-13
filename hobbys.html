@@ -24,6 +24,7 @@
         --ice: #4fc3e0;
         --tour: #e8a23a;
         --grass: #42a85f;
+        --nac: #f4c300;
         --display: "Oswald", Inter, Segoe UI, Arial, sans-serif;
         --body: Inter, Segoe UI, Arial, sans-serif;
       }
@@ -461,7 +462,53 @@
       }
       .tracker-item.schaatsen { --accent: var(--ice); }
       .tracker-item.wielrennen { --accent: var(--tour); }
-      .tracker-item.voetbal { --accent: var(--grass); }
+      .tracker-item.voetbal { --accent: var(--nac); }
+      .tracker-item .club-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0 8px;
+      }
+      .tracker-item .club-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 10px 3px 8px;
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--nac);
+        background: #141414;
+        border: 1px solid var(--nac);
+        border-radius: 999px;
+      }
+      .tracker-item .club-badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--nac);
+      }
+      .tracker-item .club-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tracker-item .club-links a {
+        padding: 4px 11px;
+        font-size: 0.76rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        transition: border-color 0.15s, color 0.15s;
+      }
+      .tracker-item .club-links a:hover {
+        border-color: var(--nac);
+        color: var(--nac);
+      }
 
       .frame.ice {
         background: linear-gradient(170deg, #12232c, #0b1620);
@@ -570,6 +617,199 @@
           text-align: center;
         }
       }
+
+      /* ---------- Popup-knoppen ---------- */
+      .popup-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 10px 18px;
+        font-family: var(--display);
+        font-size: 0.84rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        color: #07111f;
+        background: var(--p-accent);
+        border: 0;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 10px 22px -8px rgba(0, 0, 0, 0.55);
+        transition: transform 0.15s, box-shadow 0.15s;
+      }
+      .popup-trigger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 26px -8px rgba(0, 0, 0, 0.6);
+      }
+      .trig-wood { --p-accent: var(--wood-light); }
+      .trig-race { --p-accent: #ff6b6b; }
+      .trig-nac { --p-accent: var(--nac); }
+      .trig-gold { --p-accent: var(--gold); }
+
+      /* ---------- Popup-vensters ---------- */
+      .popup-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 180;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(3, 8, 16, 0.86);
+        backdrop-filter: blur(6px);
+      }
+      .popup-overlay[hidden] {
+        display: none;
+      }
+      .popup-card {
+        width: min(440px, 100%);
+        max-height: 88vh;
+        overflow-y: auto;
+        background: linear-gradient(165deg, var(--panel), var(--panel2));
+        border: 1px solid var(--p-accent);
+        border-radius: 16px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 24px 54px rgba(0, 0, 0, 0.5);
+      }
+      .popup-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        background: var(--p-accent);
+        border-radius: 15px 15px 0 0;
+      }
+      .popup-bar .picon {
+        font-size: 1.15rem;
+      }
+      .popup-bar h3 {
+        flex: 1;
+        margin: 0;
+        font-family: var(--display);
+        font-size: 1rem;
+        font-weight: 700;
+        color: #07111f;
+      }
+      .popup-bar button {
+        width: 26px;
+        height: 26px;
+        display: grid;
+        place-items: center;
+        font-size: 1.15rem;
+        line-height: 1;
+        color: #07111f;
+        background: rgba(7, 17, 31, 0.12);
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .popup-bar button:hover {
+        background: rgba(7, 17, 31, 0.24);
+      }
+      .popup-body {
+        padding: 18px 20px 22px;
+      }
+      .popup-body > p {
+        margin: 0 0 16px;
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .popup-field label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .popup-field input {
+        width: 100%;
+        padding: 11px 14px;
+        font: inherit;
+        font-size: 0.92rem;
+        color: var(--ink);
+        background: rgba(5, 14, 29, 0.6);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        outline: none;
+      }
+      .popup-field input:focus {
+        border-color: var(--p-accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-accent) 30%, transparent);
+      }
+      .popup-submit {
+        width: 100%;
+        margin-top: 12px;
+        padding: 11px;
+        font: inherit;
+        font-family: var(--display);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #07111f;
+        background: var(--p-accent);
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: filter 0.15s;
+      }
+      .popup-submit:hover {
+        filter: brightness(1.08);
+      }
+      .popup-reply {
+        display: none;
+        margin-top: 14px;
+        padding: 12px 14px;
+        font-size: 0.86rem;
+        line-height: 1.55;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 3px solid var(--p-accent);
+        border-radius: 8px;
+      }
+      .popup-reply.show {
+        display: block;
+        animation: popIn 0.25s ease;
+      }
+      @keyframes popIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: none; }
+      }
+      .popup-list {
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .popup-list:empty {
+        display: none;
+      }
+      .popup-list li {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        line-height: 1.4;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.035);
+        border-radius: 7px;
+      }
+      .popup-list li b {
+        color: var(--ink);
+      }
+      .popup-list li span {
+        display: block;
+        margin-top: 1px;
+        font-size: 0.7rem;
+        opacity: 0.75;
+      }
+      .popup-count {
+        margin-top: 14px;
+        font-size: 0.74rem;
+        color: var(--muted);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .popup-reply.show {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -639,6 +879,10 @@
             </p>
             <p>Hieronder een cover die ik voor mezelf heb opgenomen.</p>
             <span class="pick">🎵 Akoestisch &middot; cover</span>
+            <br />
+            <button type="button" class="popup-trigger trig-wood" data-popup="pop-gitaar">
+              🎸 Vraag een nummer aan
+            </button>
           </div>
           <figure class="frame wood">
             <div class="ratio">
@@ -668,6 +912,9 @@
             tot karten tegen duizenden andere spelers &mdash; de concentratie en het duel met andere racers
             geven precies de adrenaline die ik zoek.
           </p>
+          <button type="button" class="popup-trigger trig-race" data-popup="pop-simracen">
+            🏁 Daag me uit voor een race
+          </button>
           <div class="garage-grid">
             <figure class="frame race">
               <div class="ratio">
@@ -731,6 +978,17 @@
               <div>
                 <h3>Voetbal</h3>
                 <p>Van de Eredivisie tot de grote internationale toernooien, ik ben er graag bij.</p>
+                <div class="club-row">
+                  <span class="club-badge"><span class="dot" aria-hidden="true"></span>NAC Breda</span>
+                </div>
+                <p>Mijn favoriete club. Dit seizoen spelen ze in de Keuken Kampioen Divisie.</p>
+                <div class="club-links">
+                  <a href="https://www.knvb.nl/competities/keuken-kampioen-divisie/stand" target="_blank" rel="noopener">📊 Stand Keuken Kampioen Divisie</a>
+                  <a href="https://www.nac.nl" target="_blank" rel="noopener">🟡⚫ NAC.nl</a>
+                </div>
+                <button type="button" class="popup-trigger trig-nac" data-popup="pop-nac">
+                  ⚽ Voorspel de uitslag
+                </button>
               </div>
             </div>
           </div>
@@ -766,6 +1024,9 @@
             net dat beetje meer die ik ook in gitaar spelen en simracen terugvind.
           </p>
           <div class="medals" aria-hidden="true">🥇 🥈 🥉</div>
+          <button type="button" class="popup-trigger trig-gold" data-popup="pop-olympisch">
+            🏅 Zet je boodschap op het scorebord
+          </button>
         </div>
       </section>
     </main>
@@ -774,5 +1035,249 @@
       <a class="back2" href="index.html">← Terug naar mijn portfolio &amp; certificaten</a>
       <small>Leon Keijzers · Hobby's</small>
     </footer>
+
+    <!-- ===== Popup: Gitaar - verzoeknummer ===== -->
+    <div class="popup-overlay trig-wood" id="pop-gitaar" hidden>
+      <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="pop-gitaar-h">
+        <div class="popup-bar">
+          <span class="picon">🎸</span>
+          <h3 id="pop-gitaar-h">Verzoeknummer</h3>
+          <button type="button" class="pop-close" aria-label="Sluiten">&times;</button>
+        </div>
+        <div class="popup-body">
+          <p>Welk nummer zou je mij eens op de akoestische gitaar willen horen spelen?</p>
+          <form class="pop-form" data-store="leon-hobby-songs" data-list="Laatste verzoekjes">
+            <div class="popup-field">
+              <label for="in-gitaar">Jouw verzoek</label>
+              <input id="in-gitaar" maxlength="60" placeholder="bv. Wonderwall, Hotel California..." required />
+            </div>
+            <button type="submit" class="popup-submit">Zet op de setlist 🎸</button>
+          </form>
+          <div class="popup-reply" data-reply></div>
+          <ul class="popup-list" data-list-el></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Popup: Simracen - uitdaging ===== -->
+    <div class="popup-overlay trig-race" id="pop-simracen" hidden>
+      <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="pop-simracen-h">
+        <div class="popup-bar">
+          <span class="picon">🏁</span>
+          <h3 id="pop-simracen-h">Daag me uit</h3>
+          <button type="button" class="pop-close" aria-label="Sluiten">&times;</button>
+        </div>
+        <div class="popup-body">
+          <p>Welk circuit of welke game moet ik een keer rijden? Schrijf het hieronder op.</p>
+          <form class="pop-form" data-store="leon-hobby-races" data-list="Wachtrij uitdagingen">
+            <div class="popup-field">
+              <label for="in-race">Circuit of game</label>
+              <input id="in-race" maxlength="60" placeholder="bv. Nürburgring, Daytona, Spa..." required />
+            </div>
+            <button type="submit" class="popup-submit">Uitdaging versturen 🏁</button>
+          </form>
+          <div class="popup-reply" data-reply></div>
+          <ul class="popup-list" data-list-el></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Popup: Voetbal - voorspelling ===== -->
+    <div class="popup-overlay trig-nac" id="pop-nac" hidden>
+      <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="pop-nac-h">
+        <div class="popup-bar">
+          <span class="picon">⚽</span>
+          <h3 id="pop-nac-h">Voorspel de uitslag</h3>
+          <button type="button" class="pop-close" aria-label="Sluiten">&times;</button>
+        </div>
+        <div class="popup-body">
+          <p>Wat wordt de volgende uitslag van NAC Breda? Doe een gok!</p>
+          <form class="pop-form" data-store="leon-hobby-predictions" data-list="Ingezonden voorspellingen">
+            <div class="popup-field">
+              <label for="in-nac">Jouw voorspelling</label>
+              <input id="in-nac" maxlength="60" placeholder="bv. NAC Breda 2 - 1 ADO Den Haag" required />
+            </div>
+            <button type="submit" class="popup-submit">Voorspelling insturen ⚽</button>
+          </form>
+          <div class="popup-reply" data-reply></div>
+          <ul class="popup-list" data-list-el></ul>
+          <p class="popup-count" data-count></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Popup: Olympisch - scorebord ===== -->
+    <div class="popup-overlay trig-gold" id="pop-olympisch" hidden>
+      <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="pop-olympisch-h">
+        <div class="popup-bar">
+          <span class="picon">🥇</span>
+          <h3 id="pop-olympisch-h">Olympisch scorebord</h3>
+          <button type="button" class="pop-close" aria-label="Sluiten">&times;</button>
+        </div>
+        <div class="popup-body">
+          <p>Laat een olympische boodschap, aanmoediging of voorspelling achter op het scorebord.</p>
+          <form class="pop-form" data-store="leon-hobby-scoreboard" data-list="Op het scorebord">
+            <div class="popup-field">
+              <label for="in-olymp">Jouw boodschap</label>
+              <input id="in-olymp" maxlength="80" placeholder="bv. Succes voor Oranje op het ijs!" required />
+            </div>
+            <button type="submit" class="popup-submit">Op het scorebord zetten 🥇</button>
+          </form>
+          <div class="popup-reply" data-reply></div>
+          <ul class="popup-list" data-list-el></ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ---------- Popups: leuke invoerformuliertjes ---------- */
+      (function () {
+        "use strict";
+        const esc = (s) =>
+          String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+        function store(key) {
+          try {
+            return JSON.parse(localStorage.getItem(key) || "[]");
+          } catch (e) {
+            return [];
+          }
+        }
+        function saveStore(key, arr) {
+          try {
+            localStorage.setItem(key, JSON.stringify(arr.slice(0, 6)));
+          } catch (e) {}
+        }
+        function countKey(key) {
+          try {
+            return parseInt(localStorage.getItem(key + "-count") || "0", 10) || 0;
+          } catch (e) {
+            return 0;
+          }
+        }
+        function bumpCount(key) {
+          const n = countKey(key) + 1;
+          try {
+            localStorage.setItem(key + "-count", String(n));
+          } catch (e) {}
+          return n;
+        }
+
+        // Leuke, afwisselende reacties per popup \u2014 {x} wordt vervangen door de invoer
+        const REPLIES = {
+          "leon-hobby-songs": [
+            "🎸 \u201c{x}\u201d staat genoteerd! Volgende keer dat ik de gitaar pak, probeer ik 'm uit.",
+            "🎵 Goede keuze! \u201c{x}\u201d gaat op de oefenlijst.",
+            "🤘 \u201c{x}\u201d toegevoegd aan de setlist. Kan wel een paar pogingen kosten voor het lekker klinkt!",
+            "📻 Nog nooit geprobeerd, maar \u201c{x}\u201d gaat nu op de planning.",
+          ],
+          "leon-hobby-races": [
+            "🏁 Uitdaging geaccepteerd: {x}! Verwachte rondetijd: ergens tussen 'net goed genoeg' en 'bijna een PB' ⏱️",
+            "🚦 {x} staat op de kalender. Zet de koffie maar vast klaar, dit kan een paar pogingen duren.",
+            "🏎️ Challenge accepted: {x}. Mijn virtuele bandenslijtage zegt alvast dankjewel.",
+            "🏆 {x} toegevoegd! Hopelijk eindig ik niet weer tegen de bandenstapel.",
+          ],
+          "leon-hobby-predictions": [
+            "⚽ Genoteerd: {x}. Hopelijk heb je gelijk, geel-zwart kan alle steun gebruiken!",
+            "🟡⚫ {x} \u2014 mooie voorspelling! Duimen dat NAC het waarmaakt.",
+            "📋 {x} staat op het voorspellingenbord. Supportersdroom activated.",
+            "🔥 {x}! Als dat uitkomt trakteer ik mezelf op een extra kop koffie.",
+          ],
+          "leon-hobby-scoreboard": [
+            "🥇 Je boodschap \u201c{x}\u201d staat op het scorebord!",
+            "🏅 Mooi gezegd: \u201c{x}\u201d is toegevoegd aan het scorebord.",
+            "🎉 \u201c{x}\u201d staat erbij \u2014 op naar de volgende Spelen!",
+            "📣 Genoteerd: \u201c{x}\u201d. Het scorebord wordt steeds voller!",
+          ],
+        };
+
+        function renderList(form, key) {
+          const ul = form.parentElement.querySelector("[data-list-el]");
+          if (!ul) return;
+          const items = store(key);
+          ul.innerHTML = items
+            .map(
+              (it) =>
+                "<li><b>" +
+                esc(it.x) +
+                "</b><span>" +
+                new Date(it.t).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" }) +
+                "</span></li>"
+            )
+            .join("");
+        }
+
+        function openPopup(id) {
+          const ov = document.getElementById(id);
+          if (!ov) return;
+          ov.hidden = false;
+          document.body.style.overflow = "hidden";
+          const form = ov.querySelector(".pop-form");
+          if (form) renderList(form, form.dataset.store);
+          const input = ov.querySelector("input");
+          if (input) setTimeout(() => input.focus(), 30);
+        }
+        function closePopup(ov) {
+          ov.hidden = true;
+          if (!document.querySelector(".popup-overlay:not([hidden])")) {
+            document.body.style.overflow = "";
+          }
+        }
+
+        document.querySelectorAll(".popup-trigger").forEach((btn) => {
+          btn.addEventListener("click", () => openPopup(btn.dataset.popup));
+        });
+        document.querySelectorAll(".popup-overlay").forEach((ov) => {
+          ov.querySelector(".pop-close").addEventListener("click", () => closePopup(ov));
+          ov.addEventListener("click", (e) => {
+            if (e.target === ov) closePopup(ov);
+          });
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key !== "Escape") return;
+          const open = document.querySelector(".popup-overlay:not([hidden])");
+          if (open) closePopup(open);
+        });
+
+        document.querySelectorAll(".pop-form").forEach((form) => {
+          const key = form.dataset.store;
+          const replyEl = form.parentElement.querySelector("[data-reply]");
+          const countEl = form.parentElement.querySelector("[data-count]");
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const input = form.querySelector("input");
+            const val = input.value.trim();
+            if (!val) return;
+
+            const pool = REPLIES[key] || ["Dank je! \u201c{x}\u201d is ontvangen."];
+            const line = pool[Math.floor(Math.random() * pool.length)].replace("{x}", esc(val));
+            replyEl.innerHTML = line;
+            replyEl.classList.remove("show");
+            void replyEl.offsetWidth;
+            replyEl.classList.add("show");
+
+            const items = store(key);
+            items.unshift({ x: val, t: Date.now() });
+            saveStore(key, items);
+            renderList(form, key);
+
+            if (countEl) {
+              const n = bumpCount(key);
+              countEl.textContent = "📊 In totaal " + n + (n === 1 ? " voorspelling" : " voorspellingen") + " ontvangen sinds je dit bent gaan invullen.";
+            }
+
+            form.reset();
+            input.focus();
+          });
+        });
+
+        // Voorspellingen-teller meteen tonen bij het openen
+        const nacCount = document.querySelector('#pop-nac [data-count]');
+        if (nacCount) {
+          const n = countKey("leon-hobby-predictions");
+          if (n > 0) nacCount.textContent = "📊 In totaal " + n + (n === 1 ? " voorspelling" : " voorspellingen") + " ontvangen sinds je dit bent gaan invullen.";
+        }
+      })();
+    </script>
   </body>
 </html>

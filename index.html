@@ -3891,8 +3891,20 @@
         );
         E("hobby", ["hobby", "hobbies", "vrije tijd", "bezig", "interesse", "interesses", "gamen", "sport", "sporten", "formule 1", "f1", "wat doe je graag", "gitaar", "gitaarspelen", "simracen", "sim racen", "racen", "schaatsen", "wielrennen", "voetbal", "olympische spelen", "olympisch", "milano cortina", "jutta leerdam"], () =>
           PROFILE.hobbys ||
-            "Naast techniek speel ik **gitaar**, duik ik graag de simulator in om te **simracen**, en volg ik **schaatsen**, **wielrennen**, **voetbal** en de **Olympische Spelen** op de voet. Ik heb er een eigen pagina met video's over gemaakt! 🎸🏎️⛸️",
+            "Naast techniek speel ik **gitaar**, duik ik graag de simulator in om te **simracen**, en volg ik **schaatsen**, **wielrennen**, **voetbal** (met **NAC Breda** als favoriete club) en de **Olympische Spelen** op de voet. Ik heb er een eigen pagina met video's over gemaakt! 🎸🏎️⛸️",
           { w: 1.2, act: [toHobbies], next: ["Welke certificaten heb je?", "Contact"] }
+        );
+        E("nac", ["nac", "nac breda", "favoriete club", "favoriete voetbalclub", "welke club", "rat verlegh"], () =>
+          "**NAC Breda** is mijn favoriete voetbalclub! 🟡⚫ Dit seizoen spelen ze in de **Keuken Kampioen Divisie**. Op mijn hobbypagina staat een link naar de actuele stand en naar NAC.nl.",
+          {
+            w: 1.3,
+            act: [
+              toHobbies,
+              { t: "link", v: "https://www.knvb.nl/competities/keuken-kampioen-divisie/stand", label: "Stand Keuken Kampioen Divisie" },
+              { t: "link", v: "https://www.nac.nl", label: "Naar NAC.nl" },
+            ],
+            next: ["Hobby's", "Welke certificaten heb je?"],
+          }
         );
         E("woon", ["woon", "woonplaats", "regio", "waar kom je vandaan", "locatie", "stad", "waar woon je"], () =>
           PROFILE.woonplaats || "Mijn woonplaats deel ik liever niet op een openbare pagina. Stuur me gerust een bericht via LinkedIn!",
@@ -4442,7 +4454,8 @@
           } else if (a.t === "account") {
             if (window.leonAuth) window.leonAuth.open();
           } else if (a.t === "link") {
-            window.location.href = a.v;
+            if (/^https?:\/\//.test(a.v)) window.open(a.v, "_blank", "noopener");
+            else window.location.href = a.v;
           } else if (a.t === "send") {
             send(a.v);
           }
