@@ -593,7 +593,25 @@
       .cnn-ticker div { display: inline-flex; white-space: nowrap; animation: ticker 22s linear infinite; font-family: var(--display); font-size: 0.78rem; font-weight: 600; line-height: 28px; color: #fff; }
       .cnn-ticker span { padding-right: 28px; }
       @keyframes ticker { to { transform: translateX(-50%); } }
+      /* Weer: Buienradar Terheijden */
+      .t-weer { --tc: #4fc3e0; }
+      .t-weer .tile-art { padding: 16px 18px; background: linear-gradient(180deg, #2f7fd0, #0d2c52); }
+      .w-loc { font-family: var(--display); font-size: 0.8rem; font-weight: 600; color: rgba(255, 255, 255, 0.85); }
+      .w-temp { margin-top: 4px; font-family: var(--display); font-size: 3.6rem; font-weight: 700; line-height: 1; color: #fff; text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35); }
+      .w-desc { margin-top: 4px; font-size: 0.82rem; color: rgba(255, 255, 255, 0.9); }
+      .w-ico { position: absolute; right: 18px; top: 14px; font-size: 4.4rem; line-height: 1; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)); }
+      .w-rain {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background: repeating-linear-gradient(105deg, transparent 0 13px, rgba(255, 255, 255, 0.4) 13px 14px);
+        background-size: 28px 28px;
+        transition: opacity 0.3s;
+      }
+      .t-weer:hover .w-rain { opacity: 1; animation: rainfall 0.7s linear infinite; }
+      @keyframes rainfall { to { background-position: -10px 28px; } }
       @media (prefers-reduced-motion: reduce) {
+        .t-weer:hover .w-rain { animation: none; }
         .cnn-ticker div { animation: none; }
         .t-bike svg, .live-dot i, .t-score:hover .score-row b { animation: none; }
         .tile { transition: none; }
@@ -919,7 +937,7 @@
           { id: "sportnieuws", tile: "score", blurb: "Uitslagen, interviews en live updates uit alle sporten.", group: "sport", name: "Sportnieuws.nl", tag: "Sport", url: "https://sportnieuws.nl/", feed: "https://sportnieuws.nl/feed" },
           { id: "sporza", tile: "bike", blurb: "Etappes, klassiekers en analyses uit het wielerpeloton.", group: "sport", name: "Sporza Wielrennen", tag: "Wielrennen", url: "https://sporza.be/nl/categorie/wielrennen/", feed: "https://sporza.be/nl/categorie/wielrennen/rss/", alt: ["https://sporza.be/nl/rss/", "https://sporza.be/nl/categorie/wielrennen.rss"] },
           { id: "rn365", tile: "f1", blurb: "Het laatste Formule 1-nieuws en alles over Max Verstappen.", group: "sport", name: "RacingNews365", tag: "Formule 1", url: "https://racingnews365.nl/f1-nieuws", feed: "https://racingnews365.nl/feed.xml", alt: ["https://racingnews365.nl/feed", "https://www.racingnews365.nl/feed.xml", "https://racingnews365.com/feed.xml"] },
-          { id: "weer", group: "weer", name: "Buienradar Terheijden", tag: "Weer", url: "https://www.buienradar.nl/weer/terheijden/nl/2746456", weather: true },
+          { id: "weer", tile: "weer", blurb: "Weersverwachting en buienradar voor Terheijden.", group: "weer", name: "Buienradar Terheijden", tag: "Weer", url: "https://www.buienradar.nl/weer/terheijden/nl/2746456", weather: true },
         ];
         const RSS_PROXY = "https://api.rss2json.com/v1/api.json?rss_url=";
         const WEATHER_URL =
@@ -1183,6 +1201,8 @@
           let art = "";
           if (src.tile === "score") {
             art = '<span class="live-dot"><i></i>LIVE</span><div class="score-row"><b>2</b><span>&ndash;</span><b>1</b></div>';
+          } else if (src.tile === "weer") {
+            art = '<div class="w-rain"></div><div class="w-loc">Terheijden</div><div class="w-temp" data-w="t">--&deg;</div><div class="w-desc" data-w="d">Weer wordt geladen&hellip;</div><div class="w-ico" data-w="i">\ud83c\udf24\ufe0f</div>';
           } else if (src.tile === "tele") {
             art = '<div class="tele-band"><i>T</i><b>De Telegraaf</b></div><div class="tele-body"><span class="tele-flag">DIRECT</span><span class="bar h"></span><span class="bar"></span><span class="bar"></span><span class="bar s"></span></div>';
           } else if (src.tile === "nos") {
@@ -1211,6 +1231,14 @@
           $("h3", a).textContent = src.name;
           $("p", a).textContent = src.blurb;
           $("#grid-" + src.group).appendChild(a);
+          if (src.tile === "weer") {
+            getWeather(false).then((d) => {
+              const [ico, txt] = wcode(d.current.weather_code);
+              $('[data-w="t"]', a).textContent = Math.round(d.current.temperature_2m) + "\u00b0";
+              $('[data-w="d"]', a).textContent = txt + " \u00b7 voelt als " + Math.round(d.current.apparent_temperature) + "\u00b0 \u00b7 wind " + Math.round(d.current.wind_speed_10m) + " km/u";
+              $('[data-w="i"]', a).textContent = ico;
+            }).catch(() => { $('[data-w="d"]', a).textContent = "Bekijk het actuele weer"; });
+          }
         }
         function buildCard(src) {
           if (src.tile) return buildTile(src);
