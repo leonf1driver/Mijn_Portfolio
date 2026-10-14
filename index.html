@@ -958,7 +958,11 @@
         --cb-line: #0b4d46;
         --cb-accent: #cedc00;
         --cb-sub: #7ee0c3;
-        --cb-head: linear-gradient(90deg, rgba(0, 165, 142, 0.25), rgba(206, 220, 0, 0.1));
+        --cb-head: linear-gradient(
+          90deg,
+          rgba(0, 165, 142, 0.25),
+          rgba(206, 220, 0, 0.1)
+        );
         --cb-bot: rgba(0, 165, 142, 0.16);
         --cb-user: #cedc00;
         --cb-user-ink: #07111f;
@@ -976,7 +980,9 @@
         background: linear-gradient(145deg, var(--cb-bg1), var(--cb-bg2));
         border: 1px solid var(--cb-line);
         border-radius: 18px;
-        box-shadow: 0 0 24px rgba(206, 220, 0, 0.1), 0 12px 30px rgba(0, 0, 0, 0.3);
+        box-shadow:
+          0 0 24px rgba(206, 220, 0, 0.1),
+          0 12px 30px rgba(0, 0, 0, 0.3);
       }
       .chatbot.light {
         --cb-bg1: #f6faf9;
@@ -986,7 +992,11 @@
         --cb-line: #a9cfc8;
         --cb-accent: #5d6b00;
         --cb-sub: #0a7a68;
-        --cb-head: linear-gradient(90deg, rgba(0, 165, 142, 0.2), rgba(206, 220, 0, 0.25));
+        --cb-head: linear-gradient(
+          90deg,
+          rgba(0, 165, 142, 0.2),
+          rgba(206, 220, 0, 0.25)
+        );
         --cb-bot: #ffffff;
         --cb-input: #ffffff;
         --cb-bar: rgba(255, 255, 255, 0.7);
@@ -1512,7 +1522,9 @@
         border-radius: 999px;
         text-decoration: none;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-        transition: transform 0.15s, background 0.15s;
+        transition:
+          transform 0.15s,
+          background 0.15s;
       }
       .hobby-btn:hover {
         background: rgba(206, 220, 0, 0.25);
@@ -1548,10 +1560,16 @@
         width: min(420px, 100%);
         max-height: 90vh;
         overflow-y: auto;
-        background: linear-gradient(145deg, rgba(20, 36, 58, 0.98), rgba(11, 23, 39, 0.98));
+        background: linear-gradient(
+          145deg,
+          rgba(20, 36, 58, 0.98),
+          rgba(11, 23, 39, 0.98)
+        );
         border: 1px solid #0b4d46;
         border-radius: 16px;
-        box-shadow: 0 0 30px rgba(206, 220, 0, 0.12), 0 20px 50px rgba(0, 0, 0, 0.45);
+        box-shadow:
+          0 0 30px rgba(206, 220, 0, 0.12),
+          0 20px 50px rgba(0, 0, 0, 0.45);
       }
       .auth-bar {
         display: flex;
@@ -1683,10 +1701,18 @@
         border-radius: 2px;
         background: #1e3048;
       }
-      .auth-meter i.on1 { background: #e5484d; }
-      .auth-meter i.on2 { background: #e5a600; }
-      .auth-meter i.on3 { background: #cedc00; }
-      .auth-meter i.on4 { background: #2ee66b; }
+      .auth-meter i.on1 {
+        background: #e5484d;
+      }
+      .auth-meter i.on2 {
+        background: #e5a600;
+      }
+      .auth-meter i.on3 {
+        background: #cedc00;
+      }
+      .auth-meter i.on4 {
+        background: #2ee66b;
+      }
       .auth-meter-label {
         margin-top: 4px;
         font-size: 0.72rem;
@@ -1799,7 +1825,11 @@
       }
       .learn-card {
         padding: 18px 20px 20px;
-        background: linear-gradient(145deg, rgba(20, 36, 58, 0.98), rgba(11, 23, 39, 0.98));
+        background: linear-gradient(
+          145deg,
+          rgba(20, 36, 58, 0.98),
+          rgba(11, 23, 39, 0.98)
+        );
         border: 1px solid var(--line);
         border-radius: 16px;
         box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
@@ -1897,37 +1927,80 @@
         color: #ffcf5c;
       }
 
-
       .news-btn {
-  position: fixed;
-  top: 62px;
-  left: 16px;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  font: inherit;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink);
-  background: rgba(0, 165, 142, 0.18);
-  border: 1px solid rgba(206, 220, 0, 0.5);
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-  transition: transform 0.15s, background 0.15s;
-}
-.news-btn:hover {
-  background: rgba(206, 220, 0, 0.25);
-  transform: translateY(-1px);
-}
-@media (max-width: 600px) {
-  .news-btn { top: 52px; left: 10px; padding: 8px 12px; font-size: 0.78rem; }
-  .news-btn .news-label { display: none; }
-}
-
-
+        position: fixed;
+        top: 62px;
+        left: 16px;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 16px;
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--ink);
+        background: rgba(0, 165, 142, 0.18);
+        border: 1px solid rgba(206, 220, 0, 0.5);
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        transition:
+          transform 0.15s,
+          background 0.15s;
+      }
+      .news-btn:hover {
+        background: rgba(206, 220, 0, 0.25);
+        transform: translateY(-1px);
+      }
+      @media (max-width: 600px) {
+        .news-btn {
+          top: 52px;
+          left: 10px;
+          padding: 8px 12px;
+          font-size: 0.78rem;
+        }
+        .news-btn .news-label {
+          display: none;
+        }
+      }
+      .lab-btn {
+        position: fixed;
+        top: 108px;
+        left: 16px;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 16px;
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--ink);
+        background: rgba(0, 165, 142, 0.18);
+        border: 1px solid rgba(206, 220, 0, 0.5);
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        transition:
+          transform 0.15s,
+          background 0.15s;
+      }
+      .lab-btn:hover {
+        background: rgba(206, 220, 0, 0.25);
+        transform: translateY(-1px);
+      }
+      @media (max-width: 600px) {
+        .lab-btn {
+          top: 94px;
+          left: 10px;
+          padding: 8px 12px;
+          font-size: 0.78rem;
+        }
+        .lab-btn .lab-label {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1942,12 +2015,17 @@
     <a class="hobby-btn" href="hobbys.html">
       <span aria-hidden="true">🎸</span><span class="hobby-label">Hobby's</span>
     </a>
-     <a class="news-btn" href="nieuws.html">
-     <span aria-hidden="true">📰</span><span class="news-label">Nieuws</span>
+    <a class="news-btn" href="nieuws.html">
+      <span aria-hidden="true">📰</span><span class="news-label">Nieuws</span>
+    </a>
+
+    <a class="lab-btn" href="lab.html">
+      <span aria-hidden="true">🧪</span><span class="lab-label">Lab</span>
     </a>
 
     <button type="button" class="acc-btn" id="acc-btn" aria-haspopup="dialog">
-      <span aria-hidden="true">👤</span><span class="acc-label" id="acc-label">Account</span>
+      <span aria-hidden="true">👤</span
+      ><span class="acc-label" id="acc-label">Account</span>
     </button>
     <header class="hero">
       <div class="hero-inner">
@@ -2293,24 +2371,72 @@
               <span id="chat-status">● Online · stel me een vraag</span>
             </div>
             <div class="chat-head-btns">
-              <button type="button" class="ic" id="chat-max" aria-label="Chat vergroten" title="Vergroten">⤢</button>
-              <button type="button" class="ic" id="chat-menu-btn" aria-label="Menu" aria-expanded="false" title="Menu">⋯</button>
+              <button
+                type="button"
+                class="ic"
+                id="chat-max"
+                aria-label="Chat vergroten"
+                title="Vergroten"
+              >
+                ⤢
+              </button>
+              <button
+                type="button"
+                class="ic"
+                id="chat-menu-btn"
+                aria-label="Menu"
+                aria-expanded="false"
+                title="Menu"
+              >
+                ⋯
+              </button>
             </div>
             <div class="chat-menu" id="chat-menu" hidden></div>
           </div>
           <div class="chat-search" id="chat-search" hidden>
-            <input type="search" id="chat-search-input" placeholder="Zoek in dit gesprek..." aria-label="Zoek in dit gesprek" />
+            <input
+              type="search"
+              id="chat-search-input"
+              placeholder="Zoek in dit gesprek..."
+              aria-label="Zoek in dit gesprek"
+            />
             <span id="chat-search-count"></span>
           </div>
-          <div class="chat-messages" id="chat-messages" role="log" aria-live="polite"></div>
+          <div
+            class="chat-messages"
+            id="chat-messages"
+            role="log"
+            aria-live="polite"
+          ></div>
           <div class="chat-quick" id="chat-quick"></div>
           <div class="chat-replybar" id="chat-replybar" hidden>
             <span id="chat-reply-text"></span>
-            <button type="button" id="chat-reply-x" aria-label="Annuleer reactie">×</button>
+            <button
+              type="button"
+              id="chat-reply-x"
+              aria-label="Annuleer reactie"
+            >
+              ×
+            </button>
           </div>
           <form class="chat-form" id="chat-form" autocomplete="off">
-            <button type="button" class="chat-mic" id="chat-mic" aria-label="Inspreken" title="Inspreken" hidden>🎤</button>
-            <input type="text" id="chat-input" maxlength="300" placeholder="Typ een bericht of /help ..." aria-label="Typ een bericht" />
+            <button
+              type="button"
+              class="chat-mic"
+              id="chat-mic"
+              aria-label="Inspreken"
+              title="Inspreken"
+              hidden
+            >
+              🎤
+            </button>
+            <input
+              type="text"
+              id="chat-input"
+              maxlength="300"
+              placeholder="Typ een bericht of /help ..."
+              aria-label="Typ een bericht"
+            />
             <button type="submit" aria-label="Verstuur">➤</button>
           </form>
         </aside>
@@ -2318,10 +2444,13 @@
 
       <section class="learn" id="learn" aria-labelledby="learn-title">
         <div class="section-heading">
-          <h2 id="learn-title" style="color:#cedc00;">🎓 Leer & oefen ethical hacking</h2>
+          <h2 id="learn-title" style="color: #cedc00">
+            🎓 Leer & oefen ethical hacking
+          </h2>
           <p class="learn-sub">
-            Een verzameling legale oefenplatforms, tools en een stappenplan om je eigen VMware-lab op te
-            zetten &mdash; onder andere om mijn eigen website veilig te scannen en testen.
+            Een verzameling legale oefenplatforms, tools en een stappenplan om
+            je eigen VMware-lab op te zetten &mdash; onder andere om mijn eigen
+            website veilig te scannen en testen.
           </p>
         </div>
 
@@ -2329,27 +2458,114 @@
           <div class="learn-card">
             <h3>🧩 Oefenplatforms <span class="learn-tag">Begin hier</span></h3>
             <ul>
-              <li><a href="https://tryhackme.com" target="_blank" rel="noopener">TryHackMe</a> &ndash; stap-voor-stap kamers, ideaal voor beginners</li>
-              <li><a href="https://www.hackthebox.com" target="_blank" rel="noopener">Hack The Box</a> &ndash; realistische machines, iets pittiger</li>
-              <li><a href="https://portswigger.net/web-security" target="_blank" rel="noopener">PortSwigger Web Security Academy</a> &ndash; gratis, diepgaand over webkwetsbaarheden</li>
-              <li><a href="https://overthewire.org/wargames/" target="_blank" rel="noopener">OverTheWire Wargames</a> &ndash; Bandit (Linux-basis) en meer</li>
-              <li><a href="https://www.root-me.org" target="_blank" rel="noopener">Root-Me</a> &ndash; honderden uitdagingen per categorie</li>
-              <li><a href="https://picoctf.org" target="_blank" rel="noopener">picoCTF</a> &ndash; laagdrempelige CTF van Carnegie Mellon</li>
-              <li><a href="https://www.vulnhub.com" target="_blank" rel="noopener">VulnHub</a> &ndash; gratis kwetsbare VM's om te downloaden</li>
-              <li><a href="https://ctftime.org" target="_blank" rel="noopener">CTFtime</a> &ndash; agenda van Capture The Flag-wedstrijden</li>
+              <li>
+                <a href="https://tryhackme.com" target="_blank" rel="noopener"
+                  >TryHackMe</a
+                >
+                &ndash; stap-voor-stap kamers, ideaal voor beginners
+              </li>
+              <li>
+                <a
+                  href="https://www.hackthebox.com"
+                  target="_blank"
+                  rel="noopener"
+                  >Hack The Box</a
+                >
+                &ndash; realistische machines, iets pittiger
+              </li>
+              <li>
+                <a
+                  href="https://portswigger.net/web-security"
+                  target="_blank"
+                  rel="noopener"
+                  >PortSwigger Web Security Academy</a
+                >
+                &ndash; gratis, diepgaand over webkwetsbaarheden
+              </li>
+              <li>
+                <a
+                  href="https://overthewire.org/wargames/"
+                  target="_blank"
+                  rel="noopener"
+                  >OverTheWire Wargames</a
+                >
+                &ndash; Bandit (Linux-basis) en meer
+              </li>
+              <li>
+                <a href="https://www.root-me.org" target="_blank" rel="noopener"
+                  >Root-Me</a
+                >
+                &ndash; honderden uitdagingen per categorie
+              </li>
+              <li>
+                <a href="https://picoctf.org" target="_blank" rel="noopener"
+                  >picoCTF</a
+                >
+                &ndash; laagdrempelige CTF van Carnegie Mellon
+              </li>
+              <li>
+                <a href="https://www.vulnhub.com" target="_blank" rel="noopener"
+                  >VulnHub</a
+                >
+                &ndash; gratis kwetsbare VM's om te downloaden
+              </li>
+              <li>
+                <a href="https://ctftime.org" target="_blank" rel="noopener"
+                  >CTFtime</a
+                >
+                &ndash; agenda van Capture The Flag-wedstrijden
+              </li>
             </ul>
           </div>
 
           <div class="learn-card">
-            <h3>🎯 Kwetsbare oefen-apps <span class="learn-tag alt">Voor in je lab</span></h3>
+            <h3>
+              🎯 Kwetsbare oefen-apps
+              <span class="learn-tag alt">Voor in je lab</span>
+            </h3>
             <ul>
-              <li><a href="https://owasp.org/www-project-juice-shop/" target="_blank" rel="noopener">OWASP Juice Shop</a> &ndash; moderne, bewust lekke webshop</li>
-              <li><a href="https://dvwa.co.uk" target="_blank" rel="noopener">DVWA</a> (Damn Vulnerable Web App) &ndash; klassieker om webaanvallen te oefenen</li>
-              <li><a href="https://www.webgoat.org" target="_blank" rel="noopener">OWASP WebGoat</a> &ndash; interactieve lessen per kwetsbaarheid</li>
-              <li><a href="https://sourceforge.net/projects/metasploitable/" target="_blank" rel="noopener">Metasploitable 2 / 3</a> &ndash; bewust lekke Linux-server</li>
-              <li><a href="https://www.vulnhub.com" target="_blank" rel="noopener">VulnHub-images</a> &ndash; tientallen losse kwetsbare machines</li>
+              <li>
+                <a
+                  href="https://owasp.org/www-project-juice-shop/"
+                  target="_blank"
+                  rel="noopener"
+                  >OWASP Juice Shop</a
+                >
+                &ndash; moderne, bewust lekke webshop
+              </li>
+              <li>
+                <a href="https://dvwa.co.uk" target="_blank" rel="noopener"
+                  >DVWA</a
+                >
+                (Damn Vulnerable Web App) &ndash; klassieker om webaanvallen te
+                oefenen
+              </li>
+              <li>
+                <a href="https://www.webgoat.org" target="_blank" rel="noopener"
+                  >OWASP WebGoat</a
+                >
+                &ndash; interactieve lessen per kwetsbaarheid
+              </li>
+              <li>
+                <a
+                  href="https://sourceforge.net/projects/metasploitable/"
+                  target="_blank"
+                  rel="noopener"
+                  >Metasploitable 2 / 3</a
+                >
+                &ndash; bewust lekke Linux-server
+              </li>
+              <li>
+                <a href="https://www.vulnhub.com" target="_blank" rel="noopener"
+                  >VulnHub-images</a
+                >
+                &ndash; tientallen losse kwetsbare machines
+              </li>
             </ul>
-            <p>Download of draai deze als losse VM's of Docker-containers, nooit op het open internet.</p>
+            <p>
+              Download of draai deze als losse VM's of Docker-containers, nooit
+              op het open internet.
+            </p>
           </div>
 
           <div class="learn-card">
@@ -2357,24 +2573,62 @@
             <ul>
               <li><b>Nmap</b> &ndash; netwerk- en poortscans</li>
               <li><b>Wireshark</b> &ndash; netwerkverkeer analyseren</li>
-              <li><b>Burp Suite</b> (Community) / <b>OWASP ZAP</b> &ndash; webapplicaties testen</li>
-              <li><b>Nikto</b> &ndash; snelle webserver-scan op bekende issues</li>
-              <li><b>Gobuster / ffuf</b> &ndash; mappen en bestanden ontdekken</li>
-              <li><b>sqlmap</b> &ndash; SQL-injectie opsporen (alleen eigen/toegestane doelen!)</li>
-              <li><b>John the Ripper / Hashcat</b> &ndash; wachtwoordsterkte testen</li>
-              <li><b>Metasploit Framework</b> &ndash; exploitatie oefenen in je lab</li>
+              <li>
+                <b>Burp Suite</b> (Community) / <b>OWASP ZAP</b> &ndash;
+                webapplicaties testen
+              </li>
+              <li>
+                <b>Nikto</b> &ndash; snelle webserver-scan op bekende issues
+              </li>
+              <li>
+                <b>Gobuster / ffuf</b> &ndash; mappen en bestanden ontdekken
+              </li>
+              <li>
+                <b>sqlmap</b> &ndash; SQL-injectie opsporen (alleen
+                eigen/toegestane doelen!)
+              </li>
+              <li>
+                <b>John the Ripper / Hashcat</b> &ndash; wachtwoordsterkte
+                testen
+              </li>
+              <li>
+                <b>Metasploit Framework</b> &ndash; exploitatie oefenen in je
+                lab
+              </li>
             </ul>
           </div>
 
           <div class="learn-card">
             <h3>📘 Boeken, video & community</h3>
             <ul>
-              <li><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank" rel="noopener">OWASP Testing Guide</a> &ndash; gratis, de standaard voor webtests</li>
-              <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener">OWASP Top 10</a> &ndash; de 10 grootste webrisico's</li>
+              <li>
+                <a
+                  href="https://owasp.org/www-project-web-security-testing-guide/"
+                  target="_blank"
+                  rel="noopener"
+                  >OWASP Testing Guide</a
+                >
+                &ndash; gratis, de standaard voor webtests
+              </li>
+              <li>
+                <a
+                  href="https://owasp.org/www-project-top-ten/"
+                  target="_blank"
+                  rel="noopener"
+                  >OWASP Top 10</a
+                >
+                &ndash; de 10 grootste webrisico's
+              </li>
               <li>Boek: <i>The Web Application Hacker's Handbook</i></li>
               <li>Boek: <i>Hacking: The Art of Exploitation</i></li>
-              <li>YouTube: <b>IppSec</b>, <b>John Hammond</b>, <b>NetworkChuck</b>, <b>LiveOverflow</b></li>
-              <li>Community: <b>r/netsec</b>, <b>r/AskNetsec</b>, Discord van TryHackMe/HTB</li>
+              <li>
+                YouTube: <b>IppSec</b>, <b>John Hammond</b>,
+                <b>NetworkChuck</b>, <b>LiveOverflow</b>
+              </li>
+              <li>
+                Community: <b>r/netsec</b>, <b>r/AskNetsec</b>, Discord van
+                TryHackMe/HTB
+              </li>
             </ul>
           </div>
 
@@ -2382,44 +2636,102 @@
             <h3>🏆 Certificeringen (groeipad)</h3>
             <ul>
               <li><b>CompTIA Security+</b> &ndash; brede basiscertificering</li>
-              <li><b>eJPT</b> (INE) &ndash; praktijkgerichte instapcertificering</li>
-              <li><b>CEH</b> (Certified Ethical Hacker) &ndash; breed bekend, theoretisch</li>
-              <li><b>OSCP</b> (Offensive Security) &ndash; pittig en praktijkgericht, voor gevorderden</li>
-              <li><b>ISO 27001</b> &ndash; voor wie meer de beveiligingsmanagement-kant op wil (heb ik al!)</li>
+              <li>
+                <b>eJPT</b> (INE) &ndash; praktijkgerichte instapcertificering
+              </li>
+              <li>
+                <b>CEH</b> (Certified Ethical Hacker) &ndash; breed bekend,
+                theoretisch
+              </li>
+              <li>
+                <b>OSCP</b> (Offensive Security) &ndash; pittig en
+                praktijkgericht, voor gevorderden
+              </li>
+              <li>
+                <b>ISO 27001</b> &ndash; voor wie meer de
+                beveiligingsmanagement-kant op wil (heb ik al!)
+              </li>
             </ul>
           </div>
 
           <div class="learn-card">
             <h3>🖥️ VMware-lab: de basisopzet</h3>
             <ol class="learn-steps">
-              <li>Installeer <b>VMware Workstation Player/Pro</b> (of Fusion op Mac).</li>
-              <li>Maak een <b>Kali Linux</b>-VM aan: dit wordt je "aanvaller".</li>
-              <li>Zet minstens één <b>doelwit-VM</b> op, bijv. Metasploitable of DVWA.</li>
-              <li>Koppel beide VM's aan een <b>Host-only</b> of <b>Internal</b> netwerk in VMware &mdash; <u>niet</u> aan NAT of Bridged, zodat je lab volledig van internet en je thuisnetwerk is afgeschermd.</li>
-              <li>Maak een <b>snapshot</b> van elke VM zodra alles werkt, zodat je altijd kunt terugzetten.</li>
-              <li>Begin met verkennen: <code>nmap -sV &lt;ip-doelwit&gt;</code> vanaf je Kali-VM.</li>
+              <li>
+                Installeer <b>VMware Workstation Player/Pro</b> (of Fusion op
+                Mac).
+              </li>
+              <li>
+                Maak een <b>Kali Linux</b>-VM aan: dit wordt je "aanvaller".
+              </li>
+              <li>
+                Zet minstens één <b>doelwit-VM</b> op, bijv. Metasploitable of
+                DVWA.
+              </li>
+              <li>
+                Koppel beide VM's aan een <b>Host-only</b> of
+                <b>Internal</b> netwerk in VMware &mdash; <u>niet</u> aan NAT of
+                Bridged, zodat je lab volledig van internet en je thuisnetwerk
+                is afgeschermd.
+              </li>
+              <li>
+                Maak een <b>snapshot</b> van elke VM zodra alles werkt, zodat je
+                altijd kunt terugzetten.
+              </li>
+              <li>
+                Begin met verkennen:
+                <code>nmap -sV &lt;ip-doelwit&gt;</code> vanaf je Kali-VM.
+              </li>
             </ol>
           </div>
         </div>
 
-        <div class="learn-card" style="margin-top:20px;">
+        <div class="learn-card" style="margin-top: 20px">
           <h3>🔎 Mijn eigen website veilig scannen en testen</h3>
           <ol class="learn-steps">
-            <li>Werk altijd op een <b>lokale kopie</b> van de site in je VM (bijv. via Docker, XAMPP of <code>python3 -m http.server</code>), in plaats van op de live, publiek gehoste versie.</li>
-            <li>Host die kopie alleen binnen je <b>geïsoleerde VMware-netwerk</b>, zodat eventuele fouten geen effect hebben op de echte site of andere apparaten.</li>
-            <li>Begin met verkennen: <code>nmap -sV -p- &lt;lokaal-ip&gt;</code> om open poorten en diensten te zien.</li>
-            <li>Scan de webserver globaal met <b>Nikto</b> en controleer veelvoorkomende fouten met de <b>OWASP Top 10</b> als checklist.</li>
-            <li>Test interactief met <b>Burp Suite</b> of <b>OWASP ZAP</b>: formulieren, invoervelden en links.</li>
-            <li>Wil je <i>wél</i> de live, publiek gehoste versie testen? Controleer dan eerst de voorwaarden van je hostingpartij en vraag zo nodig schriftelijk toestemming. Blijf daarna bij lichte, niet-verstorende checks.</li>
-            <li>Leg je bevindingen vast in een kort rapportje: wat heb je getest, wat vond je, en hoe los je het op?</li>
+            <li>
+              Werk altijd op een <b>lokale kopie</b> van de site in je VM (bijv.
+              via Docker, XAMPP of <code>python3 -m http.server</code>), in
+              plaats van op de live, publiek gehoste versie.
+            </li>
+            <li>
+              Host die kopie alleen binnen je <b>geïsoleerde VMware-netwerk</b>,
+              zodat eventuele fouten geen effect hebben op de echte site of
+              andere apparaten.
+            </li>
+            <li>
+              Begin met verkennen:
+              <code>nmap -sV -p- &lt;lokaal-ip&gt;</code> om open poorten en
+              diensten te zien.
+            </li>
+            <li>
+              Scan de webserver globaal met <b>Nikto</b> en controleer
+              veelvoorkomende fouten met de <b>OWASP Top 10</b> als checklist.
+            </li>
+            <li>
+              Test interactief met <b>Burp Suite</b> of <b>OWASP ZAP</b>:
+              formulieren, invoervelden en links.
+            </li>
+            <li>
+              Wil je <i>wél</i> de live, publiek gehoste versie testen?
+              Controleer dan eerst de voorwaarden van je hostingpartij en vraag
+              zo nodig schriftelijk toestemming. Blijf daarna bij lichte,
+              niet-verstorende checks.
+            </li>
+            <li>
+              Leg je bevindingen vast in een kort rapportje: wat heb je getest,
+              wat vond je, en hoe los je het op?
+            </li>
           </ol>
         </div>
 
         <div class="learn-warning">
-          ⚠️ <b>Belangrijk:</b> scan en test alleen systemen die van jezelf zijn of waarvoor je uitdrukkelijke, schriftelijke
-          toestemming hebt. Oefen aanvalstechnieken uitsluitend binnen een geïsoleerd lab (zoals hierboven) of op
-          platforms die daar specifiek voor bedoeld zijn. Hacken zonder toestemming is in Nederland en België strafbaar,
-          ook als het "maar een test" is.
+          ⚠️ <b>Belangrijk:</b> scan en test alleen systemen die van jezelf zijn
+          of waarvoor je uitdrukkelijke, schriftelijke toestemming hebt. Oefen
+          aanvalstechnieken uitsluitend binnen een geïsoleerd lab (zoals
+          hierboven) of op platforms die daar specifiek voor bedoeld zijn.
+          Hacken zonder toestemming is in Nederland en België strafbaar, ook als
+          het "maar een test" is.
         </div>
       </section>
 
@@ -2497,67 +2809,133 @@
     </div>
 
     <div class="auth-overlay" id="auth-overlay" hidden>
-      <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-heading">
+      <div
+        class="auth-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-heading"
+      >
         <div class="auth-bar">
           <i></i><i></i><i></i><span>account.sh</span>
-          <button type="button" id="auth-close" aria-label="Sluiten">&times;</button>
+          <button type="button" id="auth-close" aria-label="Sluiten">
+            &times;
+          </button>
         </div>
 
         <div id="auth-guest">
           <div class="auth-tabs" role="tablist">
-            <button type="button" id="tab-login" role="tab" aria-selected="true">Inloggen</button>
-            <button type="button" id="tab-register" role="tab" aria-selected="false">Registreren</button>
+            <button
+              type="button"
+              id="tab-login"
+              role="tab"
+              aria-selected="true"
+            >
+              Inloggen
+            </button>
+            <button
+              type="button"
+              id="tab-register"
+              role="tab"
+              aria-selected="false"
+            >
+              Registreren
+            </button>
           </div>
           <div class="auth-body">
             <div class="auth-msg" id="auth-msg" role="alert"></div>
 
             <form class="auth-panel" id="panel-login">
               <h3 id="auth-heading">Welkom terug</h3>
-              <p class="auth-sub">Log in op je demo-account voor deze portfolio-pagina.</p>
+              <p class="auth-sub">
+                Log in op je demo-account voor deze portfolio-pagina.
+              </p>
               <div class="auth-field">
                 <label for="li-user">Gebruikersnaam</label>
-                <input id="li-user" name="username" autocomplete="username" required />
+                <input
+                  id="li-user"
+                  name="username"
+                  autocomplete="username"
+                  required
+                />
               </div>
               <div class="auth-field">
                 <label for="li-pass">Wachtwoord</label>
                 <div class="pw-row">
-                  <input id="li-pass" type="password" name="password" autocomplete="current-password" required />
-                  <button type="button" class="pw-toggle" data-for="li-pass">Toon</button>
+                  <input
+                    id="li-pass"
+                    type="password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                  />
+                  <button type="button" class="pw-toggle" data-for="li-pass">
+                    Toon
+                  </button>
                 </div>
               </div>
               <button type="submit" class="auth-submit">Inloggen</button>
               <div class="auth-note">
-                🔒 Dit is een <b>demo-login</b> voor deze portfolio-site. Er is geen echte server: alles wordt lokaal in
-                jouw browser opgeslagen (als gehashte waarde met een unieke salt, via de Web Crypto API). Gebruik dus
-                nooit een wachtwoord dat je ook écht ergens anders gebruikt.
+                🔒 Dit is een <b>demo-login</b> voor deze portfolio-site. Er is
+                geen echte server: alles wordt lokaal in jouw browser opgeslagen
+                (als gehashte waarde met een unieke salt, via de Web Crypto
+                API). Gebruik dus nooit een wachtwoord dat je ook écht ergens
+                anders gebruikt.
               </div>
             </form>
 
             <form class="auth-panel" id="panel-register" hidden>
               <h3>Account aanmaken</h3>
-              <p class="auth-sub">Maak een demo-account om te zien hoe veilige registratie werkt.</p>
+              <p class="auth-sub">
+                Maak een demo-account om te zien hoe veilige registratie werkt.
+              </p>
               <div class="auth-field">
                 <label for="re-user">Gebruikersnaam</label>
-                <input id="re-user" name="username" autocomplete="username" minlength="3" maxlength="24" required />
+                <input
+                  id="re-user"
+                  name="username"
+                  autocomplete="username"
+                  minlength="3"
+                  maxlength="24"
+                  required
+                />
               </div>
               <div class="auth-field">
                 <label for="re-pass">Wachtwoord</label>
                 <div class="pw-row">
-                  <input id="re-pass" type="password" name="new-password" autocomplete="new-password" minlength="8" required />
-                  <button type="button" class="pw-toggle" data-for="re-pass">Toon</button>
+                  <input
+                    id="re-pass"
+                    type="password"
+                    name="new-password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                  />
+                  <button type="button" class="pw-toggle" data-for="re-pass">
+                    Toon
+                  </button>
                 </div>
-                <div class="auth-meter" id="re-meter"><i></i><i></i><i></i><i></i></div>
-                <div class="auth-meter-label" id="re-meter-label">Minstens 8 tekens</div>
+                <div class="auth-meter" id="re-meter">
+                  <i></i><i></i><i></i><i></i>
+                </div>
+                <div class="auth-meter-label" id="re-meter-label">
+                  Minstens 8 tekens
+                </div>
               </div>
               <div class="auth-field">
                 <label for="re-pass2">Herhaal wachtwoord</label>
-                <input id="re-pass2" type="password" autocomplete="new-password" required />
+                <input
+                  id="re-pass2"
+                  type="password"
+                  autocomplete="new-password"
+                  required
+                />
               </div>
               <button type="submit" class="auth-submit">Registreren</button>
               <div class="auth-note">
-                🔒 Ook hier geldt: dit is een <b>demo zonder echte backend</b>, bedoeld om te laten zien hoe hashing +
-                salt werkt (zoals in het <code>hash_demo.py</code>-codevenster bovenaan de pagina). Vul geen echt
-                wachtwoord in.
+                🔒 Ook hier geldt: dit is een <b>demo zonder echte backend</b>,
+                bedoeld om te laten zien hoe hashing + salt werkt (zoals in het
+                <code>hash_demo.py</code>-codevenster bovenaan de pagina). Vul
+                geen echt wachtwoord in.
               </div>
             </form>
           </div>
@@ -2568,7 +2946,9 @@
             <div class="big-avatar" id="auth-avatar" aria-hidden="true">?</div>
             <h3 id="auth-welcome">Hoi!</h3>
             <p>Je bent ingelogd op dit apparaat.</p>
-            <button type="button" class="auth-logout" id="auth-logout">Uitloggen</button>
+            <button type="button" class="auth-logout" id="auth-logout">
+              Uitloggen
+            </button>
           </div>
         </div>
       </div>
@@ -3686,7 +4066,8 @@
         /* --- Chatbot naast de laatste certificaten laten staan --- */
         function layout() {
           if (bot.classList.contains("max")) return;
-          const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+          const cols =
+            getComputedStyle(grid).gridTemplateColumns.split(" ").length;
           const vis = cards.filter((c) => !c.hidden).length;
           const rem = (cols - (vis % cols)) % cols;
           bot.style.gridColumn = "span " + (rem >= 2 ? rem : cols);
@@ -3722,7 +4103,10 @@
         };
         const KEY_HIST = "leon-chat-v2";
         const KEY_SET = "leon-chat-settings";
-        const settings = Object.assign({ theme: "dark", sound: false, voice: false }, store.get(KEY_SET, {}));
+        const settings = Object.assign(
+          { theme: "dark", sound: false, voice: false },
+          store.get(KEY_SET, {}),
+        );
 
         /* --- Certificaatgegevens uit de pagina lezen --- */
         const certs = cards.map((c, i) => {
@@ -3731,25 +4115,41 @@
             i,
             card: c,
             title: h[0].textContent.trim(),
-            org: h[1] ? h[1].textContent.replace("Behaald bij:", "").trim() : "",
+            org: h[1]
+              ? h[1].textContent.replace("Behaald bij:", "").trim()
+              : "",
             cat: c.dataset.cat || "basis",
           };
         });
         const byCat = (cat) => certs.filter((c) => c.cat === cat);
         const catText = (cat, intro) =>
-          intro + "\n" + byCat(cat).map((c) => "- " + c.title + " (" + c.org + ")").join("\n");
+          intro +
+          "\n" +
+          byCat(cat)
+            .map((c) => "- " + c.title + " (" + c.org + ")")
+            .join("\n");
 
         /* ================= Hulpfuncties ================= */
         const esc = (s) =>
-          String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+          String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
 
         // Mini-markdown: **vet**, *cursief*, `code`, [tekst](https://link) en lijstjes
         function md(src) {
           let s = esc(src);
           s = s.replace(/`([^`\n]+)`/g, "<code>$1</code>");
           s = s.replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>");
-          s = s.replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?]|$)/g, "$1<i>$2</i>");
-          s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+          s = s.replace(
+            /(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?]|$)/g,
+            "$1<i>$2</i>",
+          );
+          s = s.replace(
+            /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+            '<a href="$2" target="_blank" rel="noopener">$1</a>',
+          );
           const blocks = [];
           let buf = [];
           let list = [];
@@ -3758,7 +4158,12 @@
             buf = [];
           };
           const flushL = () => {
-            if (list.length) blocks.push("<ul>" + list.map((x) => "<li>" + x + "</li>").join("") + "</ul>");
+            if (list.length)
+              blocks.push(
+                "<ul>" +
+                  list.map((x) => "<li>" + x + "</li>").join("") +
+                  "</ul>",
+              );
             list = [];
           };
           s.split("\n").forEach((l) => {
@@ -3775,7 +4180,10 @@
           flushL();
           return blocks.join("");
         }
-        const stripMd = (s) => String(s).replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/[*`]/g, "");
+        const stripMd = (s) =>
+          String(s)
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+            .replace(/[*`]/g, "");
 
         const norm = (s) =>
           String(s)
@@ -3787,12 +4195,18 @@
 
         // Eenvoudige stam-functie voor het Nederlands (certificaten -> certificat)
         function stem(w) {
-          if (w.length > 4) w = w.replace(/aa/g, "a").replace(/ee/g, "e").replace(/oo/g, "o").replace(/uu/g, "u");
+          if (w.length > 4)
+            w = w
+              .replace(/aa/g, "a")
+              .replace(/ee/g, "e")
+              .replace(/oo/g, "o")
+              .replace(/uu/g, "u");
           if (w.length > 5) {
             if (w.endsWith("jes")) return w.slice(0, -3);
             if (w.endsWith("en")) return w.slice(0, -2);
           }
-          if (w.length > 4 && (w.endsWith("s") || w.endsWith("e"))) return w.slice(0, -1);
+          if (w.length > 4 && (w.endsWith("s") || w.endsWith("e")))
+            return w.slice(0, -1);
           return w;
         }
         function lev(a, b) {
@@ -3802,7 +4216,11 @@
           for (let i = 1; i <= m; i++) {
             const cur = [i];
             for (let j = 1; j <= n; j++) {
-              cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+              cur[j] = Math.min(
+                prev[j] + 1,
+                cur[j - 1] + 1,
+                prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
+              );
             }
             prev = cur;
           }
@@ -3823,8 +4241,12 @@
         const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
         const shuffle = (arr) => arr.slice().sort(() => Math.random() - 0.5);
         const timeStr = (t) =>
-          new Date(t).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" });
-        const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+          new Date(t).toLocaleTimeString("nl-NL", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        const uid = () =>
+          Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
         /* ================= Kennisbank ================= */
         const ENTRIES = [];
@@ -3842,320 +4264,1412 @@
           });
         }
         const toContact = { t: "scroll", v: "contact", label: "Naar contact" };
-        const showAll = { t: "filter", v: "all", label: "Toon alle certificaten" };
-        const toLearn = { t: "scroll", v: "learn", label: "Naar leermateriaal" };
+        const showAll = {
+          t: "filter",
+          v: "all",
+          label: "Toon alle certificaten",
+        };
+        const toLearn = {
+          t: "scroll",
+          v: "learn",
+          label: "Naar leermateriaal",
+        };
         const toAccount = { t: "account", v: "", label: "Open account-scherm" };
-        const toHobbies = { t: "link", v: "hobbys.html", label: "Naar mijn hobby's" };
+        const toHobbies = {
+          t: "link",
+          v: "hobbys.html",
+          label: "Naar mijn hobby's",
+        };
 
         /* --- Small talk --- */
-        E("greet", ["hallo", "hoi", "hey", "hi", "hello", "hee", "goedemorgen", "goedemiddag", "goedenavond"], () =>
-          rand([
-            "Hoi! 👋 Leuk dat je langskomt. Vraag me iets over mijn certificaten, werkervaring, hobby's of over cybersecurity.",
-            "Hey! 😊 Waar kan ik je mee helpen? Typ `/help` om te zien wat ik allemaal kan.",
-            "Hallo! 👋 Stel gerust een vraag, ik ben er klaar voor.",
-          ])
+        E(
+          "greet",
+          [
+            "hallo",
+            "hoi",
+            "hey",
+            "hi",
+            "hello",
+            "hee",
+            "goedemorgen",
+            "goedemiddag",
+            "goedenavond",
+          ],
+          () =>
+            rand([
+              "Hoi! 👋 Leuk dat je langskomt. Vraag me iets over mijn certificaten, werkervaring, hobby's of over cybersecurity.",
+              "Hey! 😊 Waar kan ik je mee helpen? Typ `/help` om te zien wat ik allemaal kan.",
+              "Hallo! 👋 Stel gerust een vraag, ik ben er klaar voor.",
+            ]),
         );
-        E("howru", ["hoe gaat het", "hoe is het", "alles goed", "hoe gaat ie", "hoe voel je"], () =>
-          rand([
-            "Prima, dank je! 🔋 Mijn batterij is altijd vol. En met jou?",
-            "Top! Ik draai op alle cilinders. 😄 Waarmee kan ik je helpen?",
-          ])
+        E(
+          "howru",
+          [
+            "hoe gaat het",
+            "hoe is het",
+            "alles goed",
+            "hoe gaat ie",
+            "hoe voel je",
+          ],
+          () =>
+            rand([
+              "Prima, dank je! 🔋 Mijn batterij is altijd vol. En met jou?",
+              "Top! Ik draai op alle cilinders. 😄 Waarmee kan ik je helpen?",
+            ]),
         );
-        E("thanks", ["bedankt", "dank", "dankjewel", "dankje", "thanks", "thx", "merci", "top bedankt"], () =>
-          rand(["Graag gedaan! 😊 Nog iets wat je wilt weten?", "Geen probleem! Vraag gerust verder.", "Altijd! 🙌"])
+        E(
+          "thanks",
+          [
+            "bedankt",
+            "dank",
+            "dankjewel",
+            "dankje",
+            "thanks",
+            "thx",
+            "merci",
+            "top bedankt",
+          ],
+          () =>
+            rand([
+              "Graag gedaan! 😊 Nog iets wat je wilt weten?",
+              "Geen probleem! Vraag gerust verder.",
+              "Altijd! 🙌",
+            ]),
         );
-        E("bye", ["doei", "dag", "tot ziens", "tot later", "bye", "tot snel", "houdoe"], () =>
-          rand(["Tot ziens! Fijn dat je even langskwam. 👋", "Doei! Kom gerust nog eens terug. 😊"])
+        E(
+          "bye",
+          [
+            "doei",
+            "dag",
+            "tot ziens",
+            "tot later",
+            "bye",
+            "tot snel",
+            "houdoe",
+          ],
+          () =>
+            rand([
+              "Tot ziens! Fijn dat je even langskwam. 👋",
+              "Doei! Kom gerust nog eens terug. 😊",
+            ]),
         );
-        E("compliment", ["goed gedaan", "wat tof", "wat cool", "mooie site", "mooie website", "goede chatbot", "slimme bot", "knappe bot", "geweldig", "complimenten"], () =>
-          rand(["Dankjewel! 😊 Dat is lief van je.", "Bedankt, dat doet me goed! 🙌"])
+        E(
+          "compliment",
+          [
+            "goed gedaan",
+            "wat tof",
+            "wat cool",
+            "mooie site",
+            "mooie website",
+            "goede chatbot",
+            "slimme bot",
+            "knappe bot",
+            "geweldig",
+            "complimenten",
+          ],
+          () =>
+            rand([
+              "Dankjewel! 😊 Dat is lief van je.",
+              "Bedankt, dat doet me goed! 🙌",
+            ]),
         );
-        E("insult", ["stom", "dom", "sukkel", "waardeloos", "slecht"], () =>
-          "Auw! 😅 Ik leer elke dag bij. Vraag het anders of typ `/help`, dan zie je wat ik wel goed kan."
+        E(
+          "insult",
+          ["stom", "dom", "sukkel", "waardeloos", "slecht"],
+          () =>
+            "Auw! 😅 Ik leer elke dag bij. Vraag het anders of typ `/help`, dan zie je wat ik wel goed kan.",
         );
-        E("ok", ["ok", "oke", "okay", "prima", "snap", "begrepen", "duidelijk"], () => "👍 Vraag gerust iets anders!");
-        E("joke", ["grap", "mop", "grapje", "lachen", "humor", "vertel een grap"], () => nextJoke(), {
-          next: ["Nog een grap", "Geef een weetje", "Werkervaring"],
-          w: 1.2,
-        });
-        E("fact", ["weetje", "feitje", "wist je dat", "leuk feitje", "geef een weetje", "fun fact"], () => nextFact(), {
-          next: ["Nog een weetje", "Vertel een grap", "Wat is phishing?"],
-          w: 1.2,
-        });
-        E("time", ["hoe laat", "welke dag", "datum", "tijd", "hoe laat is het", "wat is de datum", "vandaag"], () => {
-          const d = new Date();
-          return (
-            "Het is nu **" +
-            d.toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" }) +
-            "** op **" +
-            d.toLocaleDateString("nl-NL", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) +
-            "** (volgens jouw apparaat)."
-          );
-        });
-        E("weather", ["weer", "buienradar", "temperatuur"], () =>
-          "Ik heb geen weerdata, maar [Buienradar](https://www.buienradar.nl) helpt je vast verder. 🌦️ Op deze pagina is het in elk geval altijd *matrix-weer*."
+        E(
+          "ok",
+          ["ok", "oke", "okay", "prima", "snap", "begrepen", "duidelijk"],
+          () => "👍 Vraag gerust iets anders!",
         );
-        E("sudo", ["sudo", "root", "admin", "rm rf"], () =>
-          "`Permission denied` 😄 Leuk geprobeerd. Voor mij geldt: ethisch hacken, alleen met toestemming!"
+        E(
+          "joke",
+          ["grap", "mop", "grapje", "lachen", "humor", "vertel een grap"],
+          () => nextJoke(),
+          {
+            next: ["Nog een grap", "Geef een weetje", "Werkervaring"],
+            w: 1.2,
+          },
         );
-        E("matrix", ["matrix", "groene regen", "witte konijn", "neo"], () =>
-          "Volg het witte konijn. 🐇 Kijk maar naar de achtergrond: dat is een hacker-achtige matrix-regen met een netwerk vol pakketjes. Beweeg je muis en je 'scant' het netwerk."
+        E(
+          "fact",
+          [
+            "weetje",
+            "feitje",
+            "wist je dat",
+            "leuk feitje",
+            "geef een weetje",
+            "fun fact",
+          ],
+          () => nextFact(),
+          {
+            next: ["Nog een weetje", "Vertel een grap", "Wat is phishing?"],
+            w: 1.2,
+          },
         );
-        E("illegal", ["wachtwoord kraken", "account hacken", "iemand hacken", "wifi kraken", "facebook hacken", "instagram hacken", "malware maken", "virus maken", "ddos uitvoeren", "ddos aanval"], () =>
-          "Daar help ik niet mee. 🚫 Hacken zonder toestemming is strafbaar en schadelijk. Wil je het vak leren? Oefen legaal in een eigen lab of op oefenplatforms, en vraag mij gerust *“Hoe word ik ethical hacker?”*.",
-          { w: 2, next: ["Hoe word ik ethical hacker?", "Wat is ethical hacking?"] }
+        E(
+          "time",
+          [
+            "hoe laat",
+            "welke dag",
+            "datum",
+            "tijd",
+            "hoe laat is het",
+            "wat is de datum",
+            "vandaag",
+          ],
+          () => {
+            const d = new Date();
+            return (
+              "Het is nu **" +
+              d.toLocaleTimeString("nl-NL", {
+                hour: "2-digit",
+                minute: "2-digit",
+              }) +
+              "** op **" +
+              d.toLocaleDateString("nl-NL", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }) +
+              "** (volgens jouw apparaat)."
+            );
+          },
+        );
+        E(
+          "weather",
+          ["weer", "buienradar", "temperatuur"],
+          () =>
+            "Ik heb geen weerdata, maar [Buienradar](https://www.buienradar.nl) helpt je vast verder. 🌦️ Op deze pagina is het in elk geval altijd *matrix-weer*.",
+        );
+        E(
+          "sudo",
+          ["sudo", "root", "admin", "rm rf"],
+          () =>
+            "`Permission denied` 😄 Leuk geprobeerd. Voor mij geldt: ethisch hacken, alleen met toestemming!",
+        );
+        E(
+          "matrix",
+          ["matrix", "groene regen", "witte konijn", "neo"],
+          () =>
+            "Volg het witte konijn. 🐇 Kijk maar naar de achtergrond: dat is een hacker-achtige matrix-regen met een netwerk vol pakketjes. Beweeg je muis en je 'scant' het netwerk.",
+        );
+        E(
+          "illegal",
+          [
+            "wachtwoord kraken",
+            "account hacken",
+            "iemand hacken",
+            "wifi kraken",
+            "facebook hacken",
+            "instagram hacken",
+            "malware maken",
+            "virus maken",
+            "ddos uitvoeren",
+            "ddos aanval",
+          ],
+          () =>
+            "Daar help ik niet mee. 🚫 Hacken zonder toestemming is strafbaar en schadelijk. Wil je het vak leren? Oefen legaal in een eigen lab of op oefenplatforms, en vraag mij gerust *“Hoe word ik ethical hacker?”*.",
+          {
+            w: 2,
+            next: ["Hoe word ik ethical hacker?", "Wat is ethical hacking?"],
+          },
         );
 
         /* --- Over Leon --- */
-        E("about", ["wie ben je", "wie ben jij", "wie is leon", "over leon", "over jezelf", "stel je voor", "vertel over jezelf", "wie is leon keijzers", "introductie"], () =>
-          "Ik ben **Leon Keijzers**, ICT'er met een passie voor **cybersecurity** en programmeren. Ik heb **" +
-          certs.length +
-          " certificaten** behaald, o.a. in ethical hacking, Python, JavaScript en ISO 27001. (Eerlijk is eerlijk: dit is een chatbot die namens mij antwoordt. 🤖)",
-          { next: ["Welke certificaten heb je?", "Werkervaring", "Hobby's", "Contact"], w: 1.3 }
+        E(
+          "about",
+          [
+            "wie ben je",
+            "wie ben jij",
+            "wie is leon",
+            "over leon",
+            "over jezelf",
+            "stel je voor",
+            "vertel over jezelf",
+            "wie is leon keijzers",
+            "introductie",
+          ],
+          () =>
+            "Ik ben **Leon Keijzers**, ICT'er met een passie voor **cybersecurity** en programmeren. Ik heb **" +
+            certs.length +
+            " certificaten** behaald, o.a. in ethical hacking, Python, JavaScript en ISO 27001. (Eerlijk is eerlijk: dit is een chatbot die namens mij antwoordt. 🤖)",
+          {
+            next: [
+              "Welke certificaten heb je?",
+              "Werkervaring",
+              "Hobby's",
+              "Contact",
+            ],
+            w: 1.3,
+          },
         );
-        E("isbot", ["ben je een bot", "ben je een robot", "ben je echt", "ben je ai", "ben je een mens", "praat ik met een mens", "chatbot", "ben je chatgpt", "ben je gpt"], () =>
-          "Ik ben een **chatbot** op de portfolio-pagina van Leon Keijzers. Ik werk met een eigen kennisbank over Leon, zijn certificaten en cybersecurity" +
-          (AI.endpoint ? ", en bij lastige vragen krijg ik hulp van een AI-model" : "") +
-          ". Een mens ben ik dus niet, maar ik doe mijn best! 😄",
-          { w: 1.3 }
+        E(
+          "isbot",
+          [
+            "ben je een bot",
+            "ben je een robot",
+            "ben je echt",
+            "ben je ai",
+            "ben je een mens",
+            "praat ik met een mens",
+            "chatbot",
+            "ben je chatgpt",
+            "ben je gpt",
+          ],
+          () =>
+            "Ik ben een **chatbot** op de portfolio-pagina van Leon Keijzers. Ik werk met een eigen kennisbank over Leon, zijn certificaten en cybersecurity" +
+            (AI.endpoint
+              ? ", en bij lastige vragen krijg ik hulp van een AI-model"
+              : "") +
+            ". Een mens ben ik dus niet, maar ik doe mijn best! 😄",
+          { w: 1.3 },
         );
-        E("werk", ["werkervaring", "werk", "werken", "baan", "functie", "beroep", "carriere", "ervaring", "bedrijf", "cv", "curriculum vitae", "wat doe je"], () =>
-          (PROFILE.werk || "Mijn volledige werkervaring staat op mijn [LinkedIn-profiel](https://www.linkedin.com/in/leon-keijzers-650469221). Kijk daar gerust even, of stuur me een bericht!") +
-          (PROFILE.cv ? "\n\n[Download mijn cv](" + PROFILE.cv + ")" : ""),
-          { act: [toContact], next: ["Welke certificaten heb je?", "Vaardigheden", "Contact"] }
+        E(
+          "werk",
+          [
+            "werkervaring",
+            "werk",
+            "werken",
+            "baan",
+            "functie",
+            "beroep",
+            "carriere",
+            "ervaring",
+            "bedrijf",
+            "cv",
+            "curriculum vitae",
+            "wat doe je",
+          ],
+          () =>
+            (PROFILE.werk ||
+              "Mijn volledige werkervaring staat op mijn [LinkedIn-profiel](https://www.linkedin.com/in/leon-keijzers-650469221). Kijk daar gerust even, of stuur me een bericht!") +
+            (PROFILE.cv ? "\n\n[Download mijn cv](" + PROFILE.cv + ")" : ""),
+          {
+            act: [toContact],
+            next: ["Welke certificaten heb je?", "Vaardigheden", "Contact"],
+          },
         );
-        E("hobby", ["hobby", "hobbies", "vrije tijd", "bezig", "interesse", "interesses", "gamen", "sport", "sporten", "formule 1", "f1", "wat doe je graag", "gitaar", "gitaarspelen", "simracen", "sim racen", "racen", "schaatsen", "wielrennen", "voetbal", "olympische spelen", "olympisch", "milano cortina", "jutta leerdam"], () =>
-          PROFILE.hobbys ||
+        E(
+          "hobby",
+          [
+            "hobby",
+            "hobbies",
+            "vrije tijd",
+            "bezig",
+            "interesse",
+            "interesses",
+            "gamen",
+            "sport",
+            "sporten",
+            "formule 1",
+            "f1",
+            "wat doe je graag",
+            "gitaar",
+            "gitaarspelen",
+            "simracen",
+            "sim racen",
+            "racen",
+            "schaatsen",
+            "wielrennen",
+            "voetbal",
+            "olympische spelen",
+            "olympisch",
+            "milano cortina",
+            "jutta leerdam",
+          ],
+          () =>
+            PROFILE.hobbys ||
             "Naast techniek speel ik **gitaar**, duik ik graag de simulator in om te **simracen**, en volg ik **schaatsen**, **wielrennen**, **voetbal** (met **NAC Breda** als favoriete club) en de **Olympische Spelen** op de voet. Ik heb er een eigen pagina met video's over gemaakt! 🎸🏎️⛸️",
-          { w: 1.2, act: [toHobbies], next: ["Welke certificaten heb je?", "Contact"] }
+          {
+            w: 1.2,
+            act: [toHobbies],
+            next: ["Welke certificaten heb je?", "Contact"],
+          },
         );
-        E("nac", ["nac", "nac breda", "favoriete club", "favoriete voetbalclub", "welke club", "rat verlegh"], () =>
-          "**NAC Breda** is mijn favoriete voetbalclub! 🟡⚫ Dit seizoen spelen ze in de **Keuken Kampioen Divisie**. Op mijn hobbypagina staat een link naar de actuele stand en naar NAC.nl.",
+        E(
+          "nac",
+          [
+            "nac",
+            "nac breda",
+            "favoriete club",
+            "favoriete voetbalclub",
+            "welke club",
+            "rat verlegh",
+          ],
+          () =>
+            "**NAC Breda** is mijn favoriete voetbalclub! 🟡⚫ Dit seizoen spelen ze in de **Keuken Kampioen Divisie**. Op mijn hobbypagina staat een link naar de actuele stand en naar NAC.nl.",
           {
             w: 1.3,
             act: [
               toHobbies,
-              { t: "link", v: "https://www.knvb.nl/competities/keuken-kampioen-divisie/stand", label: "Stand Keuken Kampioen Divisie" },
+              {
+                t: "link",
+                v: "https://www.knvb.nl/competities/keuken-kampioen-divisie/stand",
+                label: "Stand Keuken Kampioen Divisie",
+              },
               { t: "link", v: "https://www.nac.nl", label: "Naar NAC.nl" },
             ],
             next: ["Hobby's", "Welke certificaten heb je?"],
-          }
+          },
         );
-        E("woon", ["woon", "woonplaats", "regio", "waar kom je vandaan", "locatie", "stad", "waar woon je"], () =>
-          PROFILE.woonplaats || "Mijn woonplaats deel ik liever niet op een openbare pagina. Stuur me gerust een bericht via LinkedIn!",
-          { act: [toContact] }
+        E(
+          "woon",
+          [
+            "woon",
+            "woonplaats",
+            "regio",
+            "waar kom je vandaan",
+            "locatie",
+            "stad",
+            "waar woon je",
+          ],
+          () =>
+            PROFILE.woonplaats ||
+            "Mijn woonplaats deel ik liever niet op een openbare pagina. Stuur me gerust een bericht via LinkedIn!",
+          { act: [toContact] },
         );
-        E("taal", ["taal", "talen", "engels", "nederlands", "spreek je", "welke talen"], () =>
-          PROFILE.talen || "Deze pagina is in het Nederlands, maar je mag me ook in het Engels benaderen via LinkedIn."
+        E(
+          "taal",
+          ["taal", "talen", "engels", "nederlands", "spreek je", "welke talen"],
+          () =>
+            PROFILE.talen ||
+            "Deze pagina is in het Nederlands, maar je mag me ook in het Engels benaderen via LinkedIn.",
         );
-        E("beschikbaar", ["beschikbaar", "op zoek", "vacature", "stage", "solliciteer", "inhuren", "freelance", "opdracht", "ben je beschikbaar", "zoek je werk"], () =>
-          PROFILE.beschikbaar || "Ik sta open voor leuke kansen en projecten in ICT en cybersecurity. Neem gerust contact op!",
-          { act: [toContact] }
+        E(
+          "beschikbaar",
+          [
+            "beschikbaar",
+            "op zoek",
+            "vacature",
+            "stage",
+            "solliciteer",
+            "inhuren",
+            "freelance",
+            "opdracht",
+            "ben je beschikbaar",
+            "zoek je werk",
+          ],
+          () =>
+            PROFILE.beschikbaar ||
+            "Ik sta open voor leuke kansen en projecten in ICT en cybersecurity. Neem gerust contact op!",
+          { act: [toContact] },
         );
-        E("doel", ["doel", "doelen", "ambitie", "toekomst", "droom", "wat wil je worden", "plannen"], () =>
-          PROFILE.doel || "Ik wil me blijven ontwikkelen in cybersecurity en programmeren, en haal daarom steeds nieuwe certificaten."
+        E(
+          "doel",
+          [
+            "doel",
+            "doelen",
+            "ambitie",
+            "toekomst",
+            "droom",
+            "wat wil je worden",
+            "plannen",
+          ],
+          () =>
+            PROFILE.doel ||
+            "Ik wil me blijven ontwikkelen in cybersecurity en programmeren, en haal daarom steeds nieuwe certificaten.",
         );
-        E("skills", ["vaardigheid", "vaardigheden", "skills", "kunnen", "wat kun je", "sterk", "goed in", "specialiteit", "kwaliteiten", "expertise"], () => {
-          const parts = [
-            byCat("hacking").length && "ethical hacking",
-            byCat("security").length && "security (o.a. ISO 27001)",
-            byCat("programmeren").length && "programmeren (Python, JavaScript, websites)",
-            byCat("data").length && "data en AI (SQL, Big Data, ChatGPT)",
-            byCat("basis").length && "ICT-basis en projectmatig werken",
-          ].filter(Boolean);
-          return "Mijn sterke punten:\n" + parts.map((p) => "- " + p).join("\n") + "\nDit blijkt ook uit mijn certificaten.";
-        }, { act: [showAll], next: ["Ethical hacking", "Programmeren", "Security"] });
-        E("opleiding", ["opleiding", "opleidingen", "school", "studie", "studeer", "gestudeerd", "geleerd", "scholing", "scholingstraject"], () =>
-          "Mijn opleidingen volg ik vooral via **ITMG**, **Mile2** en **Hoge school Novi**. Samen goed voor " + certs.length + " certificaten.",
-          { act: [showAll], next: ["ITMG", "Mile2", "Novi"] }
+        E(
+          "skills",
+          [
+            "vaardigheid",
+            "vaardigheden",
+            "skills",
+            "kunnen",
+            "wat kun je",
+            "sterk",
+            "goed in",
+            "specialiteit",
+            "kwaliteiten",
+            "expertise",
+          ],
+          () => {
+            const parts = [
+              byCat("hacking").length && "ethical hacking",
+              byCat("security").length && "security (o.a. ISO 27001)",
+              byCat("programmeren").length &&
+                "programmeren (Python, JavaScript, websites)",
+              byCat("data").length && "data en AI (SQL, Big Data, ChatGPT)",
+              byCat("basis").length && "ICT-basis en projectmatig werken",
+            ].filter(Boolean);
+            return (
+              "Mijn sterke punten:\n" +
+              parts.map((p) => "- " + p).join("\n") +
+              "\nDit blijkt ook uit mijn certificaten."
+            );
+          },
+          {
+            act: [showAll],
+            next: ["Ethical hacking", "Programmeren", "Security"],
+          },
         );
-        E("tools", ["tools", "gereedschap", "programma's", "software", "kali", "nmap", "welke tools", "terminal", "code vensters", "code vensters"], () =>
-          "In de code-vensters bovenaan zie je voorbeelden met **Python**, **JavaScript** en een **Nmap**-scan in een Kali-omgeving (alleen op mijn eigen lab, nooit op andermans systemen).",
-          { next: ["Wat is Nmap?", "Wat is Kali Linux?", "Python"] }
+        E(
+          "opleiding",
+          [
+            "opleiding",
+            "opleidingen",
+            "school",
+            "studie",
+            "studeer",
+            "gestudeerd",
+            "geleerd",
+            "scholing",
+            "scholingstraject",
+          ],
+          () =>
+            "Mijn opleidingen volg ik vooral via **ITMG**, **Mile2** en **Hoge school Novi**. Samen goed voor " +
+            certs.length +
+            " certificaten.",
+          { act: [showAll], next: ["ITMG", "Mile2", "Novi"] },
         );
-        E("lessen", ["lessen", "oefeningen", "oefening", "boodschappen", "dierentuin", "landkaart", "landen", "stemmenteller", "javascript lessen", "projecten", "gegevens", "berekening"], () =>
-          "Mijn JavaScript-lessen en oefeningen van ITMG staan onderaan deze pagina, zoals Boodschappen, Dierentuin en Landkaart. Scroll maar naar beneden! ⬇️"
+        E(
+          "tools",
+          [
+            "tools",
+            "gereedschap",
+            "programma's",
+            "software",
+            "kali",
+            "nmap",
+            "welke tools",
+            "terminal",
+            "code vensters",
+            "code vensters",
+          ],
+          () =>
+            "In de code-vensters bovenaan zie je voorbeelden met **Python**, **JavaScript** en een **Nmap**-scan in een Kali-omgeving (alleen op mijn eigen lab, nooit op andermans systemen).",
+          { next: ["Wat is Nmap?", "Wat is Kali Linux?", "Python"] },
         );
-        E("salaris", ["salaris", "tarief", "uurtarief", "wat verdien", "loon", "kosten"], () =>
-          "Over geld praat ik liever persoonlijk. Stuur me een bericht, dan komen we er samen uit.", { act: [toContact] }
+        E(
+          "lessen",
+          [
+            "lessen",
+            "oefeningen",
+            "oefening",
+            "boodschappen",
+            "dierentuin",
+            "landkaart",
+            "landen",
+            "stemmenteller",
+            "javascript lessen",
+            "projecten",
+            "gegevens",
+            "berekening",
+          ],
+          () =>
+            "Mijn JavaScript-lessen en oefeningen van ITMG staan onderaan deze pagina, zoals Boodschappen, Dierentuin en Landkaart. Scroll maar naar beneden! ⬇️",
         );
-        E("prive", ["leeftijd", "hoe oud", "telefoon", "telefoonnummer", "bellen", "adres", "privenummer"], () =>
-          "Persoonlijke gegevens zoals leeftijd, telefoonnummer en adres deel ik niet openbaar. Via LinkedIn kun je me altijd bereiken.",
-          { act: [toContact] }
+        E(
+          "salaris",
+          ["salaris", "tarief", "uurtarief", "wat verdien", "loon", "kosten"],
+          () =>
+            "Over geld praat ik liever persoonlijk. Stuur me een bericht, dan komen we er samen uit.",
+          { act: [toContact] },
         );
-        E("contact", ["contact", "linkedin", "facebook", "bereik", "bereiken", "mailen", "bericht", "email", "e mail", "contact opnemen"], () =>
-          "Je kunt me bereiken via [LinkedIn](https://www.linkedin.com/in/leon-keijzers-650469221) of Facebook. Ik hoor graag van je!",
-          { act: [toContact], next: ["Werkervaring", "Welke certificaten heb je?"], w: 1.2 }
+        E(
+          "prive",
+          [
+            "leeftijd",
+            "hoe oud",
+            "telefoon",
+            "telefoonnummer",
+            "bellen",
+            "adres",
+            "privenummer",
+          ],
+          () =>
+            "Persoonlijke gegevens zoals leeftijd, telefoonnummer en adres deel ik niet openbaar. Via LinkedIn kun je me altijd bereiken.",
+          { act: [toContact] },
         );
-        E("privacy", ["privacy", "gegevens opgeslagen", "bewaar je", "cookies", "opslaan", "bewaard", "avg chat"], () =>
-          "Dit gesprek wordt alleen **in jouw eigen browser** bewaard (localStorage), zodat je het later weer ziet." +
-          (AI.endpoint ? " Als ik een vraag zelf niet ken, gaat die vraag naar een AI-dienst om te antwoorden." : " Er wordt niets naar een server gestuurd.") +
-          " Via het menu (⋯) kun je het gesprek downloaden of wissen."
+        E(
+          "contact",
+          [
+            "contact",
+            "linkedin",
+            "facebook",
+            "bereik",
+            "bereiken",
+            "mailen",
+            "bericht",
+            "email",
+            "e mail",
+            "contact opnemen",
+          ],
+          () =>
+            "Je kunt me bereiken via [LinkedIn](https://www.linkedin.com/in/leon-keijzers-650469221) of Facebook. Ik hoor graag van je!",
+          {
+            act: [toContact],
+            next: ["Werkervaring", "Welke certificaten heb je?"],
+            w: 1.2,
+          },
         );
-        E("tech", ["hoe is deze site gemaakt", "website gemaakt", "technologie", "framework", "gebouwd", "hoe is dit gebouwd", "welke taal site", "bron code"], () =>
-          "Deze pagina is volledig met **HTML, CSS en JavaScript** gebouwd, zonder framework. De hacker-achtergrond, het vuurwerk en de code-vensters zijn canvas- en CSS-animaties. Ik ben een regelgebaseerde chatbot met een eigen kennisbank."
+        E(
+          "privacy",
+          [
+            "privacy",
+            "gegevens opgeslagen",
+            "bewaar je",
+            "cookies",
+            "opslaan",
+            "bewaard",
+            "avg chat",
+          ],
+          () =>
+            "Dit gesprek wordt alleen **in jouw eigen browser** bewaard (localStorage), zodat je het later weer ziet." +
+            (AI.endpoint
+              ? " Als ik een vraag zelf niet ken, gaat die vraag naar een AI-dienst om te antwoorden."
+              : " Er wordt niets naar een server gestuurd.") +
+            " Via het menu (⋯) kun je het gesprek downloaden of wissen.",
         );
-        E("sitehelp", ["hoe filter ik", "zoeken certificaat", "vergroten", "zoom", "lightbox", "toetsenbord", "pijltjestoetsen", "hoe werkt de site", "zoekbalk", "categorie"], () =>
-          "Op deze pagina kun je:\n- op een certificaat klikken om het te **vergroten** (pijltjes of swipen om te bladeren, `Esc` sluit)\n- **zoeken** met de zoekbalk\n- **filteren** met de categorie-knoppen erboven",
-          { act: [{ t: "scroll", v: "filters", label: "Naar de filters" }] }
+        E(
+          "tech",
+          [
+            "hoe is deze site gemaakt",
+            "website gemaakt",
+            "technologie",
+            "framework",
+            "gebouwd",
+            "hoe is dit gebouwd",
+            "welke taal site",
+            "bron code",
+          ],
+          () =>
+            "Deze pagina is volledig met **HTML, CSS en JavaScript** gebouwd, zonder framework. De hacker-achtergrond, het vuurwerk en de code-vensters zijn canvas- en CSS-animaties. Ik ben een regelgebaseerde chatbot met een eigen kennisbank.",
         );
-        E("help", ["help", "hulp", "commando", "commandos", "wat kan je", "wat kan ik vragen", "opties", "menu", "functies", "mogelijkheden", "wat kun jij"], () => helpText(), { w: 1.3 });
+        E(
+          "sitehelp",
+          [
+            "hoe filter ik",
+            "zoeken certificaat",
+            "vergroten",
+            "zoom",
+            "lightbox",
+            "toetsenbord",
+            "pijltjestoetsen",
+            "hoe werkt de site",
+            "zoekbalk",
+            "categorie",
+          ],
+          () =>
+            "Op deze pagina kun je:\n- op een certificaat klikken om het te **vergroten** (pijltjes of swipen om te bladeren, `Esc` sluit)\n- **zoeken** met de zoekbalk\n- **filteren** met de categorie-knoppen erboven",
+          { act: [{ t: "scroll", v: "filters", label: "Naar de filters" }] },
+        );
+        E(
+          "help",
+          [
+            "help",
+            "hulp",
+            "commando",
+            "commandos",
+            "wat kan je",
+            "wat kan ik vragen",
+            "opties",
+            "menu",
+            "functies",
+            "mogelijkheden",
+            "wat kun jij",
+          ],
+          () => helpText(),
+          { w: 1.3 },
+        );
 
         /* --- Certificaten per onderwerp --- */
-        E("certs", ["welke certificaten", "certificaten", "certificaat", "hoeveel certificaten", "alle certificaten", "diploma", "bewijzen", "cursussen", "cursus", "trainingen", "hoeveel cursussen"], () =>
-          "Ik heb **" + certs.length + " certificaten** in 5 categorieën:\n" +
-          [["hacking", "Ethical hacking"], ["security", "Security"], ["programmeren", "Programmeren"], ["data", "Data & AI"], ["basis", "ICT-basis"]]
-            .map((c) => "- " + c[1] + ": " + byCat(c[0]).length).join("\n") +
-          "\nTyp `/certificaten` voor de volledige lijst.",
-          { act: [showAll], next: ["Ethical hacking", "Security", "Programmeren", "Data & AI"] }
+        E(
+          "certs",
+          [
+            "welke certificaten",
+            "certificaten",
+            "certificaat",
+            "hoeveel certificaten",
+            "alle certificaten",
+            "diploma",
+            "bewijzen",
+            "cursussen",
+            "cursus",
+            "trainingen",
+            "hoeveel cursussen",
+          ],
+          () =>
+            "Ik heb **" +
+            certs.length +
+            " certificaten** in 5 categorieën:\n" +
+            [
+              ["hacking", "Ethical hacking"],
+              ["security", "Security"],
+              ["programmeren", "Programmeren"],
+              ["data", "Data & AI"],
+              ["basis", "ICT-basis"],
+            ]
+              .map((c) => "- " + c[1] + ": " + byCat(c[0]).length)
+              .join("\n") +
+            "\nTyp `/certificaten` voor de volledige lijst.",
+          {
+            act: [showAll],
+            next: ["Ethical hacking", "Security", "Programmeren", "Data & AI"],
+          },
         );
-        E("cat-hacking", ["hack", "hacken", "hacker", "hacking", "kali", "hackers", "cpeh", "ethical hacking certificaten"], () =>
-          catText("hacking", "Ethical hacking is mijn favoriet! 😎 Ik heb:"),
-          { act: [{ t: "filter", v: "hacking", label: "Toon deze certificaten" }], next: ["Wat is ethical hacking?", "Wat is een pentest?", "Hoe word ik ethical hacker?"] }
+        E(
+          "cat-hacking",
+          [
+            "hack",
+            "hacken",
+            "hacker",
+            "hacking",
+            "kali",
+            "hackers",
+            "cpeh",
+            "ethical hacking certificaten",
+          ],
+          () =>
+            catText("hacking", "Ethical hacking is mijn favoriet! 😎 Ik heb:"),
+          {
+            act: [
+              { t: "filter", v: "hacking", label: "Toon deze certificaten" },
+            ],
+            next: [
+              "Wat is ethical hacking?",
+              "Wat is een pentest?",
+              "Hoe word ik ethical hacker?",
+            ],
+          },
         );
-        E("cat-security", ["security", "beveiliging", "beveiligen", "cybersecurity", "awareness", "informatiebeveiliging"], () =>
-          catText("security", "Op het gebied van security heb ik:"),
-          { act: [{ t: "filter", v: "security", label: "Toon deze certificaten" }], next: ["Wat is ISO 27001?", "Tips voor veilig internetten", "Wat is phishing?"] }
+        E(
+          "cat-security",
+          [
+            "security",
+            "beveiliging",
+            "beveiligen",
+            "cybersecurity",
+            "awareness",
+            "informatiebeveiliging",
+          ],
+          () => catText("security", "Op het gebied van security heb ik:"),
+          {
+            act: [
+              { t: "filter", v: "security", label: "Toon deze certificaten" },
+            ],
+            next: [
+              "Wat is ISO 27001?",
+              "Tips voor veilig internetten",
+              "Wat is phishing?",
+            ],
+          },
         );
-        E("cat-prog", ["programmeren", "programmeertaal", "programmeertalen", "coderen", "code", "developer", "website", "websites", "webdevelopment", "ontwikkelaar", "python", "javascript", "js"], () =>
-          catText("programmeren", "Programmeren doe ik graag. Mijn certificaten:"),
-          { act: [{ t: "filter", v: "programmeren", label: "Toon deze certificaten" }], next: ["Hoe leer ik programmeren?", "Wat is Python?", "Wat is JavaScript?"] }
+        E(
+          "cat-prog",
+          [
+            "programmeren",
+            "programmeertaal",
+            "programmeertalen",
+            "coderen",
+            "code",
+            "developer",
+            "website",
+            "websites",
+            "webdevelopment",
+            "ontwikkelaar",
+            "python",
+            "javascript",
+            "js",
+          ],
+          () =>
+            catText(
+              "programmeren",
+              "Programmeren doe ik graag. Mijn certificaten:",
+            ),
+          {
+            act: [
+              {
+                t: "filter",
+                v: "programmeren",
+                label: "Toon deze certificaten",
+              },
+            ],
+            next: [
+              "Hoe leer ik programmeren?",
+              "Wat is Python?",
+              "Wat is JavaScript?",
+            ],
+          },
         );
-        E("cat-data", ["data", "database", "ai", "chatgpt", "big data", "bigdata", "sql", "dataanalyse"], () =>
-          catText("data", "Voor data en AI heb ik:"),
-          { act: [{ t: "filter", v: "data", label: "Toon deze certificaten" }], next: ["Wat is SQL?", "Wat is big data?", "Wat is AI?"] }
+        E(
+          "cat-data",
+          [
+            "data",
+            "database",
+            "ai",
+            "chatgpt",
+            "big data",
+            "bigdata",
+            "sql",
+            "dataanalyse",
+          ],
+          () => catText("data", "Voor data en AI heb ik:"),
+          {
+            act: [{ t: "filter", v: "data", label: "Toon deze certificaten" }],
+            next: ["Wat is SQL?", "Wat is big data?", "Wat is AI?"],
+          },
         );
-        E("cat-basis", ["basiskennis", "basis it", "ict basis", "projectmatig", "projectmatig werken"], () =>
-          catText("basis", "Voor de ICT-basis heb ik:"),
-          { act: [{ t: "filter", v: "basis", label: "Toon deze certificaten" }] }
+        E(
+          "cat-basis",
+          [
+            "basiskennis",
+            "basis it",
+            "ict basis",
+            "projectmatig",
+            "projectmatig werken",
+          ],
+          () => catText("basis", "Voor de ICT-basis heb ik:"),
+          {
+            act: [{ t: "filter", v: "basis", label: "Toon deze certificaten" }],
+          },
         );
-        E("itmg", ["itmg"], () => {
-          const n = certs.filter((c) => c.org === "ITMG").length;
-          return "Bij **ITMG** heb ik **" + n + " certificaten** behaald; de meeste van mijn opleidingen komen daar vandaan.";
-        }, { act: [showAll] });
-        E("mile2", ["mile2", "mile 2"], () =>
-          "Bij **Mile2** heb ik behaald:\n" + certs.filter((c) => c.org === "Mile2").map((c) => "- " + c.title).join("\n")
+        E(
+          "itmg",
+          ["itmg"],
+          () => {
+            const n = certs.filter((c) => c.org === "ITMG").length;
+            return (
+              "Bij **ITMG** heb ik **" +
+              n +
+              " certificaten** behaald; de meeste van mijn opleidingen komen daar vandaan."
+            );
+          },
+          { act: [showAll] },
         );
-        E("novi", ["novi", "hogeschool novi", "hoge school novi"], () =>
-          "Bij **Hoge school Novi** heb ik de cursus **Introductie Hacking** gevolgd."
+        E(
+          "mile2",
+          ["mile2", "mile 2"],
+          () =>
+            "Bij **Mile2** heb ik behaald:\n" +
+            certs
+              .filter((c) => c.org === "Mile2")
+              .map((c) => "- " + c.title)
+              .join("\n"),
+        );
+        E(
+          "novi",
+          ["novi", "hogeschool novi", "hoge school novi"],
+          () =>
+            "Bij **Hoge school Novi** heb ik de cursus **Introductie Hacking** gevolgd.",
         );
 
         /* --- Tips & advies --- */
-        E("career-hacker", ["ethical hacker worden", "hacker worden", "leren hacken", "beginnen met hacken", "hoe word ik ethical hacker", "hoe begin ik met hacken", "start met hacking", "carriere cybersecurity", "cybersecurity worden", "werken in cybersecurity"], () =>
-          "Zo begin je met **ethical hacking**:\n- Leer de **basis**: netwerken (IP, DNS, poorten), Linux en een beetje programmeren (Python)\n- Oefen **legaal**: in een eigen lab of op oefenplatforms zoals TryHackMe, Hack The Box of OverTheWire\n- Volg een opleiding of certificering (bijvoorbeeld CEH, CompTIA Security+ of later OSCP)\n- Hack **alleen met schriftelijke toestemming**. Zonder toestemming is het strafbaar.",
-          { w: 1.3, next: ["Welke certificaten raad je aan?", "Hoe leer ik programmeren?", "Wat is een pentest?"] }
+        E(
+          "career-hacker",
+          [
+            "ethical hacker worden",
+            "hacker worden",
+            "leren hacken",
+            "beginnen met hacken",
+            "hoe word ik ethical hacker",
+            "hoe begin ik met hacken",
+            "start met hacking",
+            "carriere cybersecurity",
+            "cybersecurity worden",
+            "werken in cybersecurity",
+          ],
+          () =>
+            "Zo begin je met **ethical hacking**:\n- Leer de **basis**: netwerken (IP, DNS, poorten), Linux en een beetje programmeren (Python)\n- Oefen **legaal**: in een eigen lab of op oefenplatforms zoals TryHackMe, Hack The Box of OverTheWire\n- Volg een opleiding of certificering (bijvoorbeeld CEH, CompTIA Security+ of later OSCP)\n- Hack **alleen met schriftelijke toestemming**. Zonder toestemming is het strafbaar.",
+          {
+            w: 1.3,
+            next: [
+              "Welke certificaten raad je aan?",
+              "Hoe leer ik programmeren?",
+              "Wat is een pentest?",
+            ],
+          },
         );
-        E("learn-prog", ["python leren", "leren programmeren", "beginnen met programmeren", "hoe leer ik python", "programmeren leren", "leren coderen", "hoe begin ik met programmeren", "beginnen met python", "hoe leer ik programmeren", "website maken leren", "hoe maak ik een website"], () =>
-          "Tips om te leren programmeren:\n- Kies **één taal** om mee te starten (Python of JavaScript)\n- Maak **kleine projecten**: een rekenmachine, een to-do-lijst, een quiz\n- Oefen elke dag een beetje, liever 20 minuten dagelijks dan 5 uur per maand\n- Lees andermans code en zoek bij problemen eerst zelf, dan pas hulp\n- Wil je een website maken? Leer eerst **HTML, CSS en JavaScript**.",
-          { w: 1.3, next: ["Wat is Python?", "Wat is JavaScript?", "Wat is HTML?"] }
+        E(
+          "learn-prog",
+          [
+            "python leren",
+            "leren programmeren",
+            "beginnen met programmeren",
+            "hoe leer ik python",
+            "programmeren leren",
+            "leren coderen",
+            "hoe begin ik met programmeren",
+            "beginnen met python",
+            "hoe leer ik programmeren",
+            "website maken leren",
+            "hoe maak ik een website",
+          ],
+          () =>
+            "Tips om te leren programmeren:\n- Kies **één taal** om mee te starten (Python of JavaScript)\n- Maak **kleine projecten**: een rekenmachine, een to-do-lijst, een quiz\n- Oefen elke dag een beetje, liever 20 minuten dagelijks dan 5 uur per maand\n- Lees andermans code en zoek bij problemen eerst zelf, dan pas hulp\n- Wil je een website maken? Leer eerst **HTML, CSS en JavaScript**.",
+          {
+            w: 1.3,
+            next: ["Wat is Python?", "Wat is JavaScript?", "Wat is HTML?"],
+          },
         );
-        E("which-certs", ["welk certificaat", "welke certificering", "welke certificeringen", "welke certificaten raad je aan", "security plus", "oscp", "ceh", "comptia", "welke opleiding cybersecurity", "opleiding cybersecurity"], () =>
-          "Bekende certificeringen in de security-wereld zijn bijvoorbeeld:\n- **CompTIA Security+**: brede basis\n- **CEH** (Certified Ethical Hacker): ethisch hacken\n- **OSCP**: praktisch en pittig, voor gevorderde pentesters\n- **ISO 27001** (Lead Implementer/Auditor): voor beveiligingsmanagement\nBegin met de basis en kies daarna op basis van je doel.",
-          { next: ["Hoe word ik ethical hacker?", "Wat is ISO 27001?"] }
+        E(
+          "which-certs",
+          [
+            "welk certificaat",
+            "welke certificering",
+            "welke certificeringen",
+            "welke certificaten raad je aan",
+            "security plus",
+            "oscp",
+            "ceh",
+            "comptia",
+            "welke opleiding cybersecurity",
+            "opleiding cybersecurity",
+          ],
+          () =>
+            "Bekende certificeringen in de security-wereld zijn bijvoorbeeld:\n- **CompTIA Security+**: brede basis\n- **CEH** (Certified Ethical Hacker): ethisch hacken\n- **OSCP**: praktisch en pittig, voor gevorderde pentesters\n- **ISO 27001** (Lead Implementer/Auditor): voor beveiligingsmanagement\nBegin met de basis en kies daarna op basis van je doel.",
+          { next: ["Hoe word ik ethical hacker?", "Wat is ISO 27001?"] },
         );
-        E("sec-tips", ["tips veilig internetten", "veilig internetten", "veilig surfen", "online veiligheid", "hoe bescherm ik mezelf", "beveiligingstips", "cybersecurity tips", "tips beveiliging", "veilig online"], () =>
-          "Mijn tips voor veilig internetten:\n- Gebruik **unieke, lange wachtwoorden** en een wachtwoordmanager\n- Zet **tweestapsverificatie** aan\n- Houd je apparaten en apps **up-to-date**\n- Wees alert op **phishing**: klik niet op verdachte links\n- Maak regelmatig een **back-up**\n- Wees voorzichtig met openbare wifi (gebruik eventueel een VPN)",
-          { w: 1.3, next: ["Wat is phishing?", "Hoe maak ik een sterk wachtwoord?", "Wat is 2FA?"] }
+        E(
+          "sec-tips",
+          [
+            "tips veilig internetten",
+            "veilig internetten",
+            "veilig surfen",
+            "online veiligheid",
+            "hoe bescherm ik mezelf",
+            "beveiligingstips",
+            "cybersecurity tips",
+            "tips beveiliging",
+            "veilig online",
+          ],
+          () =>
+            "Mijn tips voor veilig internetten:\n- Gebruik **unieke, lange wachtwoorden** en een wachtwoordmanager\n- Zet **tweestapsverificatie** aan\n- Houd je apparaten en apps **up-to-date**\n- Wees alert op **phishing**: klik niet op verdachte links\n- Maak regelmatig een **back-up**\n- Wees voorzichtig met openbare wifi (gebruik eventueel een VPN)",
+          {
+            w: 1.3,
+            next: [
+              "Wat is phishing?",
+              "Hoe maak ik een sterk wachtwoord?",
+              "Wat is 2FA?",
+            ],
+          },
         );
-        E("password", ["sterk wachtwoord", "wachtwoord tips", "veilig wachtwoord", "wachtwoord maken", "goed wachtwoord", "hoe maak ik een sterk wachtwoord", "wachtwoordzin", "passphrase"], () =>
-          "Een sterk wachtwoord is **lang en uniek**:\n- Liever een **wachtwoordzin** van 4+ willekeurige woorden dan een korte ingewikkelde reeks\n- Gebruik nooit hetzelfde wachtwoord op twee sites\n- Laat een **wachtwoordmanager** ze onthouden\n- Zet overal waar het kan **2FA** aan",
-          { w: 1.3, next: ["Wat is een wachtwoordmanager?", "Wat is 2FA?", "Wat is brute force?"] }
+        E(
+          "password",
+          [
+            "sterk wachtwoord",
+            "wachtwoord tips",
+            "veilig wachtwoord",
+            "wachtwoord maken",
+            "goed wachtwoord",
+            "hoe maak ik een sterk wachtwoord",
+            "wachtwoordzin",
+            "passphrase",
+          ],
+          () =>
+            "Een sterk wachtwoord is **lang en uniek**:\n- Liever een **wachtwoordzin** van 4+ willekeurige woorden dan een korte ingewikkelde reeks\n- Gebruik nooit hetzelfde wachtwoord op twee sites\n- Laat een **wachtwoordmanager** ze onthouden\n- Zet overal waar het kan **2FA** aan",
+          {
+            w: 1.3,
+            next: [
+              "Wat is een wachtwoordmanager?",
+              "Wat is 2FA?",
+              "Wat is brute force?",
+            ],
+          },
         );
 
         /* --- Account (login/registreren) --- */
-        E("account", ["account", "inloggen", "login", "log in", "registreren", "aanmelden", "account maken", "nieuw account", "wachtwoord vergeten", "uitloggen"], () =>
-          "Rechtsboven op de pagina vind je een **account-knop**. Daarmee kun je inloggen of een demo-account registreren. Let op: dit is een **front-end demo** zonder echte server, gemaakt om te laten zien hoe wachtwoorden met **hashing en een salt** veilig worden opgeslagen (vergelijkbaar met het `hash_demo.py`-voorbeeld bovenaan deze pagina). Gebruik dus nooit een echt wachtwoord.",
-          { act: [toAccount], next: ["Wat is een hash?", "Hoe maak ik een sterk wachtwoord?"], w: 1.4 }
+        E(
+          "account",
+          [
+            "account",
+            "inloggen",
+            "login",
+            "log in",
+            "registreren",
+            "aanmelden",
+            "account maken",
+            "nieuw account",
+            "wachtwoord vergeten",
+            "uitloggen",
+          ],
+          () =>
+            "Rechtsboven op de pagina vind je een **account-knop**. Daarmee kun je inloggen of een demo-account registreren. Let op: dit is een **front-end demo** zonder echte server, gemaakt om te laten zien hoe wachtwoorden met **hashing en een salt** veilig worden opgeslagen (vergelijkbaar met het `hash_demo.py`-voorbeeld bovenaan deze pagina). Gebruik dus nooit een echt wachtwoord.",
+          {
+            act: [toAccount],
+            next: ["Wat is een hash?", "Hoe maak ik een sterk wachtwoord?"],
+            w: 1.4,
+          },
         );
 
         /* --- VMware-lab & eigen site testen --- */
-        E("vmware-lab", ["vmware", "eigen lab", "hacking lab", "lab opzetten", "oefenlab", "thuislab", "virtuele machine", "virtuele machines", "homelab", "kali installeren", "pentest lab"], () =>
-          "Zo bouw je een eigen **VMware-lab**:\n- Installeer **VMware Workstation Player/Pro** (of Fusion op Mac)\n- Maak een **Kali Linux**-VM: je 'aanvaller'\n- Zet een **doelwit-VM** neer, bijv. Metasploitable of DVWA\n- Koppel beide VM's aan een **Host-only/Internal** netwerk, nooit Bridged, zodat je lab volledig afgeschermd is\n- Maak een **snapshot** zodra alles werkt\n\nHieronder op de pagina staat een hele sectie met platforms, tools en een stappenplan.",
-          { w: 1.4, act: [toLearn], next: ["Mijn eigen website scannen", "Welke tools gebruik je?", "Hoe word ik ethical hacker?"] }
+        E(
+          "vmware-lab",
+          [
+            "vmware",
+            "eigen lab",
+            "hacking lab",
+            "lab opzetten",
+            "oefenlab",
+            "thuislab",
+            "virtuele machine",
+            "virtuele machines",
+            "homelab",
+            "kali installeren",
+            "pentest lab",
+          ],
+          () =>
+            "Zo bouw je een eigen **VMware-lab**:\n- Installeer **VMware Workstation Player/Pro** (of Fusion op Mac)\n- Maak een **Kali Linux**-VM: je 'aanvaller'\n- Zet een **doelwit-VM** neer, bijv. Metasploitable of DVWA\n- Koppel beide VM's aan een **Host-only/Internal** netwerk, nooit Bridged, zodat je lab volledig afgeschermd is\n- Maak een **snapshot** zodra alles werkt\n\nHieronder op de pagina staat een hele sectie met platforms, tools en een stappenplan.",
+          {
+            w: 1.4,
+            act: [toLearn],
+            next: [
+              "Mijn eigen website scannen",
+              "Welke tools gebruik je?",
+              "Hoe word ik ethical hacker?",
+            ],
+          },
         );
-        E("scan-eigen-site", ["eigen website scannen", "mijn website testen", "site scannen", "website testen", "eigen site hacken", "pentest eigen website", "mijn eigen website scannen"], () =>
-          "Wil je je **eigen website** veilig scannen en testen? Doe dat in je VMware-lab:\n- Draai een **lokale kopie** van de site (Docker/XAMPP), niet de live versie\n- Host die alleen binnen je **geïsoleerde netwerk**\n- Begin met `nmap -sV -p- <lokaal-ip>`\n- Scan globaal met **Nikto**, test gericht met **Burp Suite** of **OWASP ZAP**\n- Wil je de live site testen? Check eerst de voorwaarden van je hostingpartij\n\nHet volledige stappenplan staat verderop op de pagina.",
-          { w: 1.4, act: [toLearn], next: ["VMware-lab opzetten", "Wat is Nikto?", "Wat is Burp Suite?"] }
+        E(
+          "scan-eigen-site",
+          [
+            "eigen website scannen",
+            "mijn website testen",
+            "site scannen",
+            "website testen",
+            "eigen site hacken",
+            "pentest eigen website",
+            "mijn eigen website scannen",
+          ],
+          () =>
+            "Wil je je **eigen website** veilig scannen en testen? Doe dat in je VMware-lab:\n- Draai een **lokale kopie** van de site (Docker/XAMPP), niet de live versie\n- Host die alleen binnen je **geïsoleerde netwerk**\n- Begin met `nmap -sV -p- <lokaal-ip>`\n- Scan globaal met **Nikto**, test gericht met **Burp Suite** of **OWASP ZAP**\n- Wil je de live site testen? Check eerst de voorwaarden van je hostingpartij\n\nHet volledige stappenplan staat verderop op de pagina.",
+          {
+            w: 1.4,
+            act: [toLearn],
+            next: [
+              "VMware-lab opzetten",
+              "Wat is Nikto?",
+              "Wat is Burp Suite?",
+            ],
+          },
         );
-        E("learn-section", ["leermateriaal", "oefenplatform", "oefenplatformen", "waar kan ik oefenen", "ctf platform", "leren hacken waar", "bronnen hacking", "resources hacking", "gratis hacken leren"], () =>
-          "Ik heb een hele sectie verderop op de pagina met **oefenplatforms, kwetsbare oefen-apps, tools, boeken, video's en certificeringen**, plus een stappenplan voor je eigen VMware-lab.",
-          { act: [toLearn], next: ["VMware-lab opzetten", "Hoe word ik ethical hacker?"] }
+        E(
+          "learn-section",
+          [
+            "leermateriaal",
+            "oefenplatform",
+            "oefenplatformen",
+            "waar kan ik oefenen",
+            "ctf platform",
+            "leren hacken waar",
+            "bronnen hacking",
+            "resources hacking",
+            "gratis hacken leren",
+          ],
+          () =>
+            "Ik heb een hele sectie verderop op de pagina met **oefenplatforms, kwetsbare oefen-apps, tools, boeken, video's en certificeringen**, plus een stappenplan voor je eigen VMware-lab.",
+          {
+            act: [toLearn],
+            next: ["VMware-lab opzetten", "Hoe word ik ethical hacker?"],
+          },
         );
 
         /* --- Cybersecurity- en IT-begrippenlijst --- */
         const GLOSS = [
-          ["Ethisch hacken", ["ethical hacking", "ethical hacker", "ethisch hacken", "white hat", "witte hoed", "hacken", "hacking", "hacker"], "Ethisch hacken betekent dat je **met toestemming** systemen aanvalt om zwakke plekken te vinden, zodat ze hersteld kunnen worden voordat criminelen ze misbruiken."],
-          ["Pentest", ["pentest", "pentesten", "penetratietest", "penetration test", "pentester"], "Een **penetratietest** (pentest) is een gecontroleerde, geautoriseerde 'aanval' op een systeem, netwerk of applicatie. Het resultaat is een rapport met gevonden kwetsbaarheden en adviezen om ze op te lossen."],
-          ["Phishing", ["phishing", "phishingmail", "nepmail", "phishing mail", "oplichting mail"], "**Phishing** is oplichting via nepmails, sms'jes of websites die lijken op een echte organisatie, om inloggegevens of geld te stelen. Let op de afzender, spelfouten, urgentie en verdachte links. Klik niet, maar ga zelf naar de officiële site."],
-          ["Ransomware", ["ransomware", "gijzelsoftware", "losgeld"], "**Ransomware** is malware die je bestanden versleutelt en losgeld eist. Je beschermt je met (offline) back-ups, updates en alertheid bij verdachte bijlagen."],
-          ["Malware", ["malware", "kwaadaardige software", "schadelijke software"], "**Malware** is een verzamelnaam voor kwaadaardige software, zoals virussen, trojans, spyware en ransomware."],
-          ["Computervirus", ["virus", "computervirus"], "Een **computervirus** is malware die zichzelf kopieert en verspreidt door zich aan andere bestanden of programma's te hechten."],
-          ["Trojan", ["trojan", "trojaans paard", "trojan horse"], "Een **trojan** lijkt een nuttig programma, maar bevat verborgen schadelijke functies."],
-          ["Spyware", ["spyware", "keylogger"], "**Spyware** verzamelt stiekem informatie over jou, bijvoorbeeld via een *keylogger* die toetsaanslagen opneemt."],
-          ["Firewall", ["firewall", "vuurmuur"], "Een **firewall** is een digitale poortwachter die netwerkverkeer filtert op basis van regels en onveilige verbindingen blokkeert."],
-          ["VPN", ["vpn", "virtual private network"], "Een **VPN** maakt een versleutelde verbinding (tunnel) tussen jouw apparaat en een server. Handig op openbare wifi, maar het maakt je niet volledig anoniem."],
-          ["2FA / MFA", ["2fa", "mfa", "tweestapsverificatie", "twee factor", "multi factor", "tweefactorauthenticatie"], "**Tweestapsverificatie** (2FA/MFA) vraagt naast je wachtwoord om een tweede bewijs, zoals een code uit een app. Zelfs bij een gelekt wachtwoord komt een aanvaller er dan niet zomaar in."],
-          ["Encryptie", ["encryptie", "versleuteling", "versleutelen", "encrypten", "encryption"], "**Encryptie** maakt gegevens onleesbaar voor iedereen zonder de juiste sleutel. Zo blijven berichten en bestanden vertrouwelijk."],
-          ["Hash", ["hash", "hashing", "hashen", "sha256", "sha 256"], "Een **hash** is een vingerafdruk van data die met een vaste formule wordt berekend en niet terug te draaien is. Wachtwoorden worden daarom als hash (met *salt*) opgeslagen. In het code-venster bovenaan zie je een SHA-256-voorbeeld."],
-          ["SQL-injectie", ["sql injectie", "sql injection", "sqli", "injectie"], "**SQL-injectie** is een aanval waarbij kwaadaardige SQL-code via invoervelden wordt meegestuurd. Je voorkomt het met **geparametriseerde queries** en het valideren van invoer."],
-          ["XSS", ["xss", "cross site scripting"], "**Cross-site scripting (XSS)** is een aanval waarbij kwaadaardige scripts in een webpagina worden geplaatst. Je voorkomt het door uitvoer te *escapen* en invoer te filteren (zie het filter.js-voorbeeld bovenaan)."],
-          ["DDoS", ["ddos", "dos aanval", "denial of service"], "Een **DDoS-aanval** overspoelt een dienst met verkeer vanaf heel veel apparaten, zodat die voor echte gebruikers onbereikbaar wordt."],
-          ["Brute force", ["brute force", "bruteforce"], "**Brute force** is alle mogelijke wachtwoorden of sleutels proberen. Lange, unieke wachtwoorden en een limiet op inlogpogingen maken dit onhaalbaar."],
-          ["Social engineering", ["social engineering", "sociale manipulatie"], "**Social engineering** is mensen manipuleren om informatie of toegang prijs te geven, in plaats van technisch in te breken. Phishing is het bekendste voorbeeld."],
-          ["Zero-day", ["zero day", "zeroday", "0day"], "Een **zero-day** is een kwetsbaarheid die nog niet bekend is bij de maker, dus er is nog geen patch."],
-          ["Botnet", ["botnet", "zombie netwerk"], "Een **botnet** is een netwerk van besmette apparaten dat door een aanvaller op afstand wordt aangestuurd, bijvoorbeeld voor DDoS-aanvallen."],
-          ["CIA-triade", ["cia triade", "cia triad", "vertrouwelijkheid", "integriteit", "triade"], "De **CIA-triade** vormt de basis van informatiebeveiliging: **Confidentiality** (vertrouwelijkheid), **Integrity** (integriteit) en **Availability** (beschikbaarheid)."],
-          ["ISO 27001", ["iso 27001", "iso27001", "27001", "iso"], "**ISO 27001** is de internationale norm voor **informatiebeveiliging**: een managementsysteem (ISMS) waarmee organisaties risico's in kaart brengen en beheersen. Ik heb hiervoor een certificaat behaald."],
-          ["AVG / GDPR", ["avg", "gdpr", "privacywet", "privacywetgeving"], "De **AVG** (GDPR) is de Europese privacywet. Organisaties moeten zorgvuldig omgaan met persoonsgegevens en datalekken melden."],
-          ["Wachtwoordmanager", ["wachtwoordmanager", "password manager", "wachtwoordkluis"], "Een **wachtwoordmanager** bewaart al je wachtwoorden versleuteld, genereert sterke exemplaren en vult ze veilig in."],
-          ["Antivirus", ["antivirus", "virusscanner", "virusscan"], "**Antivirussoftware** scant op bekende en verdachte malware en blokkeert die. Het is een goede laag, maar geen vervanging voor updates en alertheid."],
-          ["IP-adres", ["ip adres", "ip"], "Een **IP-adres** is het 'adres' van een apparaat in een netwerk, zodat gegevens de juiste bestemming bereiken (bijvoorbeeld 192.168.1.10)."],
-          ["DNS", ["dns", "domeinnaam systeem"], "**DNS** is het 'telefoonboek' van het internet: het vertaalt een naam zoals voorbeeld.nl naar een IP-adres."],
-          ["HTTPS", ["https", "ssl", "tls", "slotje"], "**HTTPS** versleutelt het verkeer tussen jouw browser en een website (via TLS, de opvolger van SSL). Het slotje in de adresbalk laat zien dat de verbinding versleuteld is."],
-          ["Poort", ["poort", "poorten", "port", "portscan", "portscanner"], "Een **poort** (port) is een 'deur' op een apparaat waarop een dienst luistert, zoals 80 (HTTP), 443 (HTTPS) of 22 (SSH). Een poortscan toont welke poorten open staan; gebruik dat alleen op systemen waar je toestemming voor hebt."],
-          ["Nmap", ["nmap"], "**Nmap** is een bekende netwerkscanner waarmee je ontdekt welke apparaten en poorten in een netwerk bereikbaar zijn. Gebruik het alleen op je eigen lab of met toestemming."],
-          ["Kali Linux", ["kali linux", "kali"], "**Kali Linux** is een Linux-distributie met veel tools voor beveiligingstests en pentesting, populair bij ethical hackers."],
-          ["Linux", ["linux", "ubuntu", "debian"], "**Linux** is een open-source besturingssysteem dat veel wordt gebruikt voor servers en in de security-wereld."],
-          ["API", ["api", "interface programmeren"], "Een **API** is een afgesproken 'stopcontact' waarmee programma's met elkaar praten en gegevens uitwisselen."],
-          ["JSON", ["json"], "**JSON** is een eenvoudig tekstformaat om gegevens te structureren, bijvoorbeeld `{ \"naam\": \"Leon\" }`. Veel gebruikt bij API's."],
-          ["HTML", ["html"], "**HTML** is de opmaaktaal die de structuur van een webpagina bepaalt: koppen, tekst, afbeeldingen en links."],
-          ["CSS", ["css", "stylesheet"], "**CSS** bepaalt hoe een webpagina eruitziet: kleuren, lettertypen, lay-out en animaties."],
-          ["JavaScript", ["javascript", "js"], "**JavaScript** is de programmeertaal van het web: het maakt pagina's interactief. Deze pagina en ikzelf zijn ermee gemaakt. Ik heb het certificaat **JavaScript Developer**."],
-          ["Python", ["python"], "**Python** is een leesbare, veelzijdige programmeertaal, populair voor automatisering, data en security-scripts. Ik heb de certificaten **Python Developer ITMG** en **Scholingstraject Python Developer**."],
-          ["SQL", ["sql", "query", "queries"], "**SQL** is de taal om gegevens in een database op te vragen en te wijzigen, bijvoorbeeld met `SELECT * FROM klanten;`. Ik heb een SQL-certificaat."],
-          ["Big data", ["big data", "bigdata"], "**Big data** zijn enorme, snel groeiende hoeveelheden gegevens die je met speciale technieken analyseert om patronen te vinden."],
-          ["AI", ["ai", "kunstmatige intelligentie", "artificial intelligence"], "**AI** (kunstmatige intelligentie) zijn systemen die taken uitvoeren waarvoor normaal menselijke intelligentie nodig is, zoals taal begrijpen of beelden herkennen."],
-          ["Machine learning", ["machine learning", "machinelearning", "leren van data"], "**Machine learning** is een tak van AI waarbij computers patronen leren uit data, in plaats van dat elke regel handmatig wordt geprogrammeerd."],
-          ["ChatGPT / LLM", ["llm", "chatgpt", "taalmodel", "groot taalmodel"], "Een **LLM** (groot taalmodel), zoals achter ChatGPT, is een AI die op enorme hoeveelheden tekst is getraind en daardoor tekst kan begrijpen en schrijven. Ik heb het certificaat **AI en ChatGPT**."],
-          ["Cloud", ["cloud", "clouddienst"], "**De cloud** betekent dat je servers, opslag en software via internet gebruikt in plaats van op je eigen computer, bijvoorbeeld bij AWS, Azure of Google Cloud."],
-          ["Back-up", ["back up", "backup", "reservekopie"], "Een **back-up** is een reservekopie van je gegevens. Handige vuistregel: **3-2-1**, dus 3 kopieën, op 2 soorten opslag, waarvan 1 op een andere plek."],
-          ["Patch", ["patch", "patchen", "patchmanagement", "beveiligingsupdate"], "Een **patch** is een update die een fout of kwetsbaarheid in software repareert. Snel patchen is een van de beste beschermingen."],
-          ["Kwetsbaarheid", ["kwetsbaarheid", "vulnerability", "zwakke plek"], "Een **kwetsbaarheid** is een zwakke plek in software, hardware of processen die misbruikt kan worden."],
-          ["Exploit", ["exploit", "exploiteren"], "Een **exploit** is code of een techniek die een kwetsbaarheid uitbuit. Ethische hackers gebruiken ze om aan te tonen dat een zwakke plek echt een risico is."],
-          ["SIEM", ["siem", "security monitoring"], "Een **SIEM** verzamelt en analyseert logbestanden uit veel systemen, zodat een security-team verdachte activiteit snel opmerkt."],
-          ["Red team / blue team", ["red team", "blue team", "purple team", "redteam", "blueteam"], "Het **red team** speelt de aanvaller, het **blue team** verdedigt. Samen (*purple team*) leren ze van elkaar."],
-          ["CTF", ["ctf", "capture the flag"], "Een **CTF** (Capture The Flag) is een securitywedstrijd waarin je puzzels en opdrachten oplost om 'vlaggen' te vinden. Ideaal om legaal te oefenen."],
-          ["OWASP", ["owasp", "owasp top 10"], "**OWASP** is een non-profit die webbeveiliging verbetert. De **OWASP Top 10** is een bekende lijst van de grootste risico's voor webapplicaties."],
-          ["Man-in-the-middle", ["man in the middle", "mitm", "afluisteren"], "Bij een **man-in-the-middle**-aanval zit een aanvaller ongemerkt tussen twee partijen en kan hij het verkeer meelezen of aanpassen. HTTPS en VPN beschermen daartegen."],
-          ["Honeypot", ["honeypot", "lokpot"], "Een **honeypot** is een bewust kwetsbaar lokaas-systeem dat aanvallers aantrekt, zodat je hun technieken kunt bestuderen."],
-          ["Cookie", ["cookie", "koekje"], "Een **cookie** is een klein bestandje dat een website in je browser bewaart, bijvoorbeeld om je ingelogd te houden of je voorkeuren te onthouden."],
-          ["Sandbox", ["sandbox", "zandbak"], "Een **sandbox** is een afgeschermde omgeving waarin je verdachte software veilig kunt uitvoeren zonder je echte systeem te riskeren."],
-          ["Zero trust", ["zero trust", "zerotrust"], "**Zero trust** betekent: vertrouw niemand automatisch, ook niet binnen het eigen netwerk. Elke toegang wordt steeds gecontroleerd."],
-          ["Burp Suite", ["burp suite", "burpsuite", "burp"], "**Burp Suite** is een populaire tool om webapplicaties te testen: je kunt verkeer tussen browser en server onderscheppen, aanpassen en herhalen om kwetsbaarheden te vinden. De gratis Community-editie is een goede start."],
-          ["OWASP ZAP", ["owasp zap", "zap scanner", "zap"], "**OWASP ZAP** is een gratis, open-source alternatief voor Burp Suite om webapplicaties te scannen op kwetsbaarheden."],
-          ["Nikto", ["nikto"], "**Nikto** is een tool die snel een webserver scant op bekende, veelvoorkomende problemen zoals verouderde software of gevaarlijke bestanden."],
-          ["Gobuster", ["gobuster", "dirbuster", "ffuf", "dirb"], "**Gobuster** (of ffuf/dirb) ontdekt verborgen mappen en bestanden op een webserver door veel namen snel achter elkaar te proberen."],
-          ["TryHackMe", ["tryhackme", "try hack me", "thm"], "**TryHackMe** is een laagdrempelig oefenplatform met stap-voor-stap 'kamers' om hacking-vaardigheden te leren, ideaal voor beginners."],
-          ["Hack The Box", ["hack the box", "hackthebox", "htb"], "**Hack The Box** is een oefenplatform met realistische, kwetsbare machines; iets pittiger dan TryHackMe."],
-          ["DVWA", ["dvwa", "damn vulnerable web app"], "**DVWA** (Damn Vulnerable Web App) is een opzettelijk kwetsbare webapplicatie om webaanvallen zoals SQL-injectie en XSS veilig te oefenen."],
-          ["Metasploitable", ["metasploitable"], "**Metasploitable** is een bewust kwetsbare Linux-server, gemaakt om mee te oefenen met scanning en exploitatie in een eigen lab."],
-          ["VulnHub", ["vulnhub"], "**VulnHub** biedt gratis, downloadbare kwetsbare virtuele machines om in je eigen lab te oefenen."],
-          ["OverTheWire", ["overthewire", "over the wire", "bandit"], "**OverTheWire** biedt 'wargames' zoals Bandit, waarmee je stap voor stap Linux- en securitybasis leert via de terminal."],
-          ["picoCTF", ["picoctf", "pico ctf"], "**picoCTF** is een gratis, laagdrempelige Capture The Flag-competitie van Carnegie Mellon University, goed voor beginners."],
-          ["Root-Me", ["root me", "rootme"], "**Root-Me** is een oefenplatform met honderden uitdagingen, verdeeld over veel securitycategorieën."],
-          ["eJPT", ["ejpt"], "**eJPT** is een praktijkgerichte instapcertificering in penetratietesten van INE, goed als eerste stap na de basis."],
-          ["OSCP", ["oscp"], "**OSCP** (Offensive Security Certified Professional) is een pittige, praktijkgerichte certificering voor pentesters en geldt als een van de meest gerespecteerde in het vak."],
-          ["CEH", ["ceh", "certified ethical hacker"], "**CEH** (Certified Ethical Hacker) is een brede, bekende certificering in ethisch hacken, vooral theoretisch van opzet."],
+          [
+            "Ethisch hacken",
+            [
+              "ethical hacking",
+              "ethical hacker",
+              "ethisch hacken",
+              "white hat",
+              "witte hoed",
+              "hacken",
+              "hacking",
+              "hacker",
+            ],
+            "Ethisch hacken betekent dat je **met toestemming** systemen aanvalt om zwakke plekken te vinden, zodat ze hersteld kunnen worden voordat criminelen ze misbruiken.",
+          ],
+          [
+            "Pentest",
+            [
+              "pentest",
+              "pentesten",
+              "penetratietest",
+              "penetration test",
+              "pentester",
+            ],
+            "Een **penetratietest** (pentest) is een gecontroleerde, geautoriseerde 'aanval' op een systeem, netwerk of applicatie. Het resultaat is een rapport met gevonden kwetsbaarheden en adviezen om ze op te lossen.",
+          ],
+          [
+            "Phishing",
+            [
+              "phishing",
+              "phishingmail",
+              "nepmail",
+              "phishing mail",
+              "oplichting mail",
+            ],
+            "**Phishing** is oplichting via nepmails, sms'jes of websites die lijken op een echte organisatie, om inloggegevens of geld te stelen. Let op de afzender, spelfouten, urgentie en verdachte links. Klik niet, maar ga zelf naar de officiële site.",
+          ],
+          [
+            "Ransomware",
+            ["ransomware", "gijzelsoftware", "losgeld"],
+            "**Ransomware** is malware die je bestanden versleutelt en losgeld eist. Je beschermt je met (offline) back-ups, updates en alertheid bij verdachte bijlagen.",
+          ],
+          [
+            "Malware",
+            ["malware", "kwaadaardige software", "schadelijke software"],
+            "**Malware** is een verzamelnaam voor kwaadaardige software, zoals virussen, trojans, spyware en ransomware.",
+          ],
+          [
+            "Computervirus",
+            ["virus", "computervirus"],
+            "Een **computervirus** is malware die zichzelf kopieert en verspreidt door zich aan andere bestanden of programma's te hechten.",
+          ],
+          [
+            "Trojan",
+            ["trojan", "trojaans paard", "trojan horse"],
+            "Een **trojan** lijkt een nuttig programma, maar bevat verborgen schadelijke functies.",
+          ],
+          [
+            "Spyware",
+            ["spyware", "keylogger"],
+            "**Spyware** verzamelt stiekem informatie over jou, bijvoorbeeld via een *keylogger* die toetsaanslagen opneemt.",
+          ],
+          [
+            "Firewall",
+            ["firewall", "vuurmuur"],
+            "Een **firewall** is een digitale poortwachter die netwerkverkeer filtert op basis van regels en onveilige verbindingen blokkeert.",
+          ],
+          [
+            "VPN",
+            ["vpn", "virtual private network"],
+            "Een **VPN** maakt een versleutelde verbinding (tunnel) tussen jouw apparaat en een server. Handig op openbare wifi, maar het maakt je niet volledig anoniem.",
+          ],
+          [
+            "2FA / MFA",
+            [
+              "2fa",
+              "mfa",
+              "tweestapsverificatie",
+              "twee factor",
+              "multi factor",
+              "tweefactorauthenticatie",
+            ],
+            "**Tweestapsverificatie** (2FA/MFA) vraagt naast je wachtwoord om een tweede bewijs, zoals een code uit een app. Zelfs bij een gelekt wachtwoord komt een aanvaller er dan niet zomaar in.",
+          ],
+          [
+            "Encryptie",
+            [
+              "encryptie",
+              "versleuteling",
+              "versleutelen",
+              "encrypten",
+              "encryption",
+            ],
+            "**Encryptie** maakt gegevens onleesbaar voor iedereen zonder de juiste sleutel. Zo blijven berichten en bestanden vertrouwelijk.",
+          ],
+          [
+            "Hash",
+            ["hash", "hashing", "hashen", "sha256", "sha 256"],
+            "Een **hash** is een vingerafdruk van data die met een vaste formule wordt berekend en niet terug te draaien is. Wachtwoorden worden daarom als hash (met *salt*) opgeslagen. In het code-venster bovenaan zie je een SHA-256-voorbeeld.",
+          ],
+          [
+            "SQL-injectie",
+            ["sql injectie", "sql injection", "sqli", "injectie"],
+            "**SQL-injectie** is een aanval waarbij kwaadaardige SQL-code via invoervelden wordt meegestuurd. Je voorkomt het met **geparametriseerde queries** en het valideren van invoer.",
+          ],
+          [
+            "XSS",
+            ["xss", "cross site scripting"],
+            "**Cross-site scripting (XSS)** is een aanval waarbij kwaadaardige scripts in een webpagina worden geplaatst. Je voorkomt het door uitvoer te *escapen* en invoer te filteren (zie het filter.js-voorbeeld bovenaan).",
+          ],
+          [
+            "DDoS",
+            ["ddos", "dos aanval", "denial of service"],
+            "Een **DDoS-aanval** overspoelt een dienst met verkeer vanaf heel veel apparaten, zodat die voor echte gebruikers onbereikbaar wordt.",
+          ],
+          [
+            "Brute force",
+            ["brute force", "bruteforce"],
+            "**Brute force** is alle mogelijke wachtwoorden of sleutels proberen. Lange, unieke wachtwoorden en een limiet op inlogpogingen maken dit onhaalbaar.",
+          ],
+          [
+            "Social engineering",
+            ["social engineering", "sociale manipulatie"],
+            "**Social engineering** is mensen manipuleren om informatie of toegang prijs te geven, in plaats van technisch in te breken. Phishing is het bekendste voorbeeld.",
+          ],
+          [
+            "Zero-day",
+            ["zero day", "zeroday", "0day"],
+            "Een **zero-day** is een kwetsbaarheid die nog niet bekend is bij de maker, dus er is nog geen patch.",
+          ],
+          [
+            "Botnet",
+            ["botnet", "zombie netwerk"],
+            "Een **botnet** is een netwerk van besmette apparaten dat door een aanvaller op afstand wordt aangestuurd, bijvoorbeeld voor DDoS-aanvallen.",
+          ],
+          [
+            "CIA-triade",
+            [
+              "cia triade",
+              "cia triad",
+              "vertrouwelijkheid",
+              "integriteit",
+              "triade",
+            ],
+            "De **CIA-triade** vormt de basis van informatiebeveiliging: **Confidentiality** (vertrouwelijkheid), **Integrity** (integriteit) en **Availability** (beschikbaarheid).",
+          ],
+          [
+            "ISO 27001",
+            ["iso 27001", "iso27001", "27001", "iso"],
+            "**ISO 27001** is de internationale norm voor **informatiebeveiliging**: een managementsysteem (ISMS) waarmee organisaties risico's in kaart brengen en beheersen. Ik heb hiervoor een certificaat behaald.",
+          ],
+          [
+            "AVG / GDPR",
+            ["avg", "gdpr", "privacywet", "privacywetgeving"],
+            "De **AVG** (GDPR) is de Europese privacywet. Organisaties moeten zorgvuldig omgaan met persoonsgegevens en datalekken melden.",
+          ],
+          [
+            "Wachtwoordmanager",
+            ["wachtwoordmanager", "password manager", "wachtwoordkluis"],
+            "Een **wachtwoordmanager** bewaart al je wachtwoorden versleuteld, genereert sterke exemplaren en vult ze veilig in.",
+          ],
+          [
+            "Antivirus",
+            ["antivirus", "virusscanner", "virusscan"],
+            "**Antivirussoftware** scant op bekende en verdachte malware en blokkeert die. Het is een goede laag, maar geen vervanging voor updates en alertheid.",
+          ],
+          [
+            "IP-adres",
+            ["ip adres", "ip"],
+            "Een **IP-adres** is het 'adres' van een apparaat in een netwerk, zodat gegevens de juiste bestemming bereiken (bijvoorbeeld 192.168.1.10).",
+          ],
+          [
+            "DNS",
+            ["dns", "domeinnaam systeem"],
+            "**DNS** is het 'telefoonboek' van het internet: het vertaalt een naam zoals voorbeeld.nl naar een IP-adres.",
+          ],
+          [
+            "HTTPS",
+            ["https", "ssl", "tls", "slotje"],
+            "**HTTPS** versleutelt het verkeer tussen jouw browser en een website (via TLS, de opvolger van SSL). Het slotje in de adresbalk laat zien dat de verbinding versleuteld is.",
+          ],
+          [
+            "Poort",
+            ["poort", "poorten", "port", "portscan", "portscanner"],
+            "Een **poort** (port) is een 'deur' op een apparaat waarop een dienst luistert, zoals 80 (HTTP), 443 (HTTPS) of 22 (SSH). Een poortscan toont welke poorten open staan; gebruik dat alleen op systemen waar je toestemming voor hebt.",
+          ],
+          [
+            "Nmap",
+            ["nmap"],
+            "**Nmap** is een bekende netwerkscanner waarmee je ontdekt welke apparaten en poorten in een netwerk bereikbaar zijn. Gebruik het alleen op je eigen lab of met toestemming.",
+          ],
+          [
+            "Kali Linux",
+            ["kali linux", "kali"],
+            "**Kali Linux** is een Linux-distributie met veel tools voor beveiligingstests en pentesting, populair bij ethical hackers.",
+          ],
+          [
+            "Linux",
+            ["linux", "ubuntu", "debian"],
+            "**Linux** is een open-source besturingssysteem dat veel wordt gebruikt voor servers en in de security-wereld.",
+          ],
+          [
+            "API",
+            ["api", "interface programmeren"],
+            "Een **API** is een afgesproken 'stopcontact' waarmee programma's met elkaar praten en gegevens uitwisselen.",
+          ],
+          [
+            "JSON",
+            ["json"],
+            '**JSON** is een eenvoudig tekstformaat om gegevens te structureren, bijvoorbeeld `{ "naam": "Leon" }`. Veel gebruikt bij API\'s.',
+          ],
+          [
+            "HTML",
+            ["html"],
+            "**HTML** is de opmaaktaal die de structuur van een webpagina bepaalt: koppen, tekst, afbeeldingen en links.",
+          ],
+          [
+            "CSS",
+            ["css", "stylesheet"],
+            "**CSS** bepaalt hoe een webpagina eruitziet: kleuren, lettertypen, lay-out en animaties.",
+          ],
+          [
+            "JavaScript",
+            ["javascript", "js"],
+            "**JavaScript** is de programmeertaal van het web: het maakt pagina's interactief. Deze pagina en ikzelf zijn ermee gemaakt. Ik heb het certificaat **JavaScript Developer**.",
+          ],
+          [
+            "Python",
+            ["python"],
+            "**Python** is een leesbare, veelzijdige programmeertaal, populair voor automatisering, data en security-scripts. Ik heb de certificaten **Python Developer ITMG** en **Scholingstraject Python Developer**.",
+          ],
+          [
+            "SQL",
+            ["sql", "query", "queries"],
+            "**SQL** is de taal om gegevens in een database op te vragen en te wijzigen, bijvoorbeeld met `SELECT * FROM klanten;`. Ik heb een SQL-certificaat.",
+          ],
+          [
+            "Big data",
+            ["big data", "bigdata"],
+            "**Big data** zijn enorme, snel groeiende hoeveelheden gegevens die je met speciale technieken analyseert om patronen te vinden.",
+          ],
+          [
+            "AI",
+            ["ai", "kunstmatige intelligentie", "artificial intelligence"],
+            "**AI** (kunstmatige intelligentie) zijn systemen die taken uitvoeren waarvoor normaal menselijke intelligentie nodig is, zoals taal begrijpen of beelden herkennen.",
+          ],
+          [
+            "Machine learning",
+            ["machine learning", "machinelearning", "leren van data"],
+            "**Machine learning** is een tak van AI waarbij computers patronen leren uit data, in plaats van dat elke regel handmatig wordt geprogrammeerd.",
+          ],
+          [
+            "ChatGPT / LLM",
+            ["llm", "chatgpt", "taalmodel", "groot taalmodel"],
+            "Een **LLM** (groot taalmodel), zoals achter ChatGPT, is een AI die op enorme hoeveelheden tekst is getraind en daardoor tekst kan begrijpen en schrijven. Ik heb het certificaat **AI en ChatGPT**.",
+          ],
+          [
+            "Cloud",
+            ["cloud", "clouddienst"],
+            "**De cloud** betekent dat je servers, opslag en software via internet gebruikt in plaats van op je eigen computer, bijvoorbeeld bij AWS, Azure of Google Cloud.",
+          ],
+          [
+            "Back-up",
+            ["back up", "backup", "reservekopie"],
+            "Een **back-up** is een reservekopie van je gegevens. Handige vuistregel: **3-2-1**, dus 3 kopieën, op 2 soorten opslag, waarvan 1 op een andere plek.",
+          ],
+          [
+            "Patch",
+            ["patch", "patchen", "patchmanagement", "beveiligingsupdate"],
+            "Een **patch** is een update die een fout of kwetsbaarheid in software repareert. Snel patchen is een van de beste beschermingen.",
+          ],
+          [
+            "Kwetsbaarheid",
+            ["kwetsbaarheid", "vulnerability", "zwakke plek"],
+            "Een **kwetsbaarheid** is een zwakke plek in software, hardware of processen die misbruikt kan worden.",
+          ],
+          [
+            "Exploit",
+            ["exploit", "exploiteren"],
+            "Een **exploit** is code of een techniek die een kwetsbaarheid uitbuit. Ethische hackers gebruiken ze om aan te tonen dat een zwakke plek echt een risico is.",
+          ],
+          [
+            "SIEM",
+            ["siem", "security monitoring"],
+            "Een **SIEM** verzamelt en analyseert logbestanden uit veel systemen, zodat een security-team verdachte activiteit snel opmerkt.",
+          ],
+          [
+            "Red team / blue team",
+            ["red team", "blue team", "purple team", "redteam", "blueteam"],
+            "Het **red team** speelt de aanvaller, het **blue team** verdedigt. Samen (*purple team*) leren ze van elkaar.",
+          ],
+          [
+            "CTF",
+            ["ctf", "capture the flag"],
+            "Een **CTF** (Capture The Flag) is een securitywedstrijd waarin je puzzels en opdrachten oplost om 'vlaggen' te vinden. Ideaal om legaal te oefenen.",
+          ],
+          [
+            "OWASP",
+            ["owasp", "owasp top 10"],
+            "**OWASP** is een non-profit die webbeveiliging verbetert. De **OWASP Top 10** is een bekende lijst van de grootste risico's voor webapplicaties.",
+          ],
+          [
+            "Man-in-the-middle",
+            ["man in the middle", "mitm", "afluisteren"],
+            "Bij een **man-in-the-middle**-aanval zit een aanvaller ongemerkt tussen twee partijen en kan hij het verkeer meelezen of aanpassen. HTTPS en VPN beschermen daartegen.",
+          ],
+          [
+            "Honeypot",
+            ["honeypot", "lokpot"],
+            "Een **honeypot** is een bewust kwetsbaar lokaas-systeem dat aanvallers aantrekt, zodat je hun technieken kunt bestuderen.",
+          ],
+          [
+            "Cookie",
+            ["cookie", "koekje"],
+            "Een **cookie** is een klein bestandje dat een website in je browser bewaart, bijvoorbeeld om je ingelogd te houden of je voorkeuren te onthouden.",
+          ],
+          [
+            "Sandbox",
+            ["sandbox", "zandbak"],
+            "Een **sandbox** is een afgeschermde omgeving waarin je verdachte software veilig kunt uitvoeren zonder je echte systeem te riskeren.",
+          ],
+          [
+            "Zero trust",
+            ["zero trust", "zerotrust"],
+            "**Zero trust** betekent: vertrouw niemand automatisch, ook niet binnen het eigen netwerk. Elke toegang wordt steeds gecontroleerd.",
+          ],
+          [
+            "Burp Suite",
+            ["burp suite", "burpsuite", "burp"],
+            "**Burp Suite** is een populaire tool om webapplicaties te testen: je kunt verkeer tussen browser en server onderscheppen, aanpassen en herhalen om kwetsbaarheden te vinden. De gratis Community-editie is een goede start.",
+          ],
+          [
+            "OWASP ZAP",
+            ["owasp zap", "zap scanner", "zap"],
+            "**OWASP ZAP** is een gratis, open-source alternatief voor Burp Suite om webapplicaties te scannen op kwetsbaarheden.",
+          ],
+          [
+            "Nikto",
+            ["nikto"],
+            "**Nikto** is een tool die snel een webserver scant op bekende, veelvoorkomende problemen zoals verouderde software of gevaarlijke bestanden.",
+          ],
+          [
+            "Gobuster",
+            ["gobuster", "dirbuster", "ffuf", "dirb"],
+            "**Gobuster** (of ffuf/dirb) ontdekt verborgen mappen en bestanden op een webserver door veel namen snel achter elkaar te proberen.",
+          ],
+          [
+            "TryHackMe",
+            ["tryhackme", "try hack me", "thm"],
+            "**TryHackMe** is een laagdrempelig oefenplatform met stap-voor-stap 'kamers' om hacking-vaardigheden te leren, ideaal voor beginners.",
+          ],
+          [
+            "Hack The Box",
+            ["hack the box", "hackthebox", "htb"],
+            "**Hack The Box** is een oefenplatform met realistische, kwetsbare machines; iets pittiger dan TryHackMe.",
+          ],
+          [
+            "DVWA",
+            ["dvwa", "damn vulnerable web app"],
+            "**DVWA** (Damn Vulnerable Web App) is een opzettelijk kwetsbare webapplicatie om webaanvallen zoals SQL-injectie en XSS veilig te oefenen.",
+          ],
+          [
+            "Metasploitable",
+            ["metasploitable"],
+            "**Metasploitable** is een bewust kwetsbare Linux-server, gemaakt om mee te oefenen met scanning en exploitatie in een eigen lab.",
+          ],
+          [
+            "VulnHub",
+            ["vulnhub"],
+            "**VulnHub** biedt gratis, downloadbare kwetsbare virtuele machines om in je eigen lab te oefenen.",
+          ],
+          [
+            "OverTheWire",
+            ["overthewire", "over the wire", "bandit"],
+            "**OverTheWire** biedt 'wargames' zoals Bandit, waarmee je stap voor stap Linux- en securitybasis leert via de terminal.",
+          ],
+          [
+            "picoCTF",
+            ["picoctf", "pico ctf"],
+            "**picoCTF** is een gratis, laagdrempelige Capture The Flag-competitie van Carnegie Mellon University, goed voor beginners.",
+          ],
+          [
+            "Root-Me",
+            ["root me", "rootme"],
+            "**Root-Me** is een oefenplatform met honderden uitdagingen, verdeeld over veel securitycategorieën.",
+          ],
+          [
+            "eJPT",
+            ["ejpt"],
+            "**eJPT** is een praktijkgerichte instapcertificering in penetratietesten van INE, goed als eerste stap na de basis.",
+          ],
+          [
+            "OSCP",
+            ["oscp"],
+            "**OSCP** (Offensive Security Certified Professional) is een pittige, praktijkgerichte certificering voor pentesters en geldt als een van de meest gerespecteerde in het vak.",
+          ],
+          [
+            "CEH",
+            ["ceh", "certified ethical hacker"],
+            "**CEH** (Certified Ethical Hacker) is een brede, bekende certificering in ethisch hacken, vooral theoretisch van opzet.",
+          ],
         ];
         GLOSS.forEach((g, i) => E("gl-" + i, g[1], g[2], { gl: true, w: 1 }));
 
@@ -4164,7 +5678,7 @@
           E("custom-" + i, q.vragen || [], q.antwoord || "", {
             next: q.opvolg,
             w: 1.5,
-          })
+          }),
         );
 
         /* --- Grappen en weetjes --- */
@@ -4270,7 +5784,10 @@
             let s = 0;
             if ((" " + n + " ").includes(" " + tn + " ")) s = 5;
             else {
-              const tt = tn.split(" ").filter((w) => w.length > 3).map(stem);
+              const tt = tn
+                .split(" ")
+                .filter((w) => w.length > 3)
+                .map(stem);
               const hits = tt.filter((w) => stems.includes(w)).length;
               if (hits >= 2) s = 2 + hits;
             }
@@ -4283,8 +5800,21 @@
           let t = text.toLowerCase().trim();
           const pct = /(\d+(?:[.,]\d+)?)\s*%\s*van\s*(\d+(?:[.,]\d+)?)/.exec(t);
           if (pct) {
-            const v = (parseFloat(pct[1].replace(",", ".")) * parseFloat(pct[2].replace(",", "."))) / 100;
-            return { calc: true, text: "**" + pct[1] + "% van " + pct[2] + "** = **" + +v.toFixed(4) + "** 🧮" };
+            const v =
+              (parseFloat(pct[1].replace(",", ".")) *
+                parseFloat(pct[2].replace(",", "."))) /
+              100;
+            return {
+              calc: true,
+              text:
+                "**" +
+                pct[1] +
+                "% van " +
+                pct[2] +
+                "** = **" +
+                +v.toFixed(4) +
+                "** 🧮",
+            };
           }
           t = t
             .replace(/^(bereken|reken uit|wat is|hoeveel is|hoeveel)\s+/, "")
@@ -4294,11 +5824,29 @@
             .replace(/\^/g, "**")
             .replace(/,/g, ".")
             .trim();
-          if (!/\d/.test(t) || !/[+\-*/]/.test(t) || !/^[0-9+\-*/().\s]+$/.test(t) || t.length > 60) return null;
+          if (
+            !/\d/.test(t) ||
+            !/[+\-*/]/.test(t) ||
+            !/^[0-9+\-*/().\s]+$/.test(t) ||
+            t.length > 60
+          )
+            return null;
           try {
             const v = Function('"use strict";return (' + t + ")")();
-            if (typeof v !== "number" || !isFinite(v)) return { calc: true, text: "Hmm, die som kan ik niet uitrekenen. 🤔" };
-            return { calc: true, text: "**" + t.replace(/\*\*/g, "^").replace(/\*/g, "×") + "** = **" + +v.toFixed(6) + "** 🧮" };
+            if (typeof v !== "number" || !isFinite(v))
+              return {
+                calc: true,
+                text: "Hmm, die som kan ik niet uitrekenen. 🤔",
+              };
+            return {
+              calc: true,
+              text:
+                "**" +
+                t.replace(/\*\*/g, "^").replace(/\*/g, "×") +
+                "** = **" +
+                +v.toFixed(6) +
+                "** 🧮",
+            };
           } catch (e) {
             return null;
           }
@@ -4318,12 +5866,21 @@
             case "?":
               return R(helpText(), null, ["/faq", "/certificaten", "/grap"]);
             case "faq":
-              return R("Dit zijn veelgestelde vragen. Tik op een knop of stel je eigen vraag:", null, FAQ.slice(0, 6));
+              return R(
+                "Dit zijn veelgestelde vragen. Tik op een knop of stel je eigen vraag:",
+                null,
+                FAQ.slice(0, 6),
+              );
             case "certificaten":
             case "certs":
               return R(
-                "Mijn **" + certs.length + " certificaten**:\n" + certs.map((c) => "- " + c.title + " (" + c.org + ")").join("\n"),
-                [showAll]
+                "Mijn **" +
+                  certs.length +
+                  " certificaten**:\n" +
+                  certs
+                    .map((c) => "- " + c.title + " (" + c.org + ")")
+                    .join("\n"),
+                [showAll],
               );
             case "contact":
               return engine("contact");
@@ -4337,14 +5894,26 @@
               return engine("hoe laat is het");
             case "thema":
               setTheme(settings.theme === "dark" ? "light" : "dark");
-              return R("Thema gewisseld naar **" + (settings.theme === "dark" ? "donker" : "licht") + "** 🎨");
+              return R(
+                "Thema gewisseld naar **" +
+                  (settings.theme === "dark" ? "donker" : "licht") +
+                  "** 🎨",
+              );
             case "geluid":
               toggleSound();
-              return R("Geluid staat nu **" + (settings.sound ? "aan 🔔" : "uit 🔕") + "**.");
+              return R(
+                "Geluid staat nu **" +
+                  (settings.sound ? "aan 🔔" : "uit 🔕") +
+                  "**.",
+              );
             case "stem":
             case "voorlezen":
               toggleVoice();
-              return R("Voorlezen staat nu **" + (settings.voice ? "aan 🗣️" : "uit 🤫") + "**.");
+              return R(
+                "Voorlezen staat nu **" +
+                  (settings.voice ? "aan 🗣️" : "uit 🤫") +
+                  "**.",
+              );
             case "groot":
               setMax(!bot.classList.contains("max"));
               return { silent: true };
@@ -4360,7 +5929,11 @@
               s.value = arg;
               s.dispatchEvent(new Event("input", { bubbles: true }));
               $("filters").scrollIntoView({ behavior: "smooth" });
-              return R(arg ? "Ik heb de certificaten gefilterd op **" + arg + "**. 🔎" : "Zoekfilter gewist.");
+              return R(
+                arg
+                  ? "Ik heb de certificaten gefilterd op **" + arg + "**. 🔎"
+                  : "Zoekfilter gewist.",
+              );
             }
             default:
               return R("Dat commando ken ik niet. Typ `/help` voor de lijst.");
@@ -4375,7 +5948,10 @@
           const n = norm(text);
           if (!n) return { unknown: true };
           const stems = n.split(" ").filter(Boolean).map(stem);
-          const defIntent = /\b(wat is|wat zijn|wat betekent|wat doet|uitleg|leg uit|uitleggen|definitie|betekenis)\b/.test(n);
+          const defIntent =
+            /\b(wat is|wat zijn|wat betekent|wat doet|uitleg|leg uit|uitleggen|definitie|betekenis)\b/.test(
+              n,
+            );
           let best = null;
           let bs = 0;
           for (const e of ENTRIES) {
@@ -4390,13 +5966,21 @@
           const cm = matchCert(n, stems);
           if (cm && cm.score > bs && !defIntent) {
             return R(
-              "Ja, dat heb ik: **" + cm.cert.title + "**, behaald bij " + cm.cert.org + ".",
+              "Ja, dat heb ik: **" +
+                cm.cert.title +
+                "**, behaald bij " +
+                cm.cert.org +
+                ".",
               [{ t: "cert", v: cm.cert.i, label: "Bekijk certificaat" }],
-              ["Welke certificaten heb je?", "Contact"]
+              ["Welke certificaten heb je?", "Contact"],
             );
           }
           if (best && bs >= 2) {
-            return R(typeof best.a === "function" ? best.a() : best.a, best.act, best.next);
+            return R(
+              typeof best.a === "function" ? best.a() : best.a,
+              best.act,
+              best.next,
+            );
           }
           return { unknown: true };
         }
@@ -4405,7 +5989,7 @@
           return R(
             "Hmm, daar heb ik nog geen antwoord op. 🤔 Probeer het anders te vragen, of kies een van de onderwerpen hieronder. Voor persoonlijke vragen kun je me ook rechtstreeks bereiken.",
             [toContact],
-            shuffle(POOL).slice(0, 4)
+            shuffle(POOL).slice(0, 4),
           );
         }
 
@@ -4413,7 +5997,10 @@
         function factsText() {
           return [
             "Naam: Leon Keijzers. Portfolio ICT & Cybersecurity.",
-            "Certificaten (" + certs.length + "): " + certs.map((c) => c.title + " (" + c.org + ")").join("; "),
+            "Certificaten (" +
+              certs.length +
+              "): " +
+              certs.map((c) => c.title + " (" + c.org + ")").join("; "),
             PROFILE.werk && "Werk: " + PROFILE.werk,
             PROFILE.hobbys && "Hobby's: " + PROFILE.hobbys,
             PROFILE.woonplaats && "Woonplaats: " + PROFILE.woonplaats,
@@ -4474,7 +6061,9 @@
         function runAction(a) {
           if (bot.classList.contains("max") && a.t !== "send") setMax(false);
           if (a.t === "filter") {
-            const chip = document.querySelector('#chips .chip[data-cat="' + a.v + '"]');
+            const chip = document.querySelector(
+              '#chips .chip[data-cat="' + a.v + '"]',
+            );
             if (chip) chip.click();
             $("filters").scrollIntoView({ behavior: "smooth" });
           } else if (a.t === "cert") {
@@ -4489,7 +6078,8 @@
           } else if (a.t === "account") {
             if (window.leonAuth) window.leonAuth.open();
           } else if (a.t === "link") {
-            if (/^https?:\/\//.test(a.v)) window.open(a.v, "_blank", "noopener");
+            if (/^https?:\/\//.test(a.v))
+              window.open(a.v, "_blank", "noopener");
             else window.location.href = a.v;
           } else if (a.t === "send") {
             send(a.v);
@@ -4593,18 +6183,21 @@
                 e.target.textContent = "✔";
                 setTimeout(() => (e.target.textContent = "📋"), 1200);
               };
-              if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done);
+              if (navigator.clipboard && navigator.clipboard.writeText)
+                navigator.clipboard.writeText(t).then(done, done);
               else done();
-            })
+            }),
           );
-          tools.appendChild(iconBtn("↩", "Reageer op dit bericht", () => setReply(m)));
+          tools.appendChild(
+            iconBtn("↩", "Reageer op dit bericht", () => setReply(m)),
+          );
           if (m.who === "user") {
             tools.appendChild(
               iconBtn("🗑", "Verwijder bericht", () => {
                 history = history.filter((x) => x.id !== m.id);
                 el.remove();
                 save();
-              })
+              }),
             );
           }
           meta.appendChild(tools);
@@ -4622,8 +6215,13 @@
         }
 
         function setReply(m) {
-          replyCtx = { id: m.id, who: m.who, snip: stripMd(m.text).replace(/\s+/g, " ").slice(0, 80) };
-          replyText.textContent = "↩ " + (m.who === "bot" ? "Leon" : "Jij") + ": " + replyCtx.snip;
+          replyCtx = {
+            id: m.id,
+            who: m.who,
+            snip: stripMd(m.text).replace(/\s+/g, " ").slice(0, 80),
+          };
+          replyText.textContent =
+            "↩ " + (m.who === "bot" ? "Leon" : "Jij") + ": " + replyCtx.snip;
           replyBar.hidden = false;
           input.focus();
         }
@@ -4683,8 +6281,17 @@
         }
 
         function botSay(r) {
-          addMsg({ id: uid(), who: "bot", text: r.text, t: Date.now(), act: r.act || null, react: [] });
-          setQuick(r.next && r.next.length ? r.next : shuffle(POOL).slice(0, 4));
+          addMsg({
+            id: uid(),
+            who: "bot",
+            text: r.text,
+            t: Date.now(),
+            act: r.act || null,
+            react: [],
+          });
+          setQuick(
+            r.next && r.next.length ? r.next : shuffle(POOL).slice(0, 4),
+          );
           beep(660);
           speak(r.text);
         }
@@ -4696,7 +6303,11 @@
           const t0 = Date.now();
           let r = engine(text);
           const isCmd = text[0] === "/";
-          const wantAI = AI.endpoint && !isCmd && !r.calc && (AI.mode === "always" || r.unknown);
+          const wantAI =
+            AI.endpoint &&
+            !isCmd &&
+            !r.calc &&
+            (AI.mode === "always" || r.unknown);
           if (wantAI) {
             try {
               r = R(await askAI(), r.act, shuffle(POOL).slice(0, 3));
@@ -4706,7 +6317,10 @@
           } else if (r.unknown) {
             r = unknownReply();
           }
-          const wait = Math.max(0, 450 + Math.min((r.text || "").length * 5, 700) - (Date.now() - t0));
+          const wait = Math.max(
+            0,
+            450 + Math.min((r.text || "").length * 5, 700) - (Date.now() - t0),
+          );
           setTimeout(() => {
             typing.remove();
             statusEl.textContent = "● Online · stel me een vraag";
@@ -4717,7 +6331,14 @@
         function send(text) {
           text = String(text).trim().slice(0, 300);
           if (!text) return;
-          const m = { id: uid(), who: "user", text, t: Date.now(), read: false, reply: replyCtx ? { who: replyCtx.who, snip: replyCtx.snip } : null };
+          const m = {
+            id: uid(),
+            who: "user",
+            text,
+            t: Date.now(),
+            read: false,
+            reply: replyCtx ? { who: replyCtx.who, snip: replyCtx.snip } : null,
+          };
           clearReply();
           addMsg(m);
           beep(520);
@@ -4747,7 +6368,8 @@
         }
         function toggleVoice() {
           settings.voice = !settings.voice;
-          if (!settings.voice && "speechSynthesis" in window) speechSynthesis.cancel();
+          if (!settings.voice && "speechSynthesis" in window)
+            speechSynthesis.cancel();
           store.set(KEY_SET, settings);
           buildMenu();
         }
@@ -4761,13 +6383,24 @@
           scrollDown();
         }
         backdrop.addEventListener("click", () => setMax(false));
-        maxBtn.addEventListener("click", () => setMax(!bot.classList.contains("max")));
+        maxBtn.addEventListener("click", () =>
+          setMax(!bot.classList.contains("max")),
+        );
 
         function exportChat() {
           const lines = history.map(
-            (m) => "[" + new Date(m.t).toLocaleString("nl-NL") + "] " + (m.who === "bot" ? "Leon" : "Jij") + ": " + stripMd(m.text)
+            (m) =>
+              "[" +
+              new Date(m.t).toLocaleString("nl-NL") +
+              "] " +
+              (m.who === "bot" ? "Leon" : "Jij") +
+              ": " +
+              stripMd(m.text),
           );
-          const blob = new Blob(["Gesprek met Leon\n\n" + lines.join("\n\n") + "\n"], { type: "text/plain;charset=utf-8" });
+          const blob = new Blob(
+            ["Gesprek met Leon\n\n" + lines.join("\n\n") + "\n"],
+            { type: "text/plain;charset=utf-8" },
+          );
           const a = document.createElement("a");
           a.href = URL.createObjectURL(blob);
           a.download = "gesprek-met-leon.txt";
@@ -4778,7 +6411,12 @@
         }
 
         function clearChat() {
-          if (!window.confirm("Weet je zeker dat je het hele gesprek wilt wissen?")) return;
+          if (
+            !window.confirm(
+              "Weet je zeker dat je het hele gesprek wilt wissen?",
+            )
+          )
+            return;
           history = [];
           store.del(KEY_HIST);
           msgsEl.innerHTML = "";
@@ -4828,12 +6466,17 @@
             mid.replaceWith(mark);
           });
         }
-        searchInput.addEventListener("input", () => filterMsgs(searchInput.value));
+        searchInput.addEventListener("input", () =>
+          filterMsgs(searchInput.value),
+        );
 
         function buildMenu() {
           const items = [
             ["🔍 Zoeken in gesprek", toggleSearch],
-            ["🌓 Thema: " + (settings.theme === "dark" ? "donker" : "licht"), () => setTheme(settings.theme === "dark" ? "light" : "dark")],
+            [
+              "🌓 Thema: " + (settings.theme === "dark" ? "donker" : "licht"),
+              () => setTheme(settings.theme === "dark" ? "light" : "dark"),
+            ],
             ["🔔 Geluid: " + (settings.sound ? "aan" : "uit"), toggleSound],
             ["🗣️ Voorlezen: " + (settings.voice ? "aan" : "uit"), toggleVoice],
             ["⬇️ Gesprek downloaden", exportChat],
@@ -4867,7 +6510,11 @@
         document.addEventListener("keydown", (e) => {
           if (e.key !== "Escape") return;
           if (!menuEl.hidden) closeMenu();
-          else if (bot.classList.contains("max") && document.getElementById("lightbox").hidden) setMax(false);
+          else if (
+            bot.classList.contains("max") &&
+            document.getElementById("lightbox").hidden
+          )
+            setMax(false);
         });
 
         /* --- Inspreken (spraakherkenning) --- */
@@ -4904,8 +6551,14 @@
               R(
                 "Hoi, ik ben **Leon**! 👋 Vraag me gerust iets over mijn certificaten, werkervaring of hobby's, over cybersecurity, of hoe je een eigen VMware-lab opzet. Rechtsboven kun je ook inloggen/registreren. Typ `/help` voor alle opties.",
                 null,
-                ["Welke certificaten heb je?", "VMware-lab opzetten", "Wat is phishing?", "Werkervaring", "Vertel een grap"]
-              )
+                [
+                  "Welke certificaten heb je?",
+                  "VMware-lab opzetten",
+                  "Wat is phishing?",
+                  "Werkervaring",
+                  "Vertel een grap",
+                ],
+              ),
             );
           }, 600);
         }
@@ -4917,7 +6570,12 @@
           setQuick(shuffle(POOL).slice(0, 4));
           scrollDown();
         } else {
-          setQuick(["Welke certificaten heb je?", "VMware-lab opzetten", "Hobby's", "Contact"]);
+          setQuick([
+            "Welke certificaten heb je?",
+            "VMware-lab opzetten",
+            "Hobby's",
+            "Contact",
+          ]);
           greet();
         }
       })();
@@ -5012,7 +6670,8 @@
           }
           // Fallback voor omgevingen zonder window.crypto (zeldzaam)
           let s = "";
-          for (let i = 0; i < 32; i++) s += Math.floor(Math.random() * 16).toString(16);
+          for (let i = 0; i < 32; i++)
+            s += Math.floor(Math.random() * 16).toString(16);
           return s;
         }
         // crypto.subtle is alleen beschikbaar in een "secure context" (https of localhost).
@@ -5027,9 +6686,16 @@
             h1 = Math.imul(h1 ^ ch, 2654435761);
             h2 = Math.imul(h2 ^ ch, 1597334677);
           }
-          h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-          h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-          return (h2 >>> 0).toString(16).padStart(8, "0") + (h1 >>> 0).toString(16).padStart(8, "0");
+          h1 =
+            Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^
+            Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+          h2 =
+            Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^
+            Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+          return (
+            (h2 >>> 0).toString(16).padStart(8, "0") +
+            (h1 >>> 0).toString(16).padStart(8, "0")
+          );
         }
         async function hashPassword(pw, salt) {
           const msg = salt + ":" + pw;
@@ -5144,9 +6810,14 @@
           const pass = $("li-pass").value;
           const users = getUsers();
           const rec = users[user.toLowerCase()];
-          if (!rec) return showMsg("Onbekende gebruikersnaam. Nog geen account? Klik op “Registreren”.", "err");
+          if (!rec)
+            return showMsg(
+              "Onbekende gebruikersnaam. Nog geen account? Klik op “Registreren”.",
+              "err",
+            );
           const hash = await hashPassword(pass, rec.salt);
-          if (hash !== rec.hash) return showMsg("Wachtwoord klopt niet.", "err");
+          if (hash !== rec.hash)
+            return showMsg("Wachtwoord klopt niet.", "err");
           setSession(rec.name);
           refreshAccBtn();
           panelLogin.reset();
@@ -5161,14 +6832,31 @@
           const pass = $("re-pass").value;
           const pass2 = $("re-pass2").value;
           if (!/^[a-zA-Z0-9_.-]{3,24}$/.test(user))
-            return showMsg("Gebruik 3-24 tekens: letters, cijfers, punt, streepje of underscore.", "err");
-          if (pass.length < 8) return showMsg("Wachtwoord moet minstens 8 tekens lang zijn.", "err");
-          if (pass !== pass2) return showMsg("De wachtwoorden komen niet overeen.", "err");
+            return showMsg(
+              "Gebruik 3-24 tekens: letters, cijfers, punt, streepje of underscore.",
+              "err",
+            );
+          if (pass.length < 8)
+            return showMsg(
+              "Wachtwoord moet minstens 8 tekens lang zijn.",
+              "err",
+            );
+          if (pass !== pass2)
+            return showMsg("De wachtwoorden komen niet overeen.", "err");
           const users = getUsers();
-          if (users[user.toLowerCase()]) return showMsg("Die gebruikersnaam bestaat al. Kies een andere, of log in.", "err");
+          if (users[user.toLowerCase()])
+            return showMsg(
+              "Die gebruikersnaam bestaat al. Kies een andere, of log in.",
+              "err",
+            );
           const salt = randomSalt();
           const hash = await hashPassword(pass, salt);
-          users[user.toLowerCase()] = { name: user, salt, hash, created: Date.now() };
+          users[user.toLowerCase()] = {
+            name: user,
+            salt,
+            hash,
+            created: Date.now(),
+          };
           saveUsers(users);
           setSession(user);
           refreshAccBtn();
@@ -5186,9 +6874,12 @@
         });
 
         refreshAccBtn();
-        window.leonAuth = { isLoggedIn: () => !!getSession(), currentUser: () => getSession() || null, open: openModal };
+        window.leonAuth = {
+          isLoggedIn: () => !!getSession(),
+          currentUser: () => getSession() || null,
+          open: openModal,
+        };
       })();
     </script>
-
   </body>
 </html>

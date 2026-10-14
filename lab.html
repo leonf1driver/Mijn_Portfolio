@@ -1,0 +1,1285 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leon Keijzers | Lab</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap");
+
+      :root {
+        color-scheme: dark;
+        --bg: #080f1a;
+        --panel: #101c2e;
+        --panel2: #0b1523;
+        --line: #223247;
+        --ink: #f4f7fb;
+        --muted: #9fb3c8;
+        --gold: #e8ad2e;
+        --cyber: #3ddc97;
+        --music: #e0a96d;
+        --race: #ff6b6b;
+        --arcade: #7aa2ff;
+        --a: var(--cyber);
+        --display: "Oswald", Inter, Segoe UI, Arial, sans-serif;
+        --body: Inter, Segoe UI, Arial, sans-serif;
+        --mono: ui-monospace, "SF Mono", Consolas, "Courier New", monospace;
+      }
+      body.hacker { --cyber: #00ff88; --gold: #00ff88; --line: #0b4d2e; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; font-family: var(--body); color: var(--ink); background: var(--bg); overflow-x: hidden; }
+      button, input, select, textarea { font: inherit; color: inherit; }
+      :focus-visible { outline: 2px solid var(--a); outline-offset: 3px; }
+
+      /* ---------- Achtergrond: synthwave-vloer, zon, sterren ---------- */
+      #stars { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+      .sky { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 93, 108, 0.18), transparent 70%),
+                    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(61, 220, 151, 0.1), transparent 70%),
+                    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(122, 162, 255, 0.12), transparent 70%); }
+      .sun { position: fixed; left: 50%; bottom: 17vh; z-index: 0; width: min(62vw, 560px); aspect-ratio: 1; transform: translateX(-50%);
+        border-radius: 50%; pointer-events: none; opacity: 0.2;
+        background: linear-gradient(180deg, #ffd24d, #ff5d6c 70%, #b02a9b);
+        -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 14px, transparent 14px 20px);
+        mask-image: repeating-linear-gradient(180deg, #000 0 14px, transparent 14px 20px);
+        animation: sunpulse 6s ease-in-out infinite alternate; }
+      @keyframes sunpulse { to { opacity: 0.3; transform: translateX(-50%) scale(1.04); } }
+      .floor { position: fixed; left: -60%; right: -60%; bottom: 0; height: 48vh; z-index: 0; pointer-events: none;
+        background:
+          repeating-linear-gradient(90deg, rgba(79, 195, 224, 0.35) 0 1px, transparent 1px 80px),
+          repeating-linear-gradient(0deg, rgba(232, 173, 46, 0.3) 0 1px, transparent 1px 80px);
+        transform: perspective(520px) rotateX(64deg); transform-origin: 50% 100%;
+        -webkit-mask-image: linear-gradient(transparent, #000 65%); mask-image: linear-gradient(transparent, #000 65%);
+        animation: floor 2.6s linear infinite; }
+      @keyframes floor { to { background-position: 0 80px, 0 80px; } }
+      header, main, footer, .topnav, .tabs { position: relative; z-index: 2; }
+
+      /* ---------- Navigatie ---------- */
+      .topnav { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        padding: 12px 24px; background: rgba(8, 15, 26, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+      .navlinks { display: flex; gap: 8px; flex-wrap: wrap; }
+      .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 15px; font-family: var(--display); font-size: 0.82rem; font-weight: 600;
+        letter-spacing: 0.02em; color: var(--ink); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 999px;
+        text-decoration: none; cursor: pointer; transition: border-color 0.15s, transform 0.15s; }
+      .pill:hover { border-color: var(--gold); transform: translateY(-1px); }
+      .pill.here { border-color: var(--gold); color: var(--gold); cursor: default; }
+      .crumbs { font-family: var(--display); font-size: 0.8rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .crumbs b { color: var(--ink); font-weight: 600; }
+
+      /* ---------- Hero ---------- */
+      .hero { max-width: 1240px; margin: 0 auto; padding: 50px 24px 10px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 26px; }
+      .eyebrow { font-family: var(--display); font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--cyber); font-weight: 600; }
+      .hero h1 { margin: 6px 0 12px; font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1.02; }
+      .hero h1 .cur { display: inline-block; width: 0.07em; height: 0.8em; margin-left: 0.06em; vertical-align: -0.04em; background: var(--cyber); animation: blink 0.8s steps(2) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .hero p { margin: 0; max-width: 54ch; color: var(--muted); line-height: 1.65; }
+      .chips { display: flex; gap: 12px; flex-wrap: wrap; }
+      .chip { min-width: 128px; padding: 12px 16px; background: rgba(16, 28, 46, 0.78); border: 1px solid var(--line); border-radius: 12px; backdrop-filter: blur(6px); }
+      .chip b { display: block; font-family: var(--display); font-size: 1.6rem; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+      .chip span { display: block; margin-top: 3px; font-size: 0.74rem; color: var(--muted); }
+
+      /* ---------- Tabs ---------- */
+      .tabs { position: sticky; top: 57px; z-index: 50; max-width: 1240px; margin: 20px auto 0; padding: 10px 24px; display: flex; gap: 8px; flex-wrap: wrap;
+        background: rgba(8, 15, 26, 0.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+      .tab { --c: var(--cyber); padding: 10px 18px; font-family: var(--display); font-size: 0.92rem; font-weight: 600; background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--line); border-radius: 999px; cursor: pointer; transition: all 0.15s; }
+      .tab[data-tab="muziek"] { --c: var(--music); }
+      .tab[data-tab="racing"] { --c: var(--race); }
+      .tab[data-tab="arcade"] { --c: var(--arcade); }
+      .tab:hover { border-color: var(--c); }
+      .tab[aria-selected="true"] { color: #07111f; background: var(--c); border-color: var(--c); box-shadow: 0 0 22px -4px var(--c); }
+
+      main { max-width: 1240px; margin: 0 auto; padding: 26px 24px 70px; }
+      .panel[hidden] { display: none; }
+      .panel { --a: var(--cyber); animation: fadein 0.3s ease; }
+      #muziek { --a: var(--music); }
+      #racing { --a: var(--race); }
+      #arcade { --a: var(--arcade); }
+      @keyframes fadein { from { opacity: 0; transform: translateY(8px); } }
+      .panel-intro { max-width: 70ch; margin: 0 0 22px; color: var(--muted); line-height: 1.6; font-size: 0.95rem; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px; }
+      .wide { grid-column: 1 / -1; }
+
+      /* ---------- Kaarten & formulier ---------- */
+      .card { min-width: 0; padding: 20px 20px 22px; background: linear-gradient(165deg, var(--panel), var(--panel2)); border: 1px solid var(--line);
+        border-top: 3px solid var(--a); border-radius: 14px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38); }
+      .card h3 { margin: 0 0 4px; font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
+      .card .sub { margin: 0 0 16px; font-size: 0.84rem; line-height: 1.55; color: var(--muted); }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .field { width: 100%; padding: 10px 14px; font-size: 0.92rem; background: rgba(4, 10, 20, 0.7); border: 1px solid var(--line); border-radius: 10px; outline: none; }
+      .field:focus { border-color: var(--a); box-shadow: 0 0 0 3px color-mix(in srgb, var(--a) 25%, transparent); }
+      textarea.field { min-height: 84px; resize: vertical; font-family: var(--mono); font-size: 0.85rem; }
+      select.field { cursor: pointer; }
+      .btn { padding: 9px 16px; font-family: var(--display); font-size: 0.86rem; font-weight: 600; color: #07111f; background: var(--a); border: 0; border-radius: 999px; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
+      .btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+      .btn.ghost { color: var(--ink); background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); }
+      .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+      .lbl { display: block; margin: 12px 0 6px; font-size: 0.76rem; color: var(--muted); }
+      .mono { font-family: var(--mono); }
+      .out { padding: 10px 12px; font-family: var(--mono); font-size: 0.8rem; line-height: 1.5; color: var(--a); background: rgba(4, 10, 20, 0.7); border: 1px dashed var(--line); border-radius: 10px; word-break: break-all; min-height: 42px; }
+      .note { margin: 12px 0 0; font-size: 0.74rem; line-height: 1.5; color: var(--muted); }
+      input[type="range"] { width: 100%; accent-color: var(--a); }
+      .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+      .seg label { cursor: pointer; }
+      .seg input { position: absolute; opacity: 0; }
+      .seg span { display: block; padding: 7px 14px; font-size: 0.8rem; font-weight: 600; }
+      .seg input:checked + span { color: #07111f; background: var(--a); }
+
+      /* ---------- Wachtwoordtester ---------- */
+      .meter { height: 10px; margin: 14px 0 6px; background: rgba(255, 255, 255, 0.07); border-radius: 6px; overflow: hidden; }
+      .meter i { display: block; height: 100%; width: 0; background: #e5484d; border-radius: 6px; transition: width 0.3s, background 0.3s; }
+      .pw-label { font-family: var(--display); font-size: 1.05rem; font-weight: 600; min-height: 1.4em; }
+      .stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+      .stats3 div { padding: 9px 8px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 10px; }
+      .stats3 b { display: block; font-family: var(--display); font-size: 0.98rem; line-height: 1.2; }
+      .stats3 span { font-size: 0.68rem; color: var(--muted); }
+      .tips { margin: 8px 0 0; padding-left: 1.15em; font-size: 0.82rem; line-height: 1.6; color: var(--muted); }
+      .tips li.bad { color: #ffb4b4; }
+      .tips li.good { color: #9bf2c6; }
+
+      /* ---------- Hash lawine ---------- */
+      .aval { margin-top: 12px; }
+      .aval .bar { height: 8px; margin-top: 6px; background: rgba(255, 255, 255, 0.07); border-radius: 5px; overflow: hidden; }
+      .aval .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--a), var(--gold)); transition: width 0.4s; }
+
+      /* ---------- CTF ---------- */
+      .prog { height: 10px; margin: 6px 0 18px; background: rgba(255, 255, 255, 0.07); border-radius: 6px; overflow: hidden; }
+      .prog i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyber), var(--gold)); transition: width 0.4s; }
+      .ctf { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+      .ctf-item { padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); border-radius: 12px; }
+      .ctf-item.solved { border-color: var(--cyber); background: rgba(61, 220, 151, 0.07); }
+      .ctf-item h4 { margin: 0 0 6px; display: flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 1rem; }
+      .ctf-item h4 .pts { margin-left: auto; font-size: 0.7rem; color: var(--gold); font-weight: 600; }
+      .ctf-item p { margin: 0 0 8px; font-size: 0.82rem; line-height: 1.5; color: var(--muted); }
+      .ctf-item .puz { margin: 0 0 10px; padding: 9px 11px; font-family: var(--mono); font-size: 0.78rem; line-height: 1.5; color: var(--cyber); background: rgba(4, 10, 20, 0.7); border-radius: 8px; word-break: break-all; }
+      .ctf-item form { display: flex; gap: 8px; }
+      .ctf-item form input { flex: 1; min-width: 0; }
+      .hint { margin-top: 8px; font-size: 0.78rem; color: var(--gold); display: none; }
+      .hint.show { display: block; }
+      .linkbtn { padding: 0; font-size: 0.76rem; color: var(--muted); text-decoration: underline; background: none; border: 0; cursor: pointer; }
+      .msg { min-height: 1.2em; margin-top: 6px; font-size: 0.78rem; }
+      .msg.ok { color: #9bf2c6; }
+      .msg.no { color: #ffb4b4; }
+
+      /* ---------- Phishing-quiz ---------- */
+      .mail { padding: 14px 16px; background: #f4f6fa; color: #101828; border-radius: 12px; }
+      .mail .hd { display: grid; gap: 2px; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 1px solid #d5dae3; font-size: 0.78rem; color: #475467; }
+      .mail .hd b { color: #101828; }
+      .mail .body { font-size: 0.9rem; line-height: 1.55; white-space: pre-line; }
+      .mail .lnk { display: inline-block; margin-top: 8px; padding: 5px 10px; font-family: var(--mono); font-size: 0.74rem; color: #1a56db; background: #e3ebff; border-radius: 6px; word-break: break-all; }
+      .ph-actions { display: flex; gap: 10px; margin: 14px 0 0; }
+      .ph-actions .btn { flex: 1; padding: 12px; font-size: 0.95rem; }
+      .ph-actions .btn.bad { background: #ff6b6b; }
+      .ph-explain { margin-top: 14px; padding: 12px 14px; font-size: 0.84rem; line-height: 1.55; border-radius: 10px; }
+      .ph-explain.ok { background: rgba(61, 220, 151, 0.1); border: 1px solid var(--cyber); }
+      .ph-explain.no { background: rgba(255, 107, 107, 0.1); border: 1px solid var(--race); }
+      .ph-explain ul { margin: 6px 0 10px; padding-left: 1.1em; color: var(--muted); }
+      .ph-top { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.78rem; color: var(--muted); }
+
+      /* ---------- Stemmer ---------- */
+      .gauge { width: min(100%, 360px); margin: 6px auto 0; display: block; }
+      #needle { transform-origin: 100px 108px; transition: transform 0.12s ease-out; }
+      .tu-read { text-align: center; margin-top: -4px; }
+      .tu-note { font-family: var(--display); font-size: 3.2rem; font-weight: 700; line-height: 1; }
+      .tu-hz { font-size: 0.84rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .tu-msg { margin-top: 6px; font-family: var(--display); font-size: 1rem; font-weight: 600; min-height: 1.4em; }
+      .strings { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 14px 0; }
+      .strings button { min-width: 52px; padding: 8px 12px; font-family: var(--display); font-size: 0.9rem; font-weight: 600; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+      .strings button[aria-pressed="true"] { color: #07111f; background: var(--a); border-color: var(--a); }
+
+      /* ---------- Metronoom ---------- */
+      .bpm { text-align: center; }
+      .bpm b { font-family: var(--display); font-size: 4.2rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+      .bpm span { display: block; font-size: 0.82rem; color: var(--muted); }
+      .beats { display: flex; justify-content: center; gap: 12px; margin: 14px 0; }
+      .beats i { width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--line); transition: background 0.05s, box-shadow 0.05s, transform 0.05s; }
+      .beats i.on { background: var(--a); box-shadow: 0 0 16px var(--a); transform: scale(1.18); }
+      .beats i.acc.on { background: var(--gold); box-shadow: 0 0 18px var(--gold); }
+      .roundbtn { width: 40px; height: 40px; display: grid; place-items: center; font-size: 1.3rem; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 50%; cursor: pointer; }
+      .roundbtn:hover { border-color: var(--a); }
+      .practice { padding: 14px 16px; margin-top: 4px; background: rgba(255, 255, 255, 0.04); border: 1px dashed var(--line); border-radius: 12px; font-size: 0.9rem; line-height: 1.7; min-height: 120px; }
+      .practice b { color: var(--a); }
+      .practice .arrows { font-family: var(--mono); font-size: 1.05rem; letter-spacing: 0.1em; }
+
+      /* ---------- Typrace ---------- */
+      .lanes { display: grid; gap: 8px; margin: 6px 0 16px; }
+      .lane { position: relative; height: 40px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 24px, transparent 24px 48px), #0a1220;
+        border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+      .lane::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 14px; background: repeating-conic-gradient(#fff 0 25%, #111 0 50%) 0 0 / 14px 14px; }
+      .lane .car { position: absolute; left: 0; top: 50%; font-size: 1.7rem; line-height: 1; transform: translate(0, -50%) scaleX(-1); transition: left 0.12s linear; }
+      .lane .tag { position: absolute; left: 8px; top: 3px; font-size: 0.64rem; color: var(--muted); }
+      .ty-text { padding: 14px 16px; font-size: 1.12rem; line-height: 1.8; background: rgba(4, 10, 20, 0.7); border: 1px solid var(--line); border-radius: 12px; user-select: none; }
+      .ty-text span { border-bottom: 2px solid transparent; }
+      .ty-text .ok { color: #9bf2c6; }
+      .ty-text .bad { color: #fff; background: rgba(255, 107, 107, 0.55); border-radius: 3px; }
+      .ty-text .cur { border-bottom-color: var(--a); background: rgba(255, 255, 255, 0.1); }
+      .result { margin-top: 14px; padding: 14px 16px; font-size: 0.92rem; line-height: 1.6; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); }
+      .result[hidden] { display: none; }
+      .result .big { font-family: var(--display); font-size: 1.5rem; font-weight: 700; color: var(--a); }
+
+      /* ---------- Snake ---------- */
+      .snake-wrap { display: grid; grid-template-columns: minmax(0, 420px) 1fr; gap: 24px; align-items: start; }
+      @media (max-width: 760px) { .snake-wrap { grid-template-columns: 1fr; } }
+      #sn { width: 100%; max-width: 420px; aspect-ratio: 1; display: block; background: #060c16; border: 2px solid var(--a); border-radius: 12px; box-shadow: 0 0 30px -6px var(--a); touch-action: none; }
+      .scorebar { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+      .dpad { display: grid; grid-template-columns: repeat(3, 56px); grid-template-rows: repeat(2, 56px); gap: 8px; margin: 18px 0 0; justify-content: start; }
+      .dpad button { font-size: 1.3rem; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; touch-action: manipulation; }
+      .dpad button:active { background: var(--a); color: #07111f; }
+      .dpad .up { grid-column: 2; grid-row: 1; }
+      .dpad .left { grid-column: 1; grid-row: 2; }
+      .dpad .down { grid-column: 2; grid-row: 2; }
+      .dpad .right { grid-column: 3; grid-row: 2; }
+
+      footer { max-width: 1240px; margin: 10px auto 0; padding: 26px 24px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); }
+      footer a { margin-right: 18px; font-family: var(--display); font-size: 0.85rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+      footer a:hover { color: var(--gold); }
+      footer small { color: var(--muted); font-size: 0.78rem; }
+
+      #toasts { position: fixed; left: 50%; bottom: 22px; z-index: 300; display: grid; gap: 8px; transform: translateX(-50%); width: min(92vw, 420px); pointer-events: none; }
+      .toast { padding: 11px 16px; font-size: 0.88rem; text-align: center; background: #16253b; border: 1px solid var(--gold); border-radius: 12px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); animation: fadein 0.25s ease; }
+
+      @media (max-width: 640px) {
+        .topnav { padding: 10px 14px; }
+        .crumbs { display: none; }
+        .tabs { top: 53px; padding: 10px 14px; }
+        .hero, main { padding-left: 14px; padding-right: 14px; }
+        .stats3 b { font-size: 0.84rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sun, .floor, .hero h1 .cur, .panel, .toast { animation: none; }
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="sky" aria-hidden="true"></div>
+    <div class="sun" aria-hidden="true"></div>
+    <div class="floor" aria-hidden="true"></div>
+
+    <nav class="topnav">
+      <div class="navlinks">
+        <a class="pill" href="index.html">← Portfolio</a>
+        <a class="pill" href="hobbys.html">🎸 Hobby's</a>
+        <a class="pill" href="nieuws.html">📰 Nieuws</a>
+        <span class="pill here" aria-current="page">🧪 Lab</span>
+      </div>
+      <span class="crumbs"><b>Leon Keijzers</b> · Lab</span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Experimenteer &middot; Speel &middot; Leer</div>
+        <h1>Leon's Lab<span class="cur" aria-hidden="true"></span></h1>
+        <p>
+          Een speelplaats vol werkende gereedschappen en spelletjes: hack een mini-CTF, test je wachtwoord, stem
+          je gitaar, race tegen een rivaal of eet pakketjes in Snake. Alles draait in je eigen browser.
+        </p>
+      </div>
+      <div class="chips" aria-label="Jouw records">
+        <div class="chip"><b id="st-ctf">0/5</b><span>CTF-vlaggen</span></div>
+        <div class="chip"><b id="st-wpm">&ndash;</b><span>Typrecord (WPM)</span></div>
+        <div class="chip"><b id="st-snake">0</b><span>Snake-record</span></div>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Onderdelen">
+      <button class="tab" role="tab" data-tab="cyber" aria-selected="true">🔐 Cyber Lab</button>
+      <button class="tab" role="tab" data-tab="muziek" aria-selected="false">🎸 Muziek</button>
+      <button class="tab" role="tab" data-tab="racing" aria-selected="false">🏁 Racing</button>
+      <button class="tab" role="tab" data-tab="arcade" aria-selected="false">🕹️ Arcade</button>
+    </div>
+
+    <main>
+      <!-- ================= CYBER LAB ================= -->
+      <section class="panel" id="cyber" role="tabpanel">
+        <p class="panel-intro">
+          Gereedschap uit de wereld van cybersecurity, bedoeld om te leren. Niets wat je hier invult verlaat je
+          browser.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>🔑 Wachtwoord-check</h3>
+            <p class="sub">Zie hoe lang een aanvaller er ongeveer over doet om je wachtwoord te raden. Vul liever <b>geen</b> echt wachtwoord in.</p>
+            <div class="row" style="flex-wrap: nowrap">
+              <input class="field" id="pw" type="password" autocomplete="off" spellcheck="false" placeholder="Typ een test-wachtwoord" aria-label="Test-wachtwoord" />
+              <button class="btn ghost" id="pw-eye" type="button">Toon</button>
+            </div>
+            <div class="meter" aria-hidden="true"><i id="pw-bar"></i></div>
+            <div class="pw-label" id="pw-label" aria-live="polite">Begin met typen&hellip;</div>
+            <div class="stats3">
+              <div><b id="pw-bits">&ndash;</b><span>bits entropie</span></div>
+              <div><b id="pw-off">&ndash;</b><span>snelle aanval offline</span></div>
+              <div><b id="pw-on">&ndash;</b><span>online met rem</span></div>
+            </div>
+            <ul class="tips" id="pw-tips"></ul>
+            <div class="row" style="margin-top: 12px">
+              <button class="btn" id="pw-gen" type="button">🎲 Genereer sterk wachtwoord</button>
+            </div>
+            <div class="out" id="pw-gen-out" style="margin-top: 10px; display: none"></div>
+            <p class="note">Schatting op basis van lengte, tekensoorten en bekende zwaktes. Een wachtwoordmanager onthoudt lange wachtwoorden voor je.</p>
+          </article>
+
+          <article class="card">
+            <h3>🔤 Cijfer-werkplaats</h3>
+            <p class="sub">Versleutel en ontcijfer tekst met klassieke methoden en veelgebruikte codes.</p>
+            <label class="lbl" for="ci-mode">Methode</label>
+            <select class="field" id="ci-mode">
+              <option value="caesar">Caesar-cijfer</option>
+              <option value="rot13">ROT13</option>
+              <option value="base64">Base64</option>
+              <option value="hex">Hexadecimaal</option>
+              <option value="bin">Binair</option>
+              <option value="morse">Morsecode</option>
+            </select>
+            <div class="row" style="margin: 12px 0 0">
+              <div class="seg" role="group" aria-label="Richting">
+                <label><input type="radio" name="ci-dir" value="enc" checked /><span>Versleutel</span></label>
+                <label><input type="radio" name="ci-dir" value="dec" /><span>Ontcijfer</span></label>
+              </div>
+              <button class="btn ghost" id="ci-swap" type="button" title="Gebruik de uitvoer als invoer">⇅ Omdraaien</button>
+            </div>
+            <div id="ci-shift-wrap">
+              <label class="lbl" for="ci-shift">Verschuiving: <b id="ci-shift-val">3</b></label>
+              <input type="range" id="ci-shift" min="1" max="25" value="3" />
+            </div>
+            <label class="lbl" for="ci-in">Invoer</label>
+            <textarea class="field" id="ci-in" spellcheck="false" placeholder="Typ of plak hier je tekst">Hallo Leon!</textarea>
+            <label class="lbl" for="ci-out">Uitvoer</label>
+            <textarea class="field" id="ci-out" readonly></textarea>
+            <div class="row" style="margin-top: 10px"><button class="btn" id="ci-copy" type="button">📋 Kopieer uitvoer</button></div>
+          </article>
+
+          <article class="card">
+            <h3>#️⃣ Hash-generator</h3>
+            <p class="sub">Een hash is een vingerafdruk van data. Verander één teken en alles ziet er anders uit: het <b>lawine-effect</b>.</p>
+            <label class="lbl" for="h-alg">Algoritme</label>
+            <select class="field" id="h-alg">
+              <option value="SHA-256">SHA-256</option>
+              <option value="SHA-1">SHA-1 (verouderd)</option>
+              <option value="SHA-384">SHA-384</option>
+              <option value="SHA-512">SHA-512</option>
+            </select>
+            <label class="lbl" for="h-in">Tekst</label>
+            <textarea class="field" id="h-in" spellcheck="false" placeholder="Typ iets&hellip;">gitaar</textarea>
+            <label class="lbl">Hash</label>
+            <div class="out" id="h-out" aria-live="polite">&hellip;</div>
+            <div class="aval">
+              <span class="lbl" style="margin-top: 4px" id="h-aval-txt">Lawine-effect</span>
+              <div class="bar"><i id="h-aval"></i></div>
+            </div>
+            <p class="note">Wachtwoorden horen als hash (met <i>salt</i>) opgeslagen te worden, nooit als leesbare tekst. Voor wachtwoorden gebruik je in de praktijk een langzaam algoritme zoals bcrypt of Argon2.</p>
+          </article>
+
+          <article class="card">
+            <h3>🕵️ Phishing of echt?</h3>
+            <p class="sub">Zes berichten. Herken jij de oplichters?</p>
+            <div id="ph-box"></div>
+          </article>
+
+          <article class="card wide" id="ctf-card">
+            <h3>🚩 Mini-CTF: vind de vijf vlaggen</h3>
+            <p class="sub">Elke vlag heeft de vorm <span class="mono">LEON{...}</span>. Gebruik de gereedschappen hierboven en je hersens. Je voortgang wordt bewaard.</p>
+            <div class="prog" aria-hidden="true"><i id="ctf-bar"></i></div>
+            <div class="ctf" id="ctf-list"></div>
+            <!-- Gefeliciteerd, speurneus: LEON{kijk_ook_in_de_broncode} -->
+            <div class="msg" id="ctf-done" aria-live="polite"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= MUZIEK ================= -->
+      <section class="panel" id="muziek" role="tabpanel" hidden>
+        <p class="panel-intro">Voor als het scherm uitgaat en het geluid aan: een stemapparaat, een metronoom en een oefenidee voor elke dag.</p>
+        <div class="grid">
+          <article class="card">
+            <h3>🎛️ Gitaar-stemmer</h3>
+            <p class="sub">Zet de microfoon aan en tokkel een snaar. Of tik op een snaar om de referentietoon te horen.</p>
+            <svg class="gauge" viewBox="0 0 200 120" role="img" aria-label="Stemmeter">
+              <path d="M20 108 A80 80 0 0 1 180 108" fill="none" stroke="#223247" stroke-width="10" stroke-linecap="round" />
+              <path d="M90 31 A80 80 0 0 1 110 31" fill="none" stroke="#3ddc97" stroke-width="10" />
+              <g stroke="#9fb3c8" stroke-width="2">
+                <line x1="100" y1="22" x2="100" y2="34" /><line x1="52" y1="38" x2="58" y2="48" /><line x1="148" y1="38" x2="142" y2="48" />
+                <line x1="30" y1="76" x2="40" y2="80" /><line x1="170" y1="76" x2="160" y2="80" />
+              </g>
+              <g id="needle"><line x1="100" y1="108" x2="100" y2="30" stroke="#e8ad2e" stroke-width="3" stroke-linecap="round" /></g>
+              <circle cx="100" cy="108" r="6" fill="#e8ad2e" />
+            </svg>
+            <div class="tu-read">
+              <div class="tu-note" id="tu-note">&ndash;</div>
+              <div class="tu-hz" id="tu-hz">Microfoon staat uit</div>
+              <div class="tu-msg" id="tu-msg" aria-live="polite"></div>
+            </div>
+            <div class="strings" id="tu-strings" role="group" aria-label="Snaar kiezen"></div>
+            <div class="row" style="justify-content: center">
+              <button class="btn" id="tu-mic" type="button">🎤 Start microfoon</button>
+            </div>
+            <p class="note" style="text-align: center">Standaard stemming: E2 A2 D3 G3 B3 E4. Kies &ldquo;Auto&rdquo; om elke toon te meten.</p>
+          </article>
+
+          <article class="card">
+            <h3>⏱️ Metronoom</h3>
+            <p class="sub">Tikt precies in de maat, ook als je pagina even druk is.</p>
+            <div class="bpm"><b id="bpm-val">100</b><span id="bpm-name">Andante</span></div>
+            <div class="beats" id="beats" aria-hidden="true"></div>
+            <input type="range" id="bpm" min="40" max="220" value="100" aria-label="Tempo in BPM" />
+            <div class="row" style="justify-content: center; margin-top: 12px">
+              <button class="roundbtn" id="bpm-min" type="button" aria-label="Langzamer">&minus;</button>
+              <button class="btn" id="bpm-tap" type="button">👆 Tap tempo</button>
+              <button class="roundbtn" id="bpm-plus" type="button" aria-label="Sneller">+</button>
+            </div>
+            <div class="row" style="justify-content: center; margin-top: 12px">
+              <select class="field" id="sig" style="width: auto" aria-label="Maatsoort">
+                <option value="4">4/4</option><option value="3">3/4</option><option value="2">2/4</option><option value="6">6/8</option>
+              </select>
+              <button class="btn" id="bpm-go" type="button">▶ Start</button>
+            </div>
+          </article>
+
+          <article class="card wide">
+            <h3>🎲 Oefenidee van de dag</h3>
+            <p class="sub">Geen idee wat je vandaag gaat spelen? Laat het lot kiezen.</p>
+            <div class="practice" id="pr-out">Druk op de knop voor een oefening.</div>
+            <div class="row" style="margin-top: 12px">
+              <button class="btn" id="pr-new" type="button">🎲 Nieuwe oefening</button>
+              <button class="btn ghost" id="pr-bpm" type="button" disabled>⏱️ Zet metronoom op dit tempo</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= RACING ================= -->
+      <section class="panel" id="racing" role="tabpanel" hidden>
+        <p class="panel-intro">Snelle vingers voor snelle auto's. Typ de tekst foutloos en versla de rivaal voordat hij de finish haalt.</p>
+        <div class="grid">
+          <article class="card wide">
+            <h3>⌨️ Pitstop-typrace</h3>
+            <p class="sub">De klok start bij je eerste toetsaanslag. Fouten kosten tijd, want je moet ze eerst herstellen.</p>
+            <div class="row" style="margin-bottom: 12px">
+              <label for="ty-rival" class="lbl" style="margin: 0">Rivaal</label>
+              <select class="field" id="ty-rival" style="width: auto">
+                <option value="25">Rookie (25 WPM)</option>
+                <option value="45" selected>Clubracer (45 WPM)</option>
+                <option value="65">Pro (65 WPM)</option>
+                <option value="90">Max-modus (90 WPM)</option>
+              </select>
+              <button class="btn ghost" id="ty-new" type="button">🔄 Nieuwe tekst</button>
+            </div>
+            <div class="lanes" aria-hidden="true">
+              <div class="lane"><span class="tag">Jij</span><span class="car" id="car-you">🏎️</span></div>
+              <div class="lane"><span class="tag">Rivaal</span><span class="car" id="car-rival">🚓</span></div>
+            </div>
+            <div class="ty-text" id="ty-text" aria-live="off"></div>
+            <input class="field" id="ty-input" style="margin-top: 12px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Klik hier en begin met typen&hellip;" aria-label="Typ de tekst hierboven over" />
+            <div class="result" id="ty-result" hidden></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= ARCADE ================= -->
+      <section class="panel" id="arcade" role="tabpanel" hidden>
+        <p class="panel-intro">Een klassieker met een netwerk-twist: stuur de slang door het netwerk en eet de data-pakketjes. Pijltjestoetsen, WASD of swipe.</p>
+        <div class="snake-wrap">
+          <canvas id="sn" width="400" height="400" tabindex="0" aria-label="Snake-spel"></canvas>
+          <div>
+            <div class="scorebar">
+              <div class="chip"><b id="sn-score">0</b><span>Score</span></div>
+              <div class="chip"><b id="sn-best">0</b><span>Record</span></div>
+            </div>
+            <div class="row">
+              <button class="btn" id="sn-start" type="button">▶ Start</button>
+              <button class="btn ghost" id="sn-pause" type="button">⏸ Pauze</button>
+            </div>
+            <p class="note">Spatie = start of pauze. Elk pakketje is 10 punten en maakt je sneller. Muren en je eigen staart zijn dodelijk.</p>
+            <div class="dpad" aria-label="Besturing">
+              <button class="up" data-dir="up" aria-label="Omhoog">▲</button>
+              <button class="left" data-dir="left" aria-label="Links">◀</button>
+              <button class="down" data-dir="down" aria-label="Omlaag">▼</button>
+              <button class="right" data-dir="right" aria-label="Rechts">▶</button>
+            </div>
+            <p class="note" style="margin-top: 18px">Tip: probeer eens de Konami-code. ⬆⬆⬇⬇⬅➡⬅➡ B A</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <a href="index.html">← Mijn portfolio</a>
+        <a href="hobbys.html">🎸 Hobby's</a>
+        <a href="nieuws.html">📰 Nieuws</a>
+      </div>
+      <small>Leon Keijzers · Lab</small>
+    </footer>
+    <div id="toasts" aria-live="polite"></div>
+    <script>
+      (function () {
+        "use strict";
+        const $ = (s, r) => (r || document).querySelector(s);
+        const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+        const ls = {
+          get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+          set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+        };
+        const reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+        const rand = (a) => a[Math.floor(Math.random() * a.length)];
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        const nl = (n, d) => n.toLocaleString("nl-NL", { maximumFractionDigits: d == null ? 0 : d });
+        const TEST = {};
+
+        function toast(msg) {
+          const t = document.createElement("div");
+          t.className = "toast";
+          t.textContent = msg;
+          $("#toasts").appendChild(t);
+          setTimeout(() => t.remove(), 3400);
+        }
+
+        /* ================= Statistieken ================= */
+        function refreshStats() {
+          $("#st-ctf").textContent = (ls.get("lab-ctf", []) || []).length + "/5";
+          const w = ls.get("lab-wpm", 0);
+          $("#st-wpm").textContent = w ? w : "\u2013";
+          $("#st-snake").textContent = ls.get("lab-snake", 0);
+        }
+
+        /* ================= Tabs ================= */
+        const TABS = ["cyber", "muziek", "racing", "arcade"];
+        const hooks = {};
+        let currentTab = "cyber";
+        function showTab(id, push) {
+          if (TABS.indexOf(id) < 0) id = "cyber";
+          const prev = currentTab;
+          currentTab = id;
+          $$(".tab").forEach((b) => {
+            const on = b.dataset.tab === id;
+            b.setAttribute("aria-selected", String(on));
+            b.tabIndex = on ? 0 : -1;
+          });
+          $$(".panel").forEach((p) => { p.hidden = p.id !== id; });
+          if (prev !== id && hooks[prev] && hooks[prev].leave) hooks[prev].leave();
+          if (hooks[id] && hooks[id].enter) hooks[id].enter();
+          if (push && window.history && history.replaceState) { try { history.replaceState(null, "", "#" + id); } catch (e) {} }
+        }
+        $$(".tab").forEach((b) => {
+          b.addEventListener("click", () => showTab(b.dataset.tab, true));
+          b.addEventListener("keydown", (e) => {
+            if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+            const i = TABS.indexOf(b.dataset.tab);
+            const n = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
+            showTab(n, true);
+            $('.tab[data-tab="' + n + '"]').focus();
+          });
+        });
+
+        /* ================= Achtergrond: sterren ================= */
+        (function () {
+          const cv = $("#stars");
+          const ctx = cv.getContext && cv.getContext("2d");
+          if (!ctx) return;
+          let w = 0, h = 0, stars = [];
+          function size() {
+            w = cv.width = window.innerWidth;
+            h = cv.height = window.innerHeight;
+            const n = Math.round(clamp((w * h) / 14000, 40, 140));
+            stars = Array.from({ length: n }, () => ({
+              x: Math.random() * w, y: Math.random() * h * 0.7, r: Math.random() * 1.4 + 0.3,
+              p: Math.random() * 6.28, s: Math.random() * 0.02 + 0.005, d: Math.random() * 0.12 + 0.02,
+            }));
+          }
+          function frame() {
+            ctx.clearRect(0, 0, w, h);
+            for (const s of stars) {
+              s.p += s.s;
+              s.x -= s.d;
+              if (s.x < 0) s.x = w;
+              ctx.globalAlpha = 0.25 + 0.55 * Math.abs(Math.sin(s.p));
+              ctx.fillStyle = "#cfe6ff";
+              ctx.beginPath();
+              ctx.arc(s.x, s.y, s.r, 0, 6.283);
+              ctx.fill();
+            }
+            if (!reduce && !document.hidden) requestAnimationFrame(frame);
+            else if (!reduce) setTimeout(frame, 500);
+          }
+          size();
+          frame();
+          window.addEventListener("resize", size);
+        })();
+
+        /* ================= Wachtwoord-check ================= */
+        const COMMON = ["password", "wachtwoord", "welkom", "welkom01", "welkom123", "geheim", "qwerty", "qwertyuiop", "azerty", "admin", "letmein", "iloveyou", "monkey", "dragon", "football", "voetbal", "ajax", "feyenoord", "psv", "nac", "nacbreda", "amsterdam", "rotterdam", "gitaar", "abc123", "test", "test123", "12345678", "123456789", "1234567890", "111111", "000000", "sunshine", "master", "login", "hallo", "hallo123", "zomer", "winter2020", "lente", "oranje", "nederland", "liefde", "fiets", "kaas"];
+        const ROWS = ["qwertyuiop", "asdfghjkl", "zxcvbnm", "1234567890", "abcdefghijklmnopqrstuvwxyz"];
+        function hasSequence(p) {
+          for (let i = 0; i + 3 <= p.length; i++) {
+            const a = p.charCodeAt(i), b = p.charCodeAt(i + 1), c = p.charCodeAt(i + 2);
+            if (b - a === c - b && Math.abs(b - a) === 1 && /[a-z0-9]/.test(p[i])) return true;
+          }
+          for (const r of ROWS) {
+            for (let i = 0; i + 4 <= p.length; i++) {
+              const s = p.slice(i, i + 4);
+              if (r.indexOf(s) >= 0 || r.split("").reverse().join("").indexOf(s) >= 0) return true;
+            }
+          }
+          return false;
+        }
+        function duration(s) {
+          if (!isFinite(s)) return "eeuwig";
+          if (s < 1) return "direct";
+          if (s < 60) return nl(s) + " sec";
+          if (s < 3600) return nl(s / 60) + " min";
+          if (s < 86400) return nl(s / 3600) + " uur";
+          const y = s / 31557600;
+          if (y < 1) return nl(s / 86400) + " dagen";
+          if (y < 1000) return nl(y) + " jaar";
+          if (y < 1e6) return nl(y / 1000) + " dzd. jaar";
+          if (y < 1e9) return nl(y / 1e6) + " mln. jaar";
+          if (y < 1e12) return nl(y / 1e9) + " mld. jaar";
+          return "> biljoen jaar";
+        }
+        function analyze(pw) {
+          const len = pw.length;
+          if (!len) return null;
+          let pool = 0;
+          if (/[a-z]/.test(pw)) pool += 26;
+          if (/[A-Z]/.test(pw)) pool += 26;
+          if (/\d/.test(pw)) pool += 10;
+          if (/[^A-Za-z0-9]/.test(pw)) pool += 33;
+          let bits = len * Math.log2(pool || 1);
+          const lower = pw.toLowerCase();
+          const base = lower.replace(/[^a-z]+$/, "").replace(/^[^a-z]+/, "");
+          const flags = { common: false, repeat: false, seq: false };
+          if (COMMON.indexOf(lower) >= 0 || COMMON.indexOf(base) >= 0) { flags.common = true; bits = Math.min(bits, 12); }
+          if (/(.)\1{2,}/.test(pw)) { flags.repeat = true; bits -= Math.min(bits * 0.35, len * 1.5); }
+          if (hasSequence(lower)) { flags.seq = true; bits -= Math.min(bits * 0.25, 10); }
+          bits = Math.max(1, bits);
+          const guesses = Math.pow(2, bits) / 2;
+          const score = bits < 28 ? 0 : bits < 40 ? 1 : bits < 60 ? 2 : bits < 80 ? 3 : 4;
+          return { len, bits, pool, flags, score, offline: guesses / 1e10, online: guesses / 100 };
+        }
+        TEST.analyze = analyze;
+        TEST.duration = duration;
+        const PW_LABELS = [["Zeer zwak", "#e5484d"], ["Zwak", "#f08a3c"], ["Redelijk", "#e5c13a"], ["Sterk", "#8bd450"], ["Zeer sterk", "#3ddc97"]];
+        const pwIn = $("#pw");
+        function renderPw() {
+          const a = analyze(pwIn.value);
+          const tips = $("#pw-tips");
+          tips.innerHTML = "";
+          if (!a) {
+            $("#pw-bar").style.width = "0";
+            $("#pw-label").textContent = "Begin met typen\u2026";
+            $("#pw-label").style.color = "";
+            ["#pw-bits", "#pw-off", "#pw-on"].forEach((s) => ($(s).textContent = "\u2013"));
+            return;
+          }
+          const [lab, col] = PW_LABELS[a.score];
+          $("#pw-bar").style.width = (a.score + 1) * 20 + "%";
+          $("#pw-bar").style.background = col;
+          $("#pw-label").textContent = lab;
+          $("#pw-label").style.color = col;
+          $("#pw-bits").textContent = nl(a.bits);
+          $("#pw-off").textContent = duration(a.offline);
+          $("#pw-on").textContent = duration(a.online);
+          const add = (t, c) => { const li = document.createElement("li"); li.className = c; li.textContent = t; tips.appendChild(li); };
+          if (a.flags.common) add("Dit is een bekend wachtwoord. Het staat in elke woordenlijst van aanvallers.", "bad");
+          if (a.len < 12) add("Maak het langer: 12 tekens of meer maakt het stukken sterker.", "bad");
+          else add("Mooie lengte (" + a.len + " tekens).", "good");
+          if (a.flags.repeat) add("Herhalende tekens (zoals aaa) zijn makkelijk te raden.", "bad");
+          if (a.flags.seq) add("Reeksen als abc, 123 of qwerty zijn zwak.", "bad");
+          if (!/[A-Z]/.test(pwIn.value) || !/[a-z]/.test(pwIn.value) || !/\d/.test(pwIn.value)) add("Meng hoofdletters, kleine letters en cijfers.", "bad");
+          if (!/[^A-Za-z0-9]/.test(pwIn.value)) add("Een symbool (zoals ! of #) helpt ook.", "bad");
+          if (!tips.querySelector(".bad")) add("Geen duidelijke zwaktes gevonden.", "good");
+        }
+        pwIn.addEventListener("input", renderPw);
+        $("#pw-eye").addEventListener("click", (e) => {
+          const show = pwIn.type === "password";
+          pwIn.type = show ? "text" : "password";
+          e.target.textContent = show ? "Verberg" : "Toon";
+        });
+        function randInt(n) {
+          if (window.crypto && crypto.getRandomValues) {
+            const a = new Uint32Array(1);
+            const lim = Math.floor(4294967296 / n) * n;
+            do { crypto.getRandomValues(a); } while (a[0] >= lim);
+            return a[0] % n;
+          }
+          return Math.floor(Math.random() * n);
+        }
+        $("#pw-gen").addEventListener("click", () => {
+          const sets = ["abcdefghijkmnopqrstuvwxyz", "ABCDEFGHJKLMNPQRSTUVWXYZ", "23456789", "!@#$%^&*-_=+?"];
+          const all = sets.join("");
+          const out = sets.map((s) => s[randInt(s.length)]);
+          while (out.length < 18) out.push(all[randInt(all.length)]);
+          for (let i = out.length - 1; i > 0; i--) { const j = randInt(i + 1); [out[i], out[j]] = [out[j], out[i]]; }
+          const pw = out.join("");
+          const box = $("#pw-gen-out");
+          box.style.display = "block";
+          box.textContent = pw;
+          pwIn.value = pw;
+          pwIn.type = "text";
+          $("#pw-eye").textContent = "Verberg";
+          renderPw();
+        });
+
+        /* ================= Cijfer-werkplaats ================= */
+        const MORSE = { A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....", I: "..", J: ".---", K: "-.-", L: ".-..", M: "--", N: "-.", O: "---", P: ".--.", Q: "--.-", R: ".-.", S: "...", T: "-", U: "..-", V: "...-", W: ".--", X: "-..-", Y: "-.--", Z: "--..", 0: "-----", 1: ".----", 2: "..---", 3: "...--", 4: "....-", 5: ".....", 6: "-....", 7: "--...", 8: "---..", 9: "----.", ".": ".-.-.-", ",": "--..--", "?": "..--..", "!": "-.-.--" };
+        const UNMORSE = {};
+        Object.keys(MORSE).forEach((k) => (UNMORSE[MORSE[k]] = k));
+        const caesar = (t, s) => t.replace(/[a-z]/gi, (c) => { const b = c <= "Z" ? 65 : 97; return String.fromCharCode(((c.charCodeAt(0) - b + s) % 26 + 26) % 26 + b); });
+        const toBytes = (t) => new TextEncoder().encode(t);
+        const fromBytes = (b) => new TextDecoder("utf-8", { fatal: true }).decode(new Uint8Array(b));
+        function b64enc(t) { let s = ""; toBytes(t).forEach((b) => (s += String.fromCharCode(b))); return btoa(s); }
+        function b64dec(t) { const s = atob(t.replace(/\s+/g, "")); const b = []; for (let i = 0; i < s.length; i++) b.push(s.charCodeAt(i)); return fromBytes(b); }
+        const hexEnc = (t) => Array.from(toBytes(t)).map((b) => b.toString(16).padStart(2, "0")).join(" ");
+        function hexDec(t) { const h = t.replace(/[^0-9a-f]/gi, ""); if (h.length % 2) throw new Error("odd"); const b = []; for (let i = 0; i < h.length; i += 2) b.push(parseInt(h.substr(i, 2), 16)); return fromBytes(b); }
+        const binEnc = (t) => Array.from(toBytes(t)).map((b) => b.toString(2).padStart(8, "0")).join(" ");
+        function binDec(t) { const h = t.replace(/[^01]/g, ""); if (h.length % 8) throw new Error("len"); const b = []; for (let i = 0; i < h.length; i += 8) b.push(parseInt(h.substr(i, 8), 2)); return fromBytes(b); }
+        const morseEnc = (t) => t.toUpperCase().split(/\s+/).map((w) => w.split("").map((c) => MORSE[c] || "").filter(Boolean).join(" ")).join(" / ");
+        const morseDec = (t) => t.trim().split(/\s*\/\s*/).map((w) => w.split(/\s+/).map((c) => UNMORSE[c] || "?").join("")).join(" ");
+        function cipher(mode, dir, text, shift) {
+          const enc = dir === "enc";
+          switch (mode) {
+            case "caesar": return caesar(text, enc ? shift : -shift);
+            case "rot13": return caesar(text, 13);
+            case "base64": return enc ? b64enc(text) : b64dec(text);
+            case "hex": return enc ? hexEnc(text) : hexDec(text);
+            case "bin": return enc ? binEnc(text) : binDec(text);
+            case "morse": return enc ? morseEnc(text) : morseDec(text);
+          }
+          return text;
+        }
+        TEST.cipher = cipher;
+        function renderCipher() {
+          const mode = $("#ci-mode").value;
+          const dir = $('input[name="ci-dir"]:checked').value;
+          const shift = +$("#ci-shift").value;
+          $("#ci-shift-wrap").style.display = mode === "caesar" ? "" : "none";
+          $("#ci-shift-val").textContent = shift;
+          try { $("#ci-out").value = cipher(mode, dir, $("#ci-in").value, shift); }
+          catch (e) { $("#ci-out").value = "\u26a0 Dit lijkt geen geldige invoer voor deze methode."; }
+        }
+        ["#ci-mode", "#ci-shift", "#ci-in"].forEach((s) => $(s).addEventListener("input", renderCipher));
+        $$('input[name="ci-dir"]').forEach((r) => r.addEventListener("change", renderCipher));
+        $("#ci-swap").addEventListener("click", () => {
+          const out = $("#ci-out").value;
+          if (out && out.indexOf("\u26a0") !== 0) $("#ci-in").value = out;
+          const cur = $('input[name="ci-dir"]:checked').value;
+          $('input[name="ci-dir"][value="' + (cur === "enc" ? "dec" : "enc") + '"]').checked = true;
+          renderCipher();
+        });
+        $("#ci-copy").addEventListener("click", () => {
+          const t = $("#ci-out").value;
+          const done = () => toast("Gekopieerd \ud83d\udccb");
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => toast("Kopi\u00ebren mislukt"));
+          else { $("#ci-out").select(); try { document.execCommand("copy"); done(); } catch (e) { toast("Kopi\u00ebren mislukt"); } }
+        });
+        renderCipher();
+
+        /* ================= Hash-generator ================= */
+        const hex = (buf) => Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+        async function digest(alg, text) {
+          if (!(window.crypto && crypto.subtle)) throw new Error("nosubtle");
+          return hex(await crypto.subtle.digest(alg, toBytes(text)));
+        }
+        function bitDiff(a, b) {
+          let d = 0;
+          for (let i = 0; i < a.length; i++) { let x = parseInt(a[i], 16) ^ parseInt(b[i], 16); while (x) { d += x & 1; x >>= 1; } }
+          return d;
+        }
+        TEST.bitDiff = bitDiff;
+        let hashSeq = 0;
+        async function renderHash() {
+          const seq = ++hashSeq;
+          const alg = $("#h-alg").value, text = $("#h-in").value;
+          try {
+            const h = await digest(alg, text);
+            const h2 = await digest(alg, text + ".");
+            if (seq !== hashSeq) return;
+            $("#h-out").textContent = h;
+            const pct = Math.round((bitDiff(h, h2) / (h.length * 4)) * 100);
+            $("#h-aval").style.width = pct + "%";
+            $("#h-aval-txt").textContent = "Lawine-effect: \u00e9\u00e9n punt erbij verandert " + pct + "% van de bits";
+          } catch (e) {
+            $("#h-out").textContent = "Hashen werkt alleen op een beveiligde verbinding (https of localhost).";
+            $("#h-aval").style.width = "0";
+          }
+        }
+        $("#h-alg").addEventListener("input", renderHash);
+        $("#h-in").addEventListener("input", renderHash);
+        renderHash();
+
+        /* ================= Mini-CTF ================= */
+        const cyrb53 = (str, seed) => {
+          seed = seed || 0;
+          let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+          for (let i = 0, ch; i < str.length; i++) { ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+          h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+          h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+          return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+        };
+        const CHALLENGES = [
+          { id: "c1", t: "Geheime boodschap", pts: 10, d: "Ik heb mijn vlag verstopt in een code die vaak voor versleuteling wordt aangezien.", puz: "TEVPTntiYXNlNjRfaXNfZ2Vlbl9lbmNyeXB0aWV9", hint: "Eindigt dit op = of ==? Dan is het vaak Base64. Gebruik de Cijfer-werkplaats.", h: 5105880258418713 },
+          { id: "c2", t: "Veni, vidi, vici", pts: 20, d: "Een Romeinse veldheer gebruikte dit al. Iedere letter is een stukje opgeschoven.", puz: "OHRQ{fdhvdu_lv_rxg_pddu_ohxn}", hint: "De verschuiving is kleiner dan 5. Probeer Caesar \u2192 Ontcijfer met de schuif.", h: 541274843012546 },
+          { id: "c3", t: "Alles is tekst", pts: 20, d: "Computers praten in getallen. Deze rij bytes (hex) is eigenlijk gewoon tekst.", puz: "4c 45 4f 4e 7b 68 65 78 5f 69 73 5f 67 65 77 6f 6f 6e 5f 74 65 6b 73 74 7d", hint: "Kies Hexadecimaal \u2192 Ontcijfer.", h: 4569802188289983 },
+          { id: "c4", t: "Speurneus", pts: 30, d: "Soms staat het antwoord gewoon in de pagina, maar je ziet het niet. Kijk eens onder de motorkap van deze site.", puz: "Waar zou een ontwikkelaar een notitie achterlaten die bezoekers niet zien?", hint: "Rechtsklik \u2192 Paginabron weergeven (of Ctrl+U) en zoek naar LEON.", h: 1430619008421428 },
+          { id: "c5", t: "De vingerafdruk", pts: 40, d: "Ik ben een van mijn hobby's. Mijn vlag is LEON{woord}, in kleine letters. Ik heb alleen de SHA-256-hash achtergelaten.", puz: "dff5c1be9fecc045b79dbb5cda16bce434dc13cab945ccde30fffdd8b80eb66a", hint: "Hashes zijn niet om te draaien, maar je kunt wel raden. Probeer mijn hobby's in de Hash-generator.", h: 2366274883197159 },
+        ];
+        const norm = (s) => s.trim().toLowerCase();
+        const checkFlag = (c, v) => cyrb53(norm(v)) === c.h;
+        TEST.checkFlag = (i, v) => checkFlag(CHALLENGES[i], v);
+        const solved = new Set(ls.get("lab-ctf", []) || []);
+        const ctfList = $("#ctf-list");
+        function renderCtf() {
+          ctfList.innerHTML = "";
+          CHALLENGES.forEach((c, i) => {
+            const done = solved.has(c.id);
+            const el = document.createElement("div");
+            el.className = "ctf-item" + (done ? " solved" : "");
+            el.innerHTML = '<h4><span>' + (done ? "\u2705" : "\ud83d\udea9") + "</span><span></span><span class=\"pts\">" + c.pts + " punten</span></h4><p></p><div class=\"puz\"></div>" +
+              '<form><input class="field mono" autocomplete="off" spellcheck="false" placeholder="LEON{...}" aria-label="Vlag voor ' + (i + 1) + '" /><button class="btn" type="submit">Check</button></form>' +
+              '<div class="msg" aria-live="polite"></div><button type="button" class="linkbtn">\ud83d\udca1 Hint</button><div class="hint"></div>';
+            el.children[0].children[1].textContent = i + 1 + ". " + c.t;
+            $("p", el).textContent = c.d;
+            $(".puz", el).textContent = c.puz;
+            $(".hint", el).textContent = c.hint;
+            const input = $("input", el), msg = $(".msg", el);
+            if (done) { input.disabled = true; input.value = "Opgelost!"; $("button.btn", el).disabled = true; msg.textContent = ""; }
+            $(".linkbtn", el).addEventListener("click", () => $(".hint", el).classList.toggle("show"));
+            $("form", el).addEventListener("submit", (e) => {
+              e.preventDefault();
+              if (checkFlag(c, input.value)) {
+                solved.add(c.id);
+                ls.set("lab-ctf", Array.from(solved));
+                refreshStats();
+                toast("\ud83d\udea9 Vlag " + (i + 1) + " gevonden! +" + c.pts + " punten");
+                renderCtf();
+              } else {
+                msg.className = "msg no";
+                msg.textContent = "Helaas, dat is niet de vlag. Probeer opnieuw.";
+              }
+            });
+            ctfList.appendChild(el);
+          });
+          const n = solved.size;
+          $("#ctf-bar").style.width = (n / CHALLENGES.length) * 100 + "%";
+          const pts = CHALLENGES.filter((c) => solved.has(c.id)).reduce((a, c) => a + c.pts, 0);
+          const done = $("#ctf-done");
+          if (n === CHALLENGES.length) {
+            done.className = "msg ok";
+            done.innerHTML = "\ud83c\udf89 Alle vlaggen gevonden, " + pts + " punten! Je bent een echte speurneus. Stuur me gerust een bericht via <a href=\"https://www.linkedin.com/in/leon-keijzers-650469221\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">LinkedIn</a>.";
+          } else {
+            done.className = "msg";
+            done.textContent = n ? n + " van " + CHALLENGES.length + " vlaggen gevonden (" + pts + " punten)." : "";
+          }
+        }
+        renderCtf();
+
+        /* ================= Phishing-quiz ================= */
+        const PHISH = [
+          { from: "PostNL", addr: "info@postnl-herlevering.top", subj: "Pakket niet bezorgd", body: "PostNL: uw pakket kon niet worden bezorgd. Betaal \u20ac1,95 herleveringskosten binnen 24 uur, anders gaat het terug naar de afzender.", link: "https://postnl-herlevering.top/betaal", phish: true, why: ["Vreemd domein (.top) dat niets met PostNL te maken heeft.", "Tijdsdruk: binnen 24 uur.", "Een klein bedrag vragen is een bekende truc om je bankgegevens te krijgen."] },
+          { from: "Jouw bank", addr: "beveiliging@mijnbank-veilig.com", subj: "Uw rekening is geblokkeerd", body: "Beste klant,\nwegens verdachte activiteit hebben wij uw rekening geblokkeerd. Log direct in om uw identiteit te bevestigen.", link: "https://mijnbank-veilig.com/login", phish: true, why: ["Banken sturen nooit links om in te loggen na een blokkade.", "Het domein is niet van de echte bank.", "Onpersoonlijke aanhef en dreigende toon."] },
+          { from: "Spotify", addr: "SMS \u00b7 +46 70 123 45 67", subj: "Verificatiecode", body: "Je verificatiecode voor Spotify is 482913. Deel deze code met niemand.", link: "", phish: false, why: ["Dit is een normale code die je alleen krijgt nadat je zelf inlogt.", "Er staat geen link in en er wordt niets van je gevraagd.", "Let op: deel zo'n code nooit met iemand die ernaar vraagt."] },
+          { from: "Directeur", addr: "directie.nl@gmail.com", subj: "Even snel", body: "Hoi Leon, ik zit in een vergadering en kan niet bellen. Kun je snel 5 cadeaubonnen van \u20ac100 kopen en de codes naar me appen? Ik leg het straks uit. Houd het onder ons.", link: "", phish: true, why: ["Dit heet CEO-fraude: iemand doet zich voor als je baas.", "Gmail-adres in plaats van het bedrijfsadres.", "Cadeaubonnen, haast en geheimhouding: alle rode vlaggen tegelijk."] },
+          { from: "Sanne (collega)", addr: "sanne.devries@jouwbedrijf.nl", subj: "Overleg morgen verplaatst", body: "Hoi Leon, het overleg van morgen is verplaatst naar 14:00. Zelfde Teams-vergadering als altijd. Tot dan! Groet, Sanne", link: "", phish: false, why: ["Bekende afzender met het juiste bedrijfsadres.", "Geen link, geen vraag om geld of gegevens.", "Het past bij hoe jullie normaal werken."] },
+          { from: "Belastingdienst", addr: "teruggave@belasting-nl.info", subj: "U heeft recht op een teruggave", body: "U heeft recht op een teruggave van \u20ac312,40. Vul uw gegevens in via de beveiligde link om het bedrag te ontvangen.", link: "https://belasting-nl.info/teruggave", phish: true, why: ["De Belastingdienst vraagt je niet per mail om gegevens in te vullen.", "Domein eindigt op .info en is niet van de overheid.", "Gratis geld is een lokkertje."] },
+        ];
+        const phBox = $("#ph-box");
+        let phI = 0, phScore = 0, phOrder = [];
+        function phStart() { phOrder = PHISH.map((_, i) => i).sort(() => Math.random() - 0.5); phI = 0; phScore = 0; phShow(); }
+        function phShow() {
+          if (phI >= phOrder.length) {
+            const msg = phScore === PHISH.length ? "Foutloos! Jij trapt er niet zomaar in. \ud83d\udee1\ufe0f" : phScore >= 4 ? "Goed bezig, maar blijf alert." : "Oefening baart kunst. Probeer het nog eens!";
+            phBox.innerHTML = '<div class="result"><div class="big">' + phScore + " / " + PHISH.length + "</div><div>" + msg + '</div></div><div class="row" style="margin-top:12px"><button class="btn" id="ph-again" type="button">\ud83d\udd04 Opnieuw</button></div>';
+            $("#ph-again").addEventListener("click", phStart);
+            return;
+          }
+          const m = PHISH[phOrder[phI]];
+          phBox.innerHTML = '<div class="ph-top"><span>Bericht ' + (phI + 1) + " van " + PHISH.length + "</span><span>Score: " + phScore + '</span></div><div class="mail"><div class="hd"><span>Van: <b></b> <span class="ad"></span></span><span>Onderwerp: <b class="sj"></b></span></div><div class="body"></div></div>' +
+            '<div class="ph-actions"><button class="btn" data-a="real" type="button">\u2705 Echt</button><button class="btn bad" data-a="phish" type="button">\ud83c\udfa3 Phishing</button></div><div id="ph-fb" aria-live="polite"></div>';
+          $(".hd b", phBox).textContent = m.from;
+          $(".ad", phBox).textContent = "<" + m.addr + ">";
+          $(".sj", phBox).textContent = m.subj;
+          $(".body", phBox).textContent = m.body;
+          if (m.link) { const l = document.createElement("span"); l.className = "lnk"; l.textContent = m.link; $(".mail", phBox).appendChild(l); }
+          $$(".ph-actions .btn", phBox).forEach((b) => b.addEventListener("click", () => phAnswer(b.dataset.a === "phish", m)));
+        }
+        function phAnswer(saidPhish, m) {
+          const right = saidPhish === m.phish;
+          if (right) phScore++;
+          $$(".ph-actions .btn", phBox).forEach((b) => (b.disabled = true));
+          const fb = $("#ph-fb", phBox);
+          fb.innerHTML = '<div class="ph-explain ' + (right ? "ok" : "no") + '"><b>' + (right ? "Goed gezien!" : "Helaas.") + " Dit was " + (m.phish ? "phishing" : "een echt bericht") + ".</b><ul></ul><button class=\"btn\" type=\"button\">" + (phI + 1 >= phOrder.length ? "Bekijk score" : "Volgende \u2192") + "</button></div>";
+          m.why.forEach((w) => { const li = document.createElement("li"); li.textContent = w; $("ul", fb).appendChild(li); });
+          $("button", fb).addEventListener("click", () => { phI++; phShow(); });
+        }
+        phStart();
+
+        /* ================= Stemmer ================= */
+        const STRINGS = [{ n: "E2", f: 82.41 }, { n: "A2", f: 110 }, { n: "D3", f: 146.83 }, { n: "G3", f: 196 }, { n: "B3", f: 246.94 }, { n: "E4", f: 329.63 }];
+        const NOTES = ["C", "C\u266f", "D", "D\u266f", "E", "F", "F\u266f", "G", "G\u266f", "A", "A\u266f", "B"];
+        function noteInfo(f) { const m = 69 + 12 * Math.log2(f / 440); const r = Math.round(m); return { name: NOTES[((r % 12) + 12) % 12] + (Math.floor(r / 12) - 1), cents: (m - r) * 100 }; }
+        function detectPitch(buf, fs) {
+          const n = buf.length;
+          let rms = 0;
+          for (let i = 0; i < n; i++) rms += buf[i] * buf[i];
+          rms = Math.sqrt(rms / n);
+          if (rms < 0.01) return -1;
+          const minLag = Math.floor(fs / 500), maxLag = Math.min(Math.floor(fs / 60), n >> 1);
+          const w = n - maxLag;
+          const nsdf = new Float32Array(maxLag + 2);
+          for (let lag = minLag - 1; lag <= maxLag + 1 && lag < n - 1; lag++) {
+            let r = 0, m = 0;
+            for (let i = 0; i < w; i++) { const a = buf[i], b = buf[i + lag]; r += a * b; m += a * a + b * b; }
+            nsdf[lag] = m > 0 ? (2 * r) / m : 0;
+          }
+          const peaks = [];
+          for (let lag = minLag; lag <= maxLag; lag++) {
+            if (nsdf[lag] > 0 && nsdf[lag] > nsdf[lag - 1] && nsdf[lag] >= nsdf[lag + 1]) peaks.push(lag);
+          }
+          if (!peaks.length) return -1;
+          let M = 0;
+          peaks.forEach((p) => { if (nsdf[p] > M) M = nsdf[p]; });
+          if (M < 0.6) return -1;
+          let lag = peaks.find((p) => nsdf[p] >= 0.93 * M);
+          const a = nsdf[lag - 1], b = nsdf[lag], c = nsdf[lag + 1];
+          const den = a - 2 * b + c;
+          const shift = den !== 0 ? (0.5 * (a - c)) / den : 0;
+          return fs / (lag + clamp(shift, -1, 1));
+        }
+        TEST.detectPitch = detectPitch;
+        TEST.noteInfo = noteInfo;
+        let target = null, tuner = null, audioCtx = null;
+        function getCtx() { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; audioCtx = audioCtx || new AC(); if (audioCtx.state === "suspended") audioCtx.resume(); return audioCtx; }
+        function playTone(freq, dur) {
+          const ctx = getCtx(); if (!ctx) return;
+          const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
+          o.type = "triangle"; o.frequency.value = freq;
+          g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.25, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+          o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + dur + 0.05);
+        }
+        const stringsBox = $("#tu-strings");
+        function buildStrings() {
+          stringsBox.innerHTML = "";
+          const mk = (label, s) => {
+            const b = document.createElement("button");
+            b.type = "button"; b.textContent = label;
+            b.setAttribute("aria-pressed", String((s === null && !target) || (s && target === s)));
+            b.addEventListener("click", () => { target = s; if (s) playTone(s.f, 1.6); buildStrings(); });
+            stringsBox.appendChild(b);
+          };
+          mk("Auto", null);
+          STRINGS.forEach((s) => mk(s.n, s));
+        }
+        buildStrings();
+        function setNeedle(c) { $("#needle").style.transform = "rotate(" + clamp(c, -50, 50) * 1.2 + "deg)"; }
+        function stopTuner() {
+          if (!tuner) return;
+          tuner.stop = true;
+          tuner.stream.getTracks().forEach((t) => t.stop());
+          try { tuner.src.disconnect(); } catch (e) {}
+          tuner = null;
+          $("#tu-mic").textContent = "\ud83c\udfa4 Start microfoon";
+          $("#tu-hz").textContent = "Microfoon staat uit";
+          $("#tu-note").textContent = "\u2013"; $("#tu-msg").textContent = ""; setNeedle(0);
+        }
+        async function startTuner() {
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { $("#tu-msg").textContent = "Microfoon is op deze verbinding niet beschikbaar (gebruik https)."; return; }
+          const ctx = getCtx();
+          if (!ctx) { $("#tu-msg").textContent = "Deze browser ondersteunt geen audio."; return; }
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+            const src = ctx.createMediaStreamSource(stream);
+            const an = ctx.createAnalyser(); an.fftSize = 2048;
+            src.connect(an);
+            tuner = { stream, src, an, stop: false, hist: [], quiet: 0, buf: new Float32Array(an.fftSize), frame: 0 };
+            $("#tu-mic").textContent = "\u23f9 Stop microfoon";
+            $("#tu-hz").textContent = "Tokkel een snaar\u2026";
+            const loop = () => {
+              if (!tuner || tuner.stop) return;
+              if (++tuner.frame % 2 === 0) {
+                tuner.an.getFloatTimeDomainData(tuner.buf);
+                const f = detectPitch(tuner.buf, ctx.sampleRate);
+                if (f > 0) { tuner.quiet = 0; tuner.hist.push(f); if (tuner.hist.length > 5) tuner.hist.shift(); showPitch(median(tuner.hist)); }
+                else if (++tuner.quiet > 12) { tuner.hist = []; $("#tu-note").textContent = "\u2013"; $("#tu-hz").textContent = "Tokkel een snaar\u2026"; $("#tu-msg").textContent = ""; setNeedle(0); }
+              }
+              requestAnimationFrame(loop);
+            };
+            loop();
+          } catch (e) { $("#tu-msg").textContent = "Geen toegang tot de microfoon. Geef toestemming in je browser."; }
+        }
+        const median = (a) => { const s = a.slice().sort((x, y) => x - y); return s[Math.floor(s.length / 2)]; };
+        function showPitch(f) {
+          let cents, label;
+          if (target) { cents = 1200 * Math.log2(f / target.f); label = target.n; }
+          else { const n = noteInfo(f); cents = n.cents; label = n.name; }
+          $("#tu-note").textContent = label;
+          $("#tu-hz").textContent = nl(f, 1) + " Hz \u00b7 " + (cents >= 0 ? "+" : "") + nl(cents) + " cent";
+          setNeedle(cents);
+          const m = $("#tu-msg");
+          if (Math.abs(cents) <= 5) { m.textContent = "Zuiver! \u2714"; m.style.color = "#3ddc97"; }
+          else if (cents < 0) { m.textContent = "Te laag \u2191 draai strakker"; m.style.color = "#ff6b6b"; }
+          else { m.textContent = "Te hoog \u2193 draai losser"; m.style.color = "#ff6b6b"; }
+        }
+        $("#tu-mic").addEventListener("click", () => (tuner ? stopTuner() : startTuner()));
+        hooks.muziek = { leave: stopTuner };
+
+        /* ================= Metronoom ================= */
+        const bpmEl = $("#bpm"), beatsEl = $("#beats");
+        let bpm = 100, sig = 4, mRun = false, mTimer = 0, nextT = 0, beatNo = 0;
+        const tempoName = (b) => (b < 60 ? "Largo" : b < 76 ? "Adagio" : b < 108 ? "Andante" : b < 120 ? "Moderato" : b < 156 ? "Allegro" : b < 176 ? "Vivace" : "Presto");
+        function drawBeats() {
+          beatsEl.innerHTML = "";
+          for (let i = 0; i < sig; i++) { const d = document.createElement("i"); if (i === 0 || (sig === 6 && i === 3)) d.className = "acc"; beatsEl.appendChild(d); }
+        }
+        function setBpm(v) { bpm = clamp(Math.round(v), 40, 220); bpmEl.value = bpm; $("#bpm-val").textContent = bpm; $("#bpm-name").textContent = tempoName(bpm); }
+        function click(t, accent) {
+          const ctx = audioCtx; if (!ctx) return;
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = "square"; o.frequency.value = accent ? 1500 : 1000;
+          g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(accent ? 0.35 : 0.22, t + 0.002); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+          o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + 0.06);
+        }
+        function flash(i) { const d = beatsEl.children[i]; if (!d) return; d.classList.add("on"); setTimeout(() => d.classList.remove("on"), 90); }
+        function scheduler() {
+          const ctx = audioCtx;
+          while (nextT < ctx.currentTime + 0.12) {
+            const i = beatNo % sig, acc = i === 0 || (sig === 6 && i === 3);
+            click(nextT, acc);
+            const delay = Math.max(0, (nextT - ctx.currentTime) * 1000);
+            setTimeout(() => flash(i), delay);
+            nextT += 60 / bpm; beatNo++;
+          }
+        }
+        function mStart() {
+          const ctx = getCtx();
+          if (!ctx) { toast("Deze browser ondersteunt geen audio."); return; }
+          mRun = true; beatNo = 0; nextT = ctx.currentTime + 0.06;
+          scheduler(); mTimer = setInterval(scheduler, 25);
+          $("#bpm-go").textContent = "\u23f8 Stop";
+        }
+        function mStop() { mRun = false; clearInterval(mTimer); $("#bpm-go").textContent = "\u25b6 Start"; }
+        $("#bpm-go").addEventListener("click", () => (mRun ? mStop() : mStart()));
+        bpmEl.addEventListener("input", () => setBpm(+bpmEl.value));
+        $("#bpm-min").addEventListener("click", () => setBpm(bpm - 1));
+        $("#bpm-plus").addEventListener("click", () => setBpm(bpm + 1));
+        $("#sig").addEventListener("change", (e) => { sig = +e.target.value; drawBeats(); beatNo = 0; });
+        let taps = [];
+        $("#bpm-tap").addEventListener("click", () => {
+          const now = performance.now();
+          if (taps.length && now - taps[taps.length - 1] > 2000) taps = [];
+          taps.push(now); if (taps.length > 6) taps.shift();
+          if (taps.length >= 2) { const iv = []; for (let i = 1; i < taps.length; i++) iv.push(taps[i] - taps[i - 1]); setBpm(60000 / (iv.reduce((a, b) => a + b, 0) / iv.length)); }
+        });
+        drawBeats(); setBpm(100);
+        hooks.muziek.leave = () => { stopTuner(); mStop(); };
+
+        /* ================= Oefenidee ================= */
+        const PROGS = [["Am", "F", "C", "G"], ["C", "G", "Am", "F"], ["G", "D", "Em", "C"], ["Em", "C", "G", "D"], ["D", "A", "Bm", "G"], ["Am", "G", "F", "E"], ["A", "D", "E", "D"], ["C", "Am", "Dm", "G"]];
+        const STRUMS = ["\u2193 \u00b7 \u2193 \u2191 \u00b7 \u2191 \u2193 \u2191", "\u2193 \u2193 \u2191 \u2191 \u2193 \u2191", "\u2193 \u2191 \u2193 \u2191 \u2193 \u2191 \u2193 \u2191", "\u2193 \u00b7 \u00b7 \u2191 \u2193 \u2191 \u00b7 \u2191", "\u2193 \u2193 \u2193 \u2193"];
+        const TECHS = ["Speel elk akkoord 4 tellen en tel hardop mee.", "Probeer fingerpicking: duim op de basnoot, vingers op de G-, B- en e-snaar.", "Wissel van akkoord zonder te stoppen, ook als het rommelig klinkt.", "Speel de eerste ronde zacht en de tweede ronde hard (dynamiek).", "Demp de snaren licht met de zijkant van je hand (palm muting).", "Speel het hele rondje met je ogen dicht.", "Zing of neurie een melodie bovenop de akkoorden."];
+        let prBpm = 0;
+        $("#pr-new").addEventListener("click", () => {
+          const p = rand(PROGS), s = rand(STRUMS), t = rand(TECHS);
+          prBpm = 60 + 5 * Math.floor(Math.random() * 13);
+          $("#pr-out").innerHTML = '<div><b>Akkoorden:</b> <span class="mono"></span></div><div><b>Ritme:</b> <span class="arrows"></span></div><div><b>Tempo:</b> <span class="bp"></span> BPM</div><div><b>Opdracht:</b> <span class="tc"></span></div>';
+          $("#pr-out .mono").textContent = p.join("  \u2192  ");
+          $("#pr-out .arrows").textContent = s;
+          $("#pr-out .bp").textContent = prBpm;
+          $("#pr-out .tc").textContent = t;
+          $("#pr-bpm").disabled = false;
+        });
+        $("#pr-bpm").addEventListener("click", () => { if (prBpm) { setBpm(prBpm); toast("Metronoom staat op " + prBpm + " BPM"); } });
+
+        /* ================= Typrace ================= */
+        const SENTENCES = [
+          "De start is perfect en de eerste bocht gaat zonder een enkele schaafplek voorbij.",
+          "Een goede hacker test alleen systemen waarvoor hij uitdrukkelijk toestemming heeft gekregen.",
+          "Op het ijs telt elke honderdste seconde, dus iedere stap moet precies kloppen.",
+          "Mijn akoestische gitaar klinkt het mooist als ik hem net voor het spelen even stem.",
+          "In de bergetappe knalt het peloton uit elkaar en blijft alleen de sterkste klimmer over.",
+          "Een sterk wachtwoord is lang en uniek, en tweestapsverificatie maakt het nog veiliger.",
+          "Na twee weken topsport zijn de Olympische vlammen gedoofd, maar de herinneringen blijven.",
+        ];
+        const tyText = $("#ty-text"), tyIn = $("#ty-input"), tyRes = $("#ty-result");
+        let tyTarget = "", tyStart = 0, tyErr = 0, tyTotal = 0, tyPrevLen = 0, tyDone = false, tyTimer = 0, tyLast = -1, rivalDone = 0;
+        function tyNew() {
+          let i; do { i = Math.floor(Math.random() * SENTENCES.length); } while (i === tyLast && SENTENCES.length > 1);
+          tyLast = i; tyTarget = SENTENCES[i];
+          clearInterval(tyTimer);
+          tyStart = 0; tyErr = 0; tyTotal = 0; tyPrevLen = 0; tyDone = false; rivalDone = 0;
+          tyIn.value = ""; tyIn.disabled = false; tyIn.maxLength = tyTarget.length;
+          tyRes.hidden = true;
+          moveCar("#car-you", 0); moveCar("#car-rival", 0);
+          tyDraw();
+        }
+        function moveCar(sel, p) { $(sel).style.left = "calc(" + p * 100 + "% - " + p * 44 + "px)"; }
+        function tyDraw() {
+          const v = tyIn.value;
+          tyText.innerHTML = "";
+          for (let i = 0; i < tyTarget.length; i++) {
+            const s = document.createElement("span");
+            s.textContent = tyTarget[i];
+            if (i < v.length) s.className = v[i] === tyTarget[i] ? "ok" : "bad";
+            else if (i === v.length) s.className = "cur";
+            tyText.appendChild(s);
+          }
+        }
+        function rivalTick() {
+          const wpm = +$("#ty-rival").value;
+          const elapsed = (performance.now() - tyStart) / 1000;
+          const p = clamp((elapsed * ((wpm * 5) / 60)) / tyTarget.length, 0, 1);
+          moveCar("#car-rival", p);
+          if (p >= 1 && !rivalDone) rivalDone = elapsed;
+          if (p >= 1) clearInterval(tyTimer);
+        }
+        tyIn.addEventListener("input", () => {
+          if (tyDone) return;
+          const v = tyIn.value;
+          if (!tyStart) { tyStart = performance.now(); tyTimer = setInterval(rivalTick, 80); }
+          if (v.length > tyPrevLen) { for (let i = tyPrevLen; i < v.length; i++) { tyTotal++; if (v[i] !== tyTarget[i]) tyErr++; } }
+          tyPrevLen = v.length;
+          moveCar("#car-you", clamp(v.length / tyTarget.length, 0, 1) * (v === tyTarget.slice(0, v.length) ? 1 : 0.98));
+          tyDraw();
+          if (v === tyTarget) tyFinish();
+        });
+        tyIn.addEventListener("paste", (e) => e.preventDefault());
+        function tyFinish() {
+          tyDone = true; clearInterval(tyTimer); tyIn.disabled = true;
+          const secs = (performance.now() - tyStart) / 1000;
+          const wpm = Math.round(tyTarget.length / 5 / (secs / 60));
+          const acc = Math.max(0, Math.round((1 - tyErr / Math.max(1, tyTotal)) * 100));
+          const best = ls.get("lab-wpm", 0);
+          const rec = wpm > best;
+          if (rec) { ls.set("lab-wpm", wpm); refreshStats(); }
+          const rw = +$("#ty-rival").value;
+          const rivalTime = (tyTarget.length / 5 / rw) * 60;
+          const won = secs < rivalTime;
+          tyRes.hidden = false;
+          tyRes.innerHTML = '<div class="big"></div><div></div>';
+          tyRes.children[0].textContent = won ? "\ud83c\udfc1 Gewonnen! " + wpm + " WPM" : "\ud83d\udea8 De rivaal was sneller: " + wpm + " WPM";
+          tyRes.children[1].textContent = "Rondetijd " + nl(secs, 2) + " s \u00b7 nauwkeurigheid " + acc + "% \u00b7 " + tyErr + " fout" + (tyErr === 1 ? "" : "en") + (rec ? " \u00b7 \u2b50 Nieuw record!" : "");
+          moveCar("#car-you", 1);
+        }
+        $("#ty-new").addEventListener("click", () => { tyNew(); tyIn.focus(); });
+        $("#ty-rival").addEventListener("change", () => { tyNew(); });
+        tyNew();
+
+        /* ================= Snake ================= */
+        const snCv = $("#sn"), sn = snCv.getContext && snCv.getContext("2d");
+        const G = 20, CELL = snCv.width / G;
+        let snake, dir, queue, food, score, snBest = ls.get("lab-snake", 0), state = "idle", snTimer = 0, speed;
+        $("#sn-best").textContent = snBest;
+        function placeFood() {
+          let p; do { p = { x: Math.floor(Math.random() * G), y: Math.floor(Math.random() * G) }; } while (snake.some((s) => s.x === p.x && s.y === p.y));
+          food = p;
+        }
+        function snReset() {
+          snake = [{ x: 8, y: 10 }, { x: 7, y: 10 }, { x: 6, y: 10 }];
+          dir = { x: 1, y: 0 }; queue = []; score = 0; speed = 140;
+          $("#sn-score").textContent = 0;
+          placeFood();
+        }
+        function snTick() {
+          if (queue.length) dir = queue.shift();
+          const h = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+          const eat = food && h.x === food.x && h.y === food.y;
+          const body = eat ? snake : snake.slice(0, -1);
+          if (h.x < 0 || h.y < 0 || h.x >= G || h.y >= G || body.some((s) => s.x === h.x && s.y === h.y)) return snOver();
+          snake.unshift(h);
+          if (eat) {
+            score += 10; $("#sn-score").textContent = score; speed = Math.max(65, speed - 4);
+            if (snake.length >= G * G) return snOver(true);
+            placeFood();
+          } else snake.pop();
+          snTimer = setTimeout(snTick, speed);
+        }
+        function snOver(win) {
+          state = "over"; clearTimeout(snTimer);
+          if (score > snBest) { snBest = score; ls.set("lab-snake", snBest); $("#sn-best").textContent = snBest; refreshStats(); toast("\u2b50 Nieuw Snake-record: " + score); }
+          $("#sn-start").textContent = "\ud83d\udd04 Opnieuw";
+          if (win) toast("Het hele netwerk is gevuld! \ud83c\udf89");
+        }
+        function snStart() { clearTimeout(snTimer); snReset(); state = "run"; $("#sn-start").textContent = "\ud83d\udd04 Opnieuw"; snTimer = setTimeout(snTick, speed); snCv.focus({ preventScroll: true }); }
+        function snPause() {
+          if (state === "run") { state = "pause"; clearTimeout(snTimer); }
+          else if (state === "pause") { state = "run"; snTimer = setTimeout(snTick, speed); }
+        }
+        function turn(dx, dy) {
+          if (state === "idle" || state === "over") return;
+          if (state === "pause") snPause();
+          const last = queue.length ? queue[queue.length - 1] : dir;
+          if ((dx === -last.x && dy === -last.y) || (dx === last.x && dy === last.y)) return;
+          if (queue.length < 3) queue.push({ x: dx, y: dy });
+        }
+        const DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+        $$(".dpad button").forEach((b) => b.addEventListener("click", () => { const d = DIRS[b.dataset.dir]; if (state === "idle" || state === "over") snStart(); turn(d[0], d[1]); }));
+        $("#sn-start").addEventListener("click", snStart);
+        $("#sn-pause").addEventListener("click", snPause);
+        const KEYS = { ArrowUp: "up", w: "up", W: "up", ArrowDown: "down", s: "down", S: "down", ArrowLeft: "left", a: "left", A: "left", ArrowRight: "right", d: "right", D: "right" };
+        document.addEventListener("keydown", (e) => {
+          if (currentTab !== "arcade") return;
+          const tag = (e.target.tagName || "").toLowerCase();
+          if (tag === "input" || tag === "textarea" || tag === "select") return;
+          if (KEYS[e.key]) { e.preventDefault(); if (state === "idle" || state === "over") snStart(); const d = DIRS[KEYS[e.key]]; turn(d[0], d[1]); }
+          else if (e.key === " " && tag !== "button") { e.preventDefault(); if (state === "idle" || state === "over") snStart(); else snPause(); }
+        });
+        let tx = 0, ty = 0;
+        snCv.addEventListener("touchstart", (e) => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+        snCv.addEventListener("touchend", (e) => {
+          const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+          if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) { if (state === "idle" || state === "over") snStart(); return; }
+          if (state === "idle" || state === "over") snStart();
+          if (Math.abs(dx) > Math.abs(dy)) turn(dx > 0 ? 1 : -1, 0); else turn(0, dy > 0 ? 1 : -1);
+        }, { passive: true });
+        function snDraw(t) {
+          if (!sn) return;
+          const W = snCv.width;
+          sn.fillStyle = "#060c16"; sn.fillRect(0, 0, W, W);
+          sn.strokeStyle = "rgba(122,162,255,0.07)"; sn.lineWidth = 1;
+          for (let i = 1; i < G; i++) { sn.beginPath(); sn.moveTo(i * CELL, 0); sn.lineTo(i * CELL, W); sn.moveTo(0, i * CELL); sn.lineTo(W, i * CELL); sn.stroke(); }
+          if (food) {
+            const pulse = 0.75 + 0.25 * Math.sin(t / 180);
+            sn.shadowColor = "#e8ad2e"; sn.shadowBlur = 14;
+            sn.fillStyle = "#e8ad2e"; sn.beginPath(); sn.arc(food.x * CELL + CELL / 2, food.y * CELL + CELL / 2, (CELL / 2 - 3) * pulse + 1, 0, 6.283); sn.fill();
+            sn.shadowBlur = 0;
+          }
+          if (snake) snake.forEach((s, i) => {
+            const k = 1 - i / Math.max(snake.length, 6) * 0.65;
+            sn.fillStyle = i === 0 ? "#b9f7d6" : "rgba(61," + Math.round(160 + 60 * k) + "," + Math.round(110 * k + 40) + ",1)";
+            const pad = i === 0 ? 1 : 2;
+            sn.beginPath();
+            if (sn.roundRect) sn.roundRect(s.x * CELL + pad, s.y * CELL + pad, CELL - pad * 2, CELL - pad * 2, 5); else sn.rect(s.x * CELL + pad, s.y * CELL + pad, CELL - pad * 2, CELL - pad * 2);
+            sn.fill();
+          });
+          if (state !== "run") {
+            sn.fillStyle = "rgba(6,12,22,0.72)"; sn.fillRect(0, 0, W, W);
+            sn.fillStyle = "#f4f7fb"; sn.textAlign = "center";
+            sn.font = "700 30px Oswald, sans-serif";
+            sn.fillText(state === "over" ? "GAME OVER" : state === "pause" ? "PAUZE" : "SNAKE", W / 2, W / 2 - 6);
+            sn.font = "500 15px Inter, sans-serif"; sn.fillStyle = "#9fb3c8";
+            sn.fillText(state === "over" ? "Score " + score + " \u00b7 druk op spatie" : "Druk op spatie of start", W / 2, W / 2 + 22);
+          }
+        }
+        snReset(); state = "idle";
+        (function loop(t) { if (currentTab === "arcade") snDraw(t || 0); requestAnimationFrame(loop); })(0);
+        hooks.arcade = { enter: () => snDraw(0), leave: () => { if (state === "run") snPause(); } };
+        document.addEventListener("visibilitychange", () => { if (document.hidden && state === "run") snPause(); });
+
+        /* ================= Easter egg: Konami ================= */
+        const KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+        let kpos = 0;
+        document.addEventListener("keydown", (e) => {
+          const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+          kpos = k === KONAMI[kpos] ? kpos + 1 : k === KONAMI[0] ? 1 : 0;
+          if (kpos === KONAMI.length) { kpos = 0; document.body.classList.toggle("hacker"); toast(document.body.classList.contains("hacker") ? "\ud83d\udc7e Hackermodus geactiveerd" : "Hackermodus uitgezet"); }
+        });
+
+        /* ================= Start ================= */
+        refreshStats();
+        showTab((location.hash || "").replace("#", ""), false);
+        if (window.__LAB_TEST) window.__labTest = TEST;
+      })();
+    </script>
+  </body>
+</html>
