@@ -1897,6 +1897,37 @@
         color: #ffcf5c;
       }
 
+
+      .news-btn {
+  position: fixed;
+  top: 62px;
+  left: 16px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: rgba(0, 165, 142, 0.18);
+  border: 1px solid rgba(206, 220, 0, 0.5);
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s, background 0.15s;
+}
+.news-btn:hover {
+  background: rgba(206, 220, 0, 0.25);
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .news-btn { top: 52px; left: 10px; padding: 8px 12px; font-size: 0.78rem; }
+  .news-btn .news-label { display: none; }
+}
+
+
     </style>
   </head>
   <body>
@@ -1911,6 +1942,10 @@
     <a class="hobby-btn" href="hobbys.html">
       <span aria-hidden="true">🎸</span><span class="hobby-label">Hobby's</span>
     </a>
+     <a class="news-btn" href="nieuws.html">
+     <span aria-hidden="true">📰</span><span class="news-label">Nieuws</span>
+    </a>
+
     <button type="button" class="acc-btn" id="acc-btn" aria-haspopup="dialog">
       <span aria-hidden="true">👤</span><span class="acc-label" id="acc-label">Account</span>
     </button>

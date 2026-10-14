@@ -48,8 +48,62 @@
         max-width: 100%;
         display: block;
       }
+      :focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+      }
 
-      /* ---------- Zachte achtergrond: ringen, auto, gitaar ---------- */
+      /* ---------- Blitsere achtergrond: gloeiende ringen, auto's en gitaren die langzaam driften ---------- */
+      .bg-wash {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse 900px 500px at 15% 0%, rgba(232, 173, 46, 0.1), transparent 60%),
+          radial-gradient(ellipse 800px 600px at 100% 60%, rgba(216, 58, 58, 0.09), transparent 60%),
+          radial-gradient(ellipse 700px 500px at 0% 100%, rgba(156, 107, 62, 0.1), transparent 60%);
+      }
+      .bg-wash::before,
+      .bg-wash::after {
+        content: "";
+        position: absolute;
+        width: 60vmax;
+        height: 60vmax;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.5;
+        animation: aurora 26s ease-in-out infinite alternate;
+      }
+      .bg-wash::before {
+        top: -20vmax;
+        right: -10vmax;
+        background: radial-gradient(circle, rgba(79, 195, 224, 0.2), transparent 65%);
+      }
+      .bg-wash::after {
+        bottom: -25vmax;
+        left: -15vmax;
+        background: radial-gradient(circle, rgba(232, 173, 46, 0.18), transparent 65%);
+        animation-duration: 32s;
+        animation-direction: alternate-reverse;
+      }
+      @keyframes aurora {
+        from { transform: translate3d(0, 0, 0) scale(1); }
+        to { transform: translate3d(-6vmax, 5vmax, 0) scale(1.18); }
+      }
+      .bg-grid {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(159, 179, 200, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(159, 179, 200, 0.05) 1px, transparent 1px);
+        background-size: 56px 56px;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 75%);
+        mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 75%);
+      }
       .bg-deco {
         position: fixed;
         inset: 0;
@@ -57,24 +111,30 @@
         pointer-events: none;
         overflow: hidden;
       }
-      .bg-deco svg {
+      .bg-deco .d {
         position: absolute;
-        opacity: 0.05;
+        opacity: 0.16;
+        filter: drop-shadow(0 0 14px currentColor) drop-shadow(0 0 34px currentColor);
+        animation: drift var(--t, 40s) ease-in-out infinite alternate;
+        animation-delay: var(--delay, 0s);
+        will-change: transform;
       }
-      .bg-rings-a { top: -60px; left: -80px; width: 480px; }
-      .bg-rings-b { bottom: 4%; right: -100px; width: 420px; opacity: 0.045; }
-      .bg-car { top: 38%; right: -60px; width: 360px; opacity: 0.05; transform: scaleX(-1); }
-      .bg-guitar { bottom: -40px; left: -40px; width: 300px; opacity: 0.06; }
-      .bg-wash {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background:
-          radial-gradient(ellipse 900px 500px at 15% 0%, rgba(232, 173, 46, 0.08), transparent 60%),
-          radial-gradient(ellipse 800px 600px at 100% 60%, rgba(216, 58, 58, 0.07), transparent 60%),
-          radial-gradient(ellipse 700px 500px at 0% 100%, rgba(156, 107, 62, 0.08), transparent 60%);
+      @keyframes drift {
+        from { transform: translate3d(0, 0, 0) rotate(var(--r0, 0deg)) scaleX(var(--fx, 1)); }
+        to { transform: translate3d(var(--dx, 40px), var(--dy, 30px), 0) rotate(var(--r1, 6deg)) scaleX(var(--fx, 1)); }
       }
+      .d-gold { color: var(--gold); }
+      .d-ice { color: var(--ice); }
+      .d-race { color: var(--race); }
+      .d-wood { color: var(--wood-light); }
+
+      .d.rings1 { top: -40px; left: -70px; width: 500px; --dx: 70px; --dy: 50px; --r0: -8deg; --r1: -2deg; --t: 44s; }
+      .d.rings2 { bottom: 6%; right: -90px; width: 440px; --dx: -60px; --dy: -40px; --r0: 6deg; --r1: 0deg; --t: 52s; opacity: 0.13; }
+      .d.rings3 { top: 46%; left: 38%; width: 240px; --dx: 50px; --dy: -60px; --r0: 0deg; --r1: 12deg; --t: 60s; opacity: 0.09; }
+      .d.car1 { top: 34%; right: -50px; width: 380px; --fx: -1; --dx: -90px; --dy: 20px; --r0: 0deg; --r1: -2deg; --t: 36s; }
+      .d.car2 { top: 72%; left: 6%; width: 260px; --dx: 80px; --dy: -24px; --r0: 2deg; --r1: -1deg; --t: 48s; --delay: -12s; opacity: 0.11; }
+      .d.guitar1 { bottom: -50px; left: -30px; width: 310px; --dx: 40px; --dy: -50px; --r0: -12deg; --r1: -4deg; --t: 50s; }
+      .d.guitar2 { top: 14%; right: 6%; width: 170px; --dx: -30px; --dy: 60px; --r0: 18deg; --r1: 28deg; --t: 42s; --delay: -20s; opacity: 0.11; }
 
       main,
       header,
@@ -148,7 +208,7 @@
         width: 300px;
         border-radius: 6px;
         border: 6px solid #fff;
-        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55);
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55), 0 0 60px rgba(232, 173, 46, 0.12);
         transform: rotate(-2.5deg);
       }
       .hero-photo .pin {
@@ -179,6 +239,7 @@
       }
       .hero-text h1 .line2 {
         color: var(--gold);
+        text-shadow: 0 0 28px rgba(232, 173, 46, 0.35);
       }
       .hero-text p {
         max-width: 48ch;
@@ -391,6 +452,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 18px;
+        margin-top: 18px;
       }
       .frame.race {
         background: #0e1318;
@@ -414,6 +476,98 @@
         background: var(--race);
         padding: 3px 9px;
         border-radius: 5px;
+      }
+
+      /* ---------- Reactielichten-game ---------- */
+      .reactie {
+        margin: 22px 0 8px;
+        padding: 22px 20px 20px;
+        text-align: center;
+        background: #0b1015;
+        border: 1px solid #2a333c;
+        border-radius: 12px;
+      }
+      .reactie h3 {
+        margin: 0 0 4px;
+        font-family: var(--display);
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+      .reactie > p {
+        margin: 0 auto 18px;
+        max-width: 50ch;
+        font-size: 0.84rem;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      .lights {
+        display: flex;
+        justify-content: center;
+        gap: clamp(8px, 2.4vw, 18px);
+        margin-bottom: 18px;
+        padding: 14px 20px;
+        width: fit-content;
+        margin-inline: auto;
+        background: #05080b;
+        border: 2px solid #1c252e;
+        border-radius: 14px;
+      }
+      .lamp {
+        width: clamp(30px, 8vw, 46px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #3a1618, #1d0b0c);
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+        transition: background 0.06s, box-shadow 0.06s;
+      }
+      .lamp.on {
+        background: radial-gradient(circle at 35% 30%, #ff9a8a, #e4281f 60%, #a3140e);
+        box-shadow: 0 0 22px 4px rgba(255, 60, 40, 0.65), inset 0 0 0 2px rgba(0, 0, 0, 0.35);
+      }
+      .reactie-btn {
+        min-width: min(320px, 100%);
+        padding: 16px 24px;
+        font-family: var(--display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #07111f;
+        background: var(--ink);
+        border: 0;
+        border-radius: 12px;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: background 0.12s, transform 0.12s;
+      }
+      .reactie-btn:active {
+        transform: scale(0.98);
+      }
+      .reactie-btn.wait { background: #ffd166; }
+      .reactie-btn.go { background: #3ddc84; }
+      .reactie-btn.fout { background: #ff6b6b; }
+      .reactie-out {
+        min-height: 3.2em;
+        margin: 16px 0 6px;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        color: var(--ink);
+      }
+      .reactie-out .ms {
+        display: block;
+        font-family: var(--display);
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1.1;
+        color: #3ddc84;
+      }
+      .reactie-best {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .reactie-best b {
+        color: var(--gold);
+        font-family: var(--display);
+        font-size: 0.95rem;
       }
 
       /* ---------- Sport-volgen sectie ---------- */
@@ -509,6 +663,15 @@
         border-color: var(--nac);
         color: var(--nac);
       }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 10px;
+      }
+      .cheer-count {
+        margin: 10px 0 0 !important;
+        font-size: 0.74rem !important;
+      }
 
       .frame.ice {
         background: linear-gradient(170deg, #12232c, #0b1620);
@@ -583,6 +746,52 @@
         font-size: 1.3rem;
       }
 
+      /* ---------- Countdown LA 2028 ---------- */
+      .countdown {
+        position: relative;
+        margin: 30px auto 0;
+        padding-top: 26px;
+        border-top: 1px solid rgba(232, 173, 46, 0.28);
+      }
+      .countdown h4 {
+        margin: 0 0 14px;
+        font-family: var(--display);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: clamp(8px, 2vw, 16px);
+      }
+      .cd-box {
+        min-width: clamp(62px, 16vw, 96px);
+        padding: 12px 8px 10px;
+        background: rgba(7, 17, 31, 0.7);
+        border: 1px solid rgba(232, 173, 46, 0.4);
+        border-radius: 10px;
+      }
+      .cd-box b {
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(1.7rem, 6vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1;
+        color: var(--gold);
+        font-variant-numeric: tabular-nums;
+      }
+      .cd-box span {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .countdown .cd-note {
+        margin: 14px auto 0;
+        font-size: 0.8rem;
+      }
+
       /* ---------- Footer / terug-link ---------- */
       footer {
         max-width: 1200px;
@@ -619,7 +828,8 @@
       }
 
       /* ---------- Popup-knoppen ---------- */
-      .popup-trigger {
+      .popup-trigger,
+      .action-btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -637,14 +847,30 @@
         box-shadow: 0 10px 22px -8px rgba(0, 0, 0, 0.55);
         transition: transform 0.15s, box-shadow 0.15s;
       }
-      .popup-trigger:hover {
+      .popup-trigger:hover,
+      .action-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 14px 26px -8px rgba(0, 0, 0, 0.6);
+      }
+      .action-btn.outline {
+        color: var(--nac);
+        background: #141414;
+        border: 1px solid var(--nac);
       }
       .trig-wood { --p-accent: var(--wood-light); }
       .trig-race { --p-accent: #ff6b6b; }
       .trig-nac { --p-accent: var(--nac); }
       .trig-gold { --p-accent: var(--gold); }
+
+      /* ---------- Confetti ---------- */
+      #confetti {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
 
       /* ---------- Popup-vensters ---------- */
       .popup-overlay {
@@ -806,37 +1032,64 @@
         color: var(--muted);
       }
       @media (prefers-reduced-motion: reduce) {
-        .popup-reply.show {
+        .popup-reply.show,
+        .bg-deco .d,
+        .bg-wash::before,
+        .bg-wash::after {
           animation: none;
+        }
+        html {
+          scroll-behavior: auto;
         }
       }
     </style>
   </head>
   <body>
+    <!-- Symbolen: dezelfde ringen, auto en gitaar als eerst, nu herbruikbaar -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="s-rings" viewBox="0 0 200 100">
+          <g fill="none" stroke="currentColor" stroke-width="5">
+            <circle cx="35" cy="35" r="26" /><circle cx="83" cy="35" r="26" /><circle cx="131" cy="35" r="26" />
+            <circle cx="59" cy="68" r="26" /><circle cx="107" cy="68" r="26" />
+          </g>
+        </symbol>
+        <symbol id="s-car" viewBox="0 0 240 100">
+          <g fill="currentColor">
+            <path d="M10 70 Q15 45 45 40 L70 22 Q95 10 140 12 L175 20 Q205 26 222 48 L228 62 Q230 72 220 74 L205 74 Q202 60 188 60 Q174 60 171 74 L80 74 Q77 60 63 60 Q49 60 46 74 L18 74 Q8 74 10 70 Z" />
+            <circle cx="63" cy="76" r="14" /><circle cx="188" cy="76" r="14" />
+          </g>
+        </symbol>
+        <symbol id="s-guitar" viewBox="0 0 160 300">
+          <g fill="currentColor">
+            <rect x="74" y="0" width="12" height="120" rx="3" />
+            <circle cx="80" cy="190" r="56" />
+            <circle cx="80" cy="235" r="72" />
+          </g>
+          <circle cx="80" cy="212" r="20" fill="#0b1420" />
+        </symbol>
+      </defs>
+    </svg>
+
     <div class="bg-wash" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-deco" aria-hidden="true">
-      <svg class="bg-rings-a" viewBox="0 0 200 100" fill="none" stroke="#fff" stroke-width="5">
-        <circle cx="35" cy="35" r="26" /><circle cx="83" cy="35" r="26" /><circle cx="131" cy="35" r="26" />
-        <circle cx="59" cy="68" r="26" /><circle cx="107" cy="68" r="26" />
-      </svg>
-      <svg class="bg-rings-b" viewBox="0 0 200 100" fill="none" stroke="#fff" stroke-width="5">
-        <circle cx="35" cy="35" r="26" /><circle cx="83" cy="35" r="26" /><circle cx="131" cy="35" r="26" />
-        <circle cx="59" cy="68" r="26" /><circle cx="107" cy="68" r="26" />
-      </svg>
-      <svg class="bg-car" viewBox="0 0 240 100" fill="#fff">
-        <path d="M10 70 Q15 45 45 40 L70 22 Q95 10 140 12 L175 20 Q205 26 222 48 L228 62 Q230 72 220 74 L205 74 Q202 60 188 60 Q174 60 171 74 L80 74 Q77 60 63 60 Q49 60 46 74 L18 74 Q8 74 10 70 Z" />
-        <circle cx="63" cy="76" r="14" /><circle cx="188" cy="76" r="14" />
-      </svg>
-      <svg class="bg-guitar" viewBox="0 0 160 300" fill="#fff">
-        <rect x="74" y="0" width="12" height="120" rx="3" />
-        <circle cx="80" cy="190" r="56" />
-        <circle cx="80" cy="235" r="72" />
-        <circle cx="80" cy="212" r="20" fill="#0b1420" />
-      </svg>
+      <svg class="d d-gold rings1" viewBox="0 0 200 100"><use href="#s-rings" /></svg>
+      <svg class="d d-ice rings2" viewBox="0 0 200 100"><use href="#s-rings" /></svg>
+      <svg class="d d-gold rings3" viewBox="0 0 200 100"><use href="#s-rings" /></svg>
+      <svg class="d d-race car1" viewBox="0 0 240 100"><use href="#s-car" /></svg>
+      <svg class="d d-race car2" viewBox="0 0 240 100"><use href="#s-car" /></svg>
+      <svg class="d d-wood guitar1" viewBox="0 0 160 300"><use href="#s-guitar" /></svg>
+      <svg class="d d-wood guitar2" viewBox="0 0 160 300"><use href="#s-guitar" /></svg>
     </div>
 
+    <canvas id="confetti" aria-hidden="true"></canvas>
+
     <nav class="topnav">
-      <a class="back" href="index.html">← Terug naar portfolio</a>
+      <span style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="back" href="index.html">← Terug naar portfolio</a>
+        <a class="back" href="nieuws.html">📰 Nieuws</a>
+      </span>
       <span class="crumbs"><b>Leon Keijzers</b> · Hobby's</span>
     </nav>
 
@@ -947,6 +1200,21 @@
               </figcaption>
             </figure>
           </div>
+
+          <!-- Reactielichten-game -->
+          <div class="reactie" id="reactie">
+            <h3>🚦 Lukt jouw start beter dan de mijne?</h3>
+            <p>
+              Vijf rode lichten gaan één voor één aan. Zodra ze allemaal doven, druk je zo snel mogelijk op de
+              knop (of op spatie). Te vroeg? Dan is het een valse start.
+            </p>
+            <div class="lights" aria-hidden="true">
+              <span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span>
+            </div>
+            <button type="button" class="reactie-btn" id="reactie-btn">Start de formatieronde</button>
+            <p class="reactie-out" id="reactie-out" aria-live="polite">Druk op start om te beginnen.</p>
+            <p class="reactie-best">Beste tijd: <b id="reactie-best">&ndash;</b></p>
+          </div>
         </div>
       </section>
 
@@ -986,9 +1254,15 @@
                   <a href="https://www.knvb.nl/competities/keuken-kampioen-divisie/stand" target="_blank" rel="noopener">📊 Stand Keuken Kampioen Divisie</a>
                   <a href="https://www.nac.nl" target="_blank" rel="noopener">🟡⚫ NAC.nl</a>
                 </div>
-                <button type="button" class="popup-trigger trig-nac" data-popup="pop-nac">
-                  ⚽ Voorspel de uitslag
-                </button>
+                <div class="btn-row">
+                  <button type="button" class="popup-trigger trig-nac" data-popup="pop-nac">
+                    ⚽ Voorspel de uitslag
+                  </button>
+                  <button type="button" class="action-btn outline" id="cheer-btn">
+                    🟡⚫ Juich voor NAC!
+                  </button>
+                </div>
+                <p class="cheer-count" id="cheer-count" aria-live="polite"></p>
               </div>
             </div>
           </div>
@@ -1027,12 +1301,26 @@
           <button type="button" class="popup-trigger trig-gold" data-popup="pop-olympisch">
             🏅 Zet je boodschap op het scorebord
           </button>
+
+          <div class="countdown" id="countdown" data-target="2028-07-14T00:00:00-07:00">
+            <h4>⏳ Nog te gaan tot Los Angeles 2028</h4>
+            <div class="cd-grid" role="timer" aria-label="Aftelklok naar de Olympische Spelen in Los Angeles">
+              <div class="cd-box"><b id="cd-d">--</b><span>dagen</span></div>
+              <div class="cd-box"><b id="cd-h">--</b><span>uren</span></div>
+              <div class="cd-box"><b id="cd-m">--</b><span>minuten</span></div>
+              <div class="cd-box"><b id="cd-s">--</b><span>seconden</span></div>
+            </div>
+            <p class="cd-note">De volgende Zomerspelen openen op 14 juli 2028.</p>
+          </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <a class="back2" href="index.html">← Terug naar mijn portfolio &amp; certificaten</a>
+      <span style="display:flex;gap:20px;flex-wrap:wrap">
+        <a class="back2" href="index.html">← Terug naar mijn portfolio &amp; certificaten</a>
+        <a class="back2" href="nieuws.html">📰 Nieuws</a>
+      </span>
       <small>Leon Keijzers · Hobby's</small>
     </footer>
 
@@ -1224,7 +1512,7 @@
           }
         }
 
-        document.querySelectorAll(".popup-trigger").forEach((btn) => {
+        document.querySelectorAll(".popup-trigger[data-popup]").forEach((btn) => {
           btn.addEventListener("click", () => openPopup(btn.dataset.popup));
         });
         document.querySelectorAll(".popup-overlay").forEach((ov) => {
@@ -1277,6 +1565,232 @@
           const n = countKey("leon-hobby-predictions");
           if (n > 0) nacCount.textContent = "📊 In totaal " + n + (n === 1 ? " voorspelling" : " voorspellingen") + " ontvangen sinds je dit bent gaan invullen.";
         }
+      })();
+
+      /* ---------- Reactielichten-game ---------- */
+      (function () {
+        "use strict";
+        const btn = document.getElementById("reactie-btn");
+        const out = document.getElementById("reactie-out");
+        const bestEl = document.getElementById("reactie-best");
+        const lamps = Array.from(document.querySelectorAll("#reactie .lamp"));
+        const KEY = "leon-hobby-reactie-best";
+        let state = "idle"; // idle | lights | hold | go
+        let timers = [];
+        let tGo = 0;
+        let best = null;
+
+        try {
+          const v = parseInt(localStorage.getItem(KEY) || "", 10);
+          if (v > 0) best = v;
+        } catch (e) {}
+        function showBest() {
+          bestEl.textContent = best ? best + " ms" : "\u2013";
+        }
+        showBest();
+
+        function clearTimers() {
+          timers.forEach(clearTimeout);
+          timers = [];
+        }
+        function setLamps(n) {
+          lamps.forEach((l, i) => l.classList.toggle("on", i < n));
+        }
+        function setBtn(text, cls) {
+          btn.textContent = text;
+          btn.className = "reactie-btn" + (cls ? " " + cls : "");
+        }
+
+        function start() {
+          clearTimers();
+          setLamps(0);
+          state = "lights";
+          setBtn("Wacht tot de lichten doven\u2026", "wait");
+          out.textContent = "Lichten aan\u2026";
+          lamps.forEach((_, i) => {
+            timers.push(setTimeout(() => setLamps(i + 1), 650 * (i + 1)));
+          });
+          const hold = 650 * lamps.length + 600 + Math.random() * 2400;
+          timers.push(setTimeout(() => { state = "hold"; }, 650 * lamps.length));
+          timers.push(
+            setTimeout(() => {
+              setLamps(0);
+              state = "go";
+              tGo = performance.now();
+              setBtn("NU!", "go");
+              out.textContent = "";
+            }, hold)
+          );
+        }
+
+        function falseStart() {
+          clearTimers();
+          setLamps(0);
+          state = "idle";
+          setBtn("Opnieuw proberen", "fout");
+          out.innerHTML = "<b>Valse start!</b> De lichten waren nog niet uit. Rustig wachten tot ze doven.";
+        }
+
+        function finish() {
+          const ms = Math.round(performance.now() - tGo);
+          state = "idle";
+          let label = "Even wakker worden \u2615";
+          if (ms < 200) label = "Poleposition-reactie \ud83c\udfc6";
+          else if (ms < 260) label = "Racer-waardig \ud83c\udfce\ufe0f";
+          else if (ms < 350) label = "Prima start, middenveld \ud83d\udc4d";
+          let extra = "";
+          if (!best || ms < best) {
+            best = ms;
+            extra = " Nieuwe beste tijd!";
+            try { localStorage.setItem(KEY, String(ms)); } catch (e) {}
+          }
+          showBest();
+          setBtn("Nog een keer", "");
+          out.innerHTML = '<span class="ms">' + ms + " ms</span>" + label + extra;
+        }
+
+        function press() {
+          if (state === "idle") start();
+          else if (state === "go") finish();
+          else falseStart();
+        }
+
+        btn.addEventListener("pointerdown", (e) => {
+          if (e.pointerType === "mouse" && e.button !== 0) return;
+          e.preventDefault();
+          press();
+        });
+        btn.addEventListener("keydown", (e) => {
+          if ((e.key === " " || e.key === "Enter") && !e.repeat) {
+            e.preventDefault();
+            press();
+          }
+        });
+      })();
+
+      /* ---------- NAC juich-knop met confetti ---------- */
+      (function () {
+        "use strict";
+        const btn = document.getElementById("cheer-btn");
+        const countEl = document.getElementById("cheer-count");
+        const canvas = document.getElementById("confetti");
+        const ctx = canvas.getContext("2d");
+        const KEY = "leon-hobby-cheers";
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const COLORS = ["#f4c300", "#f4c300", "#ffd84a", "#111111", "#ffffff"];
+        let parts = [];
+        let raf = 0;
+
+        function getCount() {
+          try { return parseInt(localStorage.getItem(KEY) || "0", 10) || 0; } catch (e) { return 0; }
+        }
+        function showCount(n) {
+          countEl.textContent = n > 0 ? "📣 Je hebt al " + n + (n === 1 ? " keer" : " keer") + " gejuicht voor geel-zwart." : "";
+        }
+        showCount(getCount());
+
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          canvas.width = window.innerWidth * dpr;
+          canvas.height = window.innerHeight * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        function burst(x, y) {
+          for (let i = 0; i < 150; i++) {
+            const a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.1;
+            const sp = 6 + Math.random() * 11;
+            parts.push({
+              x, y,
+              vx: Math.cos(a) * sp,
+              vy: Math.sin(a) * sp,
+              w: 6 + Math.random() * 6,
+              h: 4 + Math.random() * 5,
+              r: Math.random() * Math.PI * 2,
+              vr: (Math.random() - 0.5) * 0.4,
+              c: COLORS[(Math.random() * COLORS.length) | 0],
+              life: 0,
+              max: 110 + Math.random() * 70,
+            });
+          }
+          if (!raf) raf = requestAnimationFrame(tick);
+        }
+
+        function tick() {
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          parts = parts.filter((p) => p.life < p.max && p.y < window.innerHeight + 40);
+          parts.forEach((p) => {
+            p.life++;
+            p.vy += 0.34;
+            p.vx *= 0.985;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.r += p.vr;
+            ctx.save();
+            ctx.globalAlpha = Math.min(1, (p.max - p.life) / 30);
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.r);
+            ctx.fillStyle = p.c;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            if (p.c === "#111111") {
+              ctx.strokeStyle = "rgba(244,195,0,.7)";
+              ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            }
+            ctx.restore();
+          });
+          if (parts.length) {
+            raf = requestAnimationFrame(tick);
+          } else {
+            raf = 0;
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          }
+        }
+
+        btn.addEventListener("click", () => {
+          let n = getCount() + 1;
+          try { localStorage.setItem(KEY, String(n)); } catch (e) {}
+          showCount(n);
+          if (reduced) return;
+          const r = btn.getBoundingClientRect();
+          const x = r.left + r.width / 2;
+          const y = r.top + r.height / 2;
+          burst(x, y);
+          // tweede golf vanuit beide onderhoeken van het scherm
+          setTimeout(() => burst(window.innerWidth * 0.15, window.innerHeight), 180);
+          setTimeout(() => burst(window.innerWidth * 0.85, window.innerHeight), 320);
+        });
+      })();
+
+      /* ---------- Aftelklok: Los Angeles 2028 ---------- */
+      (function () {
+        "use strict";
+        const root = document.getElementById("countdown");
+        const target = new Date(root.dataset.target).getTime();
+        const els = {
+          d: document.getElementById("cd-d"),
+          h: document.getElementById("cd-h"),
+          m: document.getElementById("cd-m"),
+          s: document.getElementById("cd-s"),
+        };
+        const pad = (n) => String(n).padStart(2, "0");
+        function update() {
+          let diff = Math.max(0, target - Date.now());
+          const d = Math.floor(diff / 86400000);
+          diff -= d * 86400000;
+          const h = Math.floor(diff / 3600000);
+          diff -= h * 3600000;
+          const m = Math.floor(diff / 60000);
+          diff -= m * 60000;
+          const s = Math.floor(diff / 1000);
+          els.d.textContent = d;
+          els.h.textContent = pad(h);
+          els.m.textContent = pad(m);
+          els.s.textContent = pad(s);
+        }
+        update();
+        setInterval(update, 1000);
       })();
     </script>
   </body>
